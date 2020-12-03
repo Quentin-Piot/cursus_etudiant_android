@@ -25,7 +25,7 @@ public interface SemestreDao {
     public void updateSemestre(Semestre... semestres);
 
     @Query("select * from semestre_table")
-    LiveData<List<Semestre>> getAllSemestres(int id);
+    LiveData<List<Semestre>> getAllSemestres();
 
     @Query("select * from semestre_table where id = :id")
     LiveData<Semestre> getSemestreById(int id);

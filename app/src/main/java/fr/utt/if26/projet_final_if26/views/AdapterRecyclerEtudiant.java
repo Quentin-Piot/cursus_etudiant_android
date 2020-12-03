@@ -20,7 +20,6 @@ public class AdapterRecyclerEtudiant extends RecyclerView.Adapter<AdapterRecycle
 
     public AdapterRecyclerEtudiant(List<Etudiant> etudiantList) {
         this.etudiantList = etudiantList;
-
     }
 
     @NonNull
@@ -44,20 +43,21 @@ public class AdapterRecyclerEtudiant extends RecyclerView.Adapter<AdapterRecycle
 
     class EtudiantHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvSigle;
-        private TextView tvCategorie;
+        private TextView tvName;
+        private TextView tvFirstName;
 
         public EtudiantHolder(@NonNull View itemView) {
             super(itemView);
 
-            this.tvSigle = (TextView) itemView.findViewById(R.id.tv_sigle);
-            this.tvCategorie = (TextView) itemView.findViewById(R.id.tv_categorie);
+            this.tvName = (TextView) itemView.findViewById(R.id.tv_name);
+            this.tvFirstName = (TextView) itemView.findViewById(R.id.tv_firstname);
+
         }
 
         public void display(Etudiant etudiant) {
 
-            this.tvSigle.setText(etudiant.getId());
-            this.tvCategorie.setText(etudiant.getNom());
+            this.tvName.setText(etudiant.getNom());
+            this.tvFirstName.setText(etudiant.getPrenom());
 
         }
     }

@@ -20,9 +20,10 @@ public class CursusEtudiantRepository {
     private ModuleDao mModuleDao;
 
     private LiveData<List<Etudiant>> mAllEtudiants;
+    private CursusEtudiantDatabase db;
 
     public CursusEtudiantRepository(Application application) {
-        CursusEtudiantDatabase db = CursusEtudiantDatabase.getDatabase(application);
+        db = CursusEtudiantDatabase.getDatabase(application);
         mEtudiantDao = db.etudiantDao();
         mCursusDao = db.cursusDao();
         mSemestreDao = db.semestreDao();
@@ -34,8 +35,23 @@ public class CursusEtudiantRepository {
         return mEtudiantDao.getAllEtudiants();
     }
 
+    public void insertEtudiant(Etudiant etudiant) {
+        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
+            mEtudiantDao.insert(etudiant);
+        });
+    }
 
+    public void deleteEtudiantById(int id) {
+        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
+            mEtudiantDao.deleteEtudiantById(id);
+        });
+    }
 }
+
+
+
+
+
 
 
 

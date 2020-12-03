@@ -24,6 +24,18 @@ public class Cursus {
         this.etudiantId = etudiantId;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setEtudiantId(int etudiantId) {
+        this.etudiantId = etudiantId;
+    }
+
     public int getId() {
         return id;
     }

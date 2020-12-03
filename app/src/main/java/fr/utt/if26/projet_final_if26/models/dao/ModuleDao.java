@@ -25,7 +25,7 @@ public interface ModuleDao {
     public void updateModule(Module... modules);
 
     @Query("select * from module_table")
-    LiveData<List<Module>> getAllModules(int id);
+    LiveData<List<Module>> getAllModules();
 
     @Query("select * from module_table where id = :id")
     LiveData<Module> getModuleById(int id);

@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
@@ -14,6 +15,9 @@ import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
 public class EtudiantViewModel extends AndroidViewModel {
 
     public final LiveData<List<Etudiant>> mEtudiants;
+    public MutableLiveData<String> name = new MutableLiveData<>();
+    public MutableLiveData<String> firstName = new MutableLiveData<>();
+
 
 
     private CursusEtudiantRepository mRepository;
@@ -22,4 +26,21 @@ public class EtudiantViewModel extends AndroidViewModel {
         mRepository = new CursusEtudiantRepository(application);
         mEtudiants = mRepository.getAllEtudiants();
     }
+
+    public void handleOnClickAddEtudiant(){
+
+        if(name.getValue() != null && firstName.getValue() != null){
+            mRepository.insertEtudiant(new Etudiant(name.getValue(),firstName.getValue()));
+        }
+    }
+
+
+    public void insert(Etudiant etudiant) {
+        mRepository.insertEtudiant(etudiant);
+    }
+
+    public void deleteById(int id) {
+        mRepository.deleteEtudiantById(id);
+    }
+
 }

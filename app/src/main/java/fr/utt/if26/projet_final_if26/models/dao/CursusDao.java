@@ -25,7 +25,7 @@ public interface CursusDao {
     public void updateCursus(Cursus... cursus);
 
     @Query("select * from cursus_table")
-    LiveData<List<Cursus>> getAllCursus(int id);
+    LiveData<List<Cursus>> getAllCursus();
 
     @Query("select * from cursus_table where etudiantId = :id")
     LiveData<Cursus> getCursusById(int id);

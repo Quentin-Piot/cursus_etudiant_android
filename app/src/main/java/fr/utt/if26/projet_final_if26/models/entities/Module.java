@@ -48,4 +48,27 @@ public class Module {
         return semestreId;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setSigle(String sigle) {
+        this.sigle = sigle;
+    }
+
+    public void setParcours(String parcours) {
+        this.parcours = parcours;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
+
+    public void setSemestreId(int semestreId) {
+        this.semestreId = semestreId;
+    }
 }

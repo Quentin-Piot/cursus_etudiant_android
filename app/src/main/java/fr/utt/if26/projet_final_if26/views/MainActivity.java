@@ -1,5 +1,6 @@
 package fr.utt.if26.projet_final_if26.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -7,6 +8,10 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 
@@ -14,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import fr.utt.if26.projet_final_if26.R;
+import fr.utt.if26.projet_final_if26.databinding.ActivityMainBinding;
 import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,10 +29,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        viewModel = new ViewModelProvider(this).get(EtudiantViewModel.class);
+        binding.setViewModel(viewModel);
+        RecyclerView recyclerView = binding.etudiantRecyclerView;
 
+        viewModel.mEtudiants.observe(this, etudiants -> {
 
+                AdapterRecyclerEtudiant adapter = new AdapterRecyclerEtudiant(etudiants);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                recyclerView.setAdapter(adapter);
 
+        });
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -35,8 +49,12 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Intent intent = new Intent(getApplicationContext(), AddEtudiantActivity.class);
+                startActivity(intent);
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                 */
             }
         });
     }
@@ -57,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(getApplicationContext(), AddEtudiantActivity.class);
+            startActivity(intent);
             return true;
         }
 

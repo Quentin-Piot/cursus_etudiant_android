@@ -28,4 +28,20 @@ public class Semestre {
     public int getCursusID() {
         return cursusId;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public int getCursusId() {
+        return cursusId;
+    }
+
+    public void setCursusId(int cursusId) {
+        this.cursusId = cursusId;
+    }
 }
