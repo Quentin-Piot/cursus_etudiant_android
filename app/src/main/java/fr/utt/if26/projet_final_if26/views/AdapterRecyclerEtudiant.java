@@ -1,0 +1,64 @@
+package fr.utt.if26.projet_final_if26.views;
+
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+
+import fr.utt.if26.projet_final_if26.R;
+import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
+
+public class AdapterRecyclerEtudiant extends RecyclerView.Adapter<AdapterRecyclerEtudiant.EtudiantHolder> {
+
+    private List<Etudiant> etudiantList;
+
+    public AdapterRecyclerEtudiant(List<Etudiant> etudiantList) {
+        this.etudiantList = etudiantList;
+
+    }
+
+    @NonNull
+    @Override
+    public EtudiantHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View view = layoutInflater.inflate(R.layout.item_etudiant, parent, false);
+        return new EtudiantHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull EtudiantHolder holder, int position) {
+        holder.display(this.etudiantList.get(position));
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return this.etudiantList.size();
+    }
+
+    class EtudiantHolder extends RecyclerView.ViewHolder {
+
+        private TextView tvSigle;
+        private TextView tvCategorie;
+
+        public EtudiantHolder(@NonNull View itemView) {
+            super(itemView);
+
+            this.tvSigle = (TextView) itemView.findViewById(R.id.tv_sigle);
+            this.tvCategorie = (TextView) itemView.findViewById(R.id.tv_categorie);
+        }
+
+        public void display(Etudiant etudiant) {
+
+            this.tvSigle.setText(etudiant.getId());
+            this.tvCategorie.setText(etudiant.getNom());
+
+        }
+    }
+}
