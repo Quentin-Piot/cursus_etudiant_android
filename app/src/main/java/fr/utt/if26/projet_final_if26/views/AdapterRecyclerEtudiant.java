@@ -7,32 +7,37 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import fr.utt.if26.projet_final_if26.R;
+import fr.utt.if26.projet_final_if26.databinding.ItemEtudiantBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
+import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
 
 public class AdapterRecyclerEtudiant extends RecyclerView.Adapter<AdapterRecyclerEtudiant.EtudiantHolder> {
 
     private List<Etudiant> etudiantList;
-
-    public AdapterRecyclerEtudiant(List<Etudiant> etudiantList) {
+    private EtudiantViewModel viewModel;
+    public AdapterRecyclerEtudiant(List<Etudiant> etudiantList, EtudiantViewModel viewModel) {
         this.etudiantList = etudiantList;
+        this.viewModel = viewModel;
     }
 
     @NonNull
     @Override
     public EtudiantHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.item_etudiant, parent, false);
-        return new EtudiantHolder(view);
+        ItemEtudiantBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_etudiant, parent,false);
+        return new EtudiantHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull EtudiantHolder holder, int position) {
-        holder.display(this.etudiantList.get(position));
+        holder.binding.setEtudiant(etudiantList.get(position));
+        holder.binding.setViewModel(viewModel);
+        holder.binding.executePendingBindings();
 
     }
 
@@ -43,22 +48,13 @@ public class AdapterRecyclerEtudiant extends RecyclerView.Adapter<AdapterRecycle
 
     class EtudiantHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvName;
-        private TextView tvFirstName;
+        private ItemEtudiantBinding binding;
 
-        public EtudiantHolder(@NonNull View itemView) {
-            super(itemView);
-
-            this.tvName = (TextView) itemView.findViewById(R.id.tv_name);
-            this.tvFirstName = (TextView) itemView.findViewById(R.id.tv_firstname);
+        public EtudiantHolder(ItemEtudiantBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
 
         }
 
-        public void display(Etudiant etudiant) {
-
-            this.tvName.setText(etudiant.getNom());
-            this.tvFirstName.setText(etudiant.getPrenom());
-
-        }
     }
 }

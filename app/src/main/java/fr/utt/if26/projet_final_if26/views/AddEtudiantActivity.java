@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ActivityAddEtudiantBinding;
@@ -21,5 +22,17 @@ public class AddEtudiantActivity extends AppCompatActivity {
         ActivityAddEtudiantBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_add_etudiant);
         viewModel = new ViewModelProvider(this).get(EtudiantViewModel.class);
         binding.setViewModel(viewModel);
+        viewModel.addSuccess.observe(this, this::onAddSuccess);
+
+    }
+
+    public void onAddSuccess(String text) {
+        if(text.equals("SUCCESS")) {
+            Toast.makeText(getApplicationContext(), "Étudiant ajouté", Toast.LENGTH_SHORT).show();
+            finish();
+        } else if(text.equals("EMPTY")) {
+            Toast.makeText(getApplicationContext(), "Veuillez compléter tous les champs", Toast.LENGTH_SHORT).show();
+
+        }
     }
 }

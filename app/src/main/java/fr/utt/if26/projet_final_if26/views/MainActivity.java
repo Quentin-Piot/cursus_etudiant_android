@@ -17,60 +17,52 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.util.List;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ActivityMainBinding;
+import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
 import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
     private EtudiantViewModel viewModel;
-
+    private ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         viewModel = new ViewModelProvider(this).get(EtudiantViewModel.class);
         binding.setViewModel(viewModel);
         RecyclerView recyclerView = binding.etudiantRecyclerView;
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        viewModel.mEtudiants.observe(this, etudiants -> {
+        viewModel.messageToView.observe(this, this::displayToast);
+        viewModel.mEtudiants.observe(this, etudiants -> initAdapter(recyclerView,etudiants,viewModel));
 
-                AdapterRecyclerEtudiant adapter = new AdapterRecyclerEtudiant(etudiants);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                recyclerView.setAdapter(adapter);
-
-        });
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), AddEtudiantActivity.class);
-                startActivity(intent);
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        FloatingActionButton fab = binding.fab;
 
-                 */
-            }
+        fab.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), AddEtudiantActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.transition.fade_in, R.transition.fade_out);
+
         });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -81,5 +73,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void initAdapter(RecyclerView recyclerView , List<Etudiant> etudiants, EtudiantViewModel viewModel) {
+        if(etudiants.size() == 0 ) {
+            binding.etudiantMessageTv.setText("Aucun étudiant");
+        } else {
+            binding.etudiantMessageTv.setText("");
+
+        }
+            AdapterRecyclerEtudiant adapter = new AdapterRecyclerEtudiant(etudiants, viewModel);
+            recyclerView.setAdapter(adapter);
+
+    }
+    public void displayToast(String text) {
+        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
     }
 }

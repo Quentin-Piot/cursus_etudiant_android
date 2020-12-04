@@ -1,5 +1,6 @@
 package fr.utt.if26.projet_final_if26.viewmodels;
 
+import android.app.Activity;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,10 @@ public class EtudiantViewModel extends AndroidViewModel {
     public MutableLiveData<String> name = new MutableLiveData<>();
     public MutableLiveData<String> firstName = new MutableLiveData<>();
 
+    public MutableLiveData<String> messageToView = new MutableLiveData<>();
+
+    public MutableLiveData<String> addSuccess = new MutableLiveData<>();
+
 
 
     private CursusEtudiantRepository mRepository;
@@ -31,8 +36,18 @@ public class EtudiantViewModel extends AndroidViewModel {
 
         if(name.getValue() != null && firstName.getValue() != null){
             mRepository.insertEtudiant(new Etudiant(name.getValue(),firstName.getValue()));
+            addSuccess.setValue("SUCCESS");
+        } else {
+            addSuccess.setValue("EMPTY");
         }
     }
+
+    public void handleOnClickDelEtudiant(Etudiant etudiant){
+        if(etudiant.getId() > -1){
+            mRepository.deleteEtudiantById(etudiant.getId());
+            messageToView.setValue("Étudiant supprimé");
+        }
+        }
 
 
     public void insert(Etudiant etudiant) {
