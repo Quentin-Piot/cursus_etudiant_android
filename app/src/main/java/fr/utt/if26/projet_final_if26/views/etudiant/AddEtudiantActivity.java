@@ -1,4 +1,4 @@
-package fr.utt.if26.projet_final_if26.views;
+package fr.utt.if26.projet_final_if26.views.etudiant;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -22,7 +22,7 @@ public class AddEtudiantActivity extends AppCompatActivity {
         ActivityAddEtudiantBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_add_etudiant);
         viewModel = new ViewModelProvider(this).get(EtudiantViewModel.class);
         binding.setViewModel(viewModel);
-        viewModel.addSuccess.observe(this, this::onAddSuccess);
+        viewModel.getAddSuccess().observe(this, this::onAddSuccess);
 
     }
 

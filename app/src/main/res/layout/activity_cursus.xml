@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel" />
+            type="fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,25 +14,8 @@
         android:layout_height="match_parent"
         tools:context=".views.etudiant.MainActivity">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/etudiant_recycler_view"
+            android:id="@+id/cursus_recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="30dp"
@@ -59,20 +42,20 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="68dp"
-            android:text="Liste des étudiants"
+            android:layout_marginTop="12dp"
+            android:text="Liste des cursus"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/etudiant_message_tv"
+            android:id="@+id/cursus_message_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#676767"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/etudiant_recycler_view"
+            app:layout_constraintBottom_toTopOf="@+id/cursus_recycler_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"

@@ -1,10 +1,9 @@
-package fr.utt.if26.projet_final_if26.views;
+package fr.utt.if26.projet_final_if26.views.etudiant;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,8 +11,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +22,7 @@ import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ActivityMainBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
 import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
+import fr.utt.if26.projet_final_if26.views.cursus.CursusActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,8 +37,9 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = binding.etudiantRecyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        viewModel.messageToView.observe(this, this::displayToast);
-        viewModel.mEtudiants.observe(this, etudiants -> initAdapter(recyclerView,etudiants,viewModel));
+        viewModel.getMessageToView().observe(this, this::displayToast);
+        viewModel.getmEtudiants().observe(this, etudiants -> initAdapter(recyclerView,etudiants,viewModel));
+        viewModel.getSelectedEtudiantId().observe(this, this::onSelectEtudiant);
 
         Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
@@ -50,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), AddEtudiantActivity.class);
             startActivity(intent);
-            overridePendingTransition(R.transition.fade_in, R.transition.fade_out);
 
         });
     }
@@ -86,7 +84,16 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
 
     }
+
+    public void onSelectEtudiant(int etudiantId){
+        if(etudiantId >= 0) {
+            Intent intent = new Intent(getApplicationContext(), CursusActivity.class);
+            intent.putExtra("student_id", etudiantId);
+            startActivity(intent);
+        }
+    }
     public void displayToast(String text) {
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
     }
+
 }

@@ -15,13 +15,19 @@ import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
 
 public class EtudiantViewModel extends AndroidViewModel {
 
-    public final LiveData<List<Etudiant>> mEtudiants;
+    private final LiveData<List<Etudiant>> mEtudiants;
+
     public MutableLiveData<String> name = new MutableLiveData<>();
     public MutableLiveData<String> firstName = new MutableLiveData<>();
 
-    public MutableLiveData<String> messageToView = new MutableLiveData<>();
+    private MutableLiveData<String> _messageToView = new MutableLiveData<>();
+    private LiveData<String> messageToView = _messageToView;
 
-    public MutableLiveData<String> addSuccess = new MutableLiveData<>();
+    private MutableLiveData<String> _addSuccess = new MutableLiveData<>();
+    private LiveData<String> addSuccess = _addSuccess;
+
+    private MutableLiveData<Integer> _selectedEtudiantId = new MutableLiveData<>();
+    private LiveData<Integer> selectedEtudiantId = _selectedEtudiantId;
 
 
 
@@ -36,16 +42,16 @@ public class EtudiantViewModel extends AndroidViewModel {
 
         if(name.getValue() != null && firstName.getValue() != null){
             mRepository.insertEtudiant(new Etudiant(name.getValue(),firstName.getValue()));
-            addSuccess.setValue("SUCCESS");
+            _addSuccess.setValue("SUCCESS");
         } else {
-            addSuccess.setValue("EMPTY");
+            _addSuccess.setValue("EMPTY");
         }
     }
 
     public void handleOnClickDelEtudiant(Etudiant etudiant){
         if(etudiant.getId() > -1){
             mRepository.deleteEtudiantById(etudiant.getId());
-            messageToView.setValue("Étudiant supprimé");
+            _messageToView.setValue("Étudiant supprimé");
         }
         }
 
@@ -58,4 +64,24 @@ public class EtudiantViewModel extends AndroidViewModel {
         mRepository.deleteEtudiantById(id);
     }
 
+
+    public LiveData<Integer> getSelectedEtudiantId() {
+        return selectedEtudiantId;
+    }
+
+    public void setSelectedEtudiantId(int selectedEtudiantId) {
+        this._selectedEtudiantId.setValue(selectedEtudiantId);;
+    }
+
+    public LiveData<String> getMessageToView() {
+        return messageToView;
+    }
+
+    public LiveData<String> getAddSuccess() {
+        return addSuccess;
+    }
+
+    public LiveData<List<Etudiant>> getmEtudiants() {
+        return mEtudiants;
+    }
 }

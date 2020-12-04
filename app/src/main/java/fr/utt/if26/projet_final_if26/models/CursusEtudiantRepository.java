@@ -10,6 +10,7 @@ import fr.utt.if26.projet_final_if26.models.dao.CursusDao;
 import fr.utt.if26.projet_final_if26.models.dao.EtudiantDao;
 import fr.utt.if26.projet_final_if26.models.dao.ModuleDao;
 import fr.utt.if26.projet_final_if26.models.dao.SemestreDao;
+import fr.utt.if26.projet_final_if26.models.entities.Cursus;
 import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
 
 public class CursusEtudiantRepository {
@@ -46,6 +47,27 @@ public class CursusEtudiantRepository {
             mEtudiantDao.deleteEtudiantById(id);
         });
     }
+
+    public LiveData<List<Cursus>> getAllCursus() {
+        return mCursusDao.getAllCursus();
+    }
+
+    public void insertCursus(Cursus cursus) {
+        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
+            mCursusDao.insert(cursus);
+        });
+    }
+
+    public void deleteCursusById(int id) {
+        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
+            mCursusDao.deleteCursusById(id);
+        });
+    }
+
+    public LiveData<List<Cursus>> getAllCursusFromEtudiantId(int id) {
+        return mCursusDao.getCursusById(id);
+    }
+
 }
 
 
