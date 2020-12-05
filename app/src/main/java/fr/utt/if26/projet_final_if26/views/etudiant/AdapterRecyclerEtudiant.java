@@ -19,6 +19,7 @@ public class AdapterRecyclerEtudiant extends RecyclerView.Adapter<AdapterRecycle
 
     private List<Etudiant> etudiantList;
     private EtudiantViewModel viewModel;
+
     public AdapterRecyclerEtudiant(List<Etudiant> etudiantList, EtudiantViewModel viewModel) {
         this.etudiantList = etudiantList;
         this.viewModel = viewModel;
@@ -27,7 +28,7 @@ public class AdapterRecyclerEtudiant extends RecyclerView.Adapter<AdapterRecycle
     @NonNull
     @Override
     public EtudiantHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemEtudiantBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_etudiant, parent,false);
+        ItemEtudiantBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_etudiant, parent, false);
         return new EtudiantHolder(binding);
     }
 

@@ -1,7 +1,10 @@
 package fr.utt.if26.projet_final_if26.viewmodels;
 
-import android.app.Activity;
 import android.app.Application;
+import android.graphics.Color;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -19,41 +22,49 @@ public class EtudiantViewModel extends AndroidViewModel {
 
     public MutableLiveData<String> name = new MutableLiveData<>();
     public MutableLiveData<String> firstName = new MutableLiveData<>();
+    public MutableLiveData<String> programme = new MutableLiveData<>();
 
-    private MutableLiveData<String> _messageToView = new MutableLiveData<>();
-    private LiveData<String> messageToView = _messageToView;
+    private final MutableLiveData<String> _messageToView = new MutableLiveData<>();
+    private final LiveData<String> messageToView = _messageToView;
 
-    private MutableLiveData<String> _addSuccess = new MutableLiveData<>();
-    private LiveData<String> addSuccess = _addSuccess;
+    private final MutableLiveData<String> _addSuccess = new MutableLiveData<>();
+    private final LiveData<String> addSuccess = _addSuccess;
 
-    private MutableLiveData<Integer> _selectedEtudiantId = new MutableLiveData<>();
-    private LiveData<Integer> selectedEtudiantId = _selectedEtudiantId;
+    private final MutableLiveData<Integer> _selectedEtudiantId = new MutableLiveData<>();
+    private final LiveData<Integer> selectedEtudiantId = _selectedEtudiantId;
 
 
+    private final CursusEtudiantRepository mRepository;
 
-    private CursusEtudiantRepository mRepository;
     public EtudiantViewModel(@NonNull Application application) {
         super(application);
         mRepository = new CursusEtudiantRepository(application);
         mEtudiants = mRepository.getAllEtudiants();
     }
 
-    public void handleOnClickAddEtudiant(){
+    public void handleOnClickAddEtudiant() {
 
-        if(name.getValue() != null && firstName.getValue() != null){
-            mRepository.insertEtudiant(new Etudiant(name.getValue(),firstName.getValue()));
+        if (name.getValue() != null && firstName.getValue() != null) {
+            mRepository.insertEtudiant(new Etudiant(name.getValue(), firstName.getValue(), programme.getValue().toString()));
             _addSuccess.setValue("SUCCESS");
         } else {
             _addSuccess.setValue("EMPTY");
         }
     }
 
-    public void handleOnClickDelEtudiant(Etudiant etudiant){
-        if(etudiant.getId() > -1){
+    public void handleOnClickDelEtudiant(Etudiant etudiant) {
+        if (etudiant.getId() > -1) {
             mRepository.deleteEtudiantById(etudiant.getId());
             _messageToView.setValue("Étudiant supprimé");
         }
-        }
+    }
+
+    public void onSelectItem(AdapterView<?> parent, View view, int pos, long id)
+    {
+        programme.setValue(parent.getSelectedItem().toString());
+        ((TextView)parent.getChildAt(0)).setTextSize(16);
+
+    }
 
 
     public void insert(Etudiant etudiant) {
@@ -70,7 +81,8 @@ public class EtudiantViewModel extends AndroidViewModel {
     }
 
     public void setSelectedEtudiantId(int selectedEtudiantId) {
-        this._selectedEtudiantId.setValue(selectedEtudiantId);;
+        this._selectedEtudiantId.setValue(selectedEtudiantId);
+        ;
     }
 
     public LiveData<String> getMessageToView() {

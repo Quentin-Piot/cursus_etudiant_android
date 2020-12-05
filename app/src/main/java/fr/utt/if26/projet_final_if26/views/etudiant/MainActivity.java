@@ -2,8 +2,9 @@ package fr.utt.if26.projet_final_if26.views.etudiant;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,9 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -28,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EtudiantViewModel viewModel;
     private ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +38,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         viewModel.getMessageToView().observe(this, this::displayToast);
-        viewModel.getmEtudiants().observe(this, etudiants -> initAdapter(recyclerView,etudiants,viewModel));
+        viewModel.getmEtudiants().observe(this, etudiants -> initAdapter(recyclerView, etudiants, viewModel));
         viewModel.getSelectedEtudiantId().observe(this, this::onSelectEtudiant);
 
-        Toolbar toolbar = binding.toolbar;
-        setSupportActionBar(toolbar);
 
         FloatingActionButton fab = binding.fab;
 
@@ -73,25 +71,26 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void initAdapter(RecyclerView recyclerView , List<Etudiant> etudiants, EtudiantViewModel viewModel) {
-        if(etudiants.size() == 0 ) {
+    public void initAdapter(RecyclerView recyclerView, List<Etudiant> etudiants, EtudiantViewModel viewModel) {
+        if (etudiants.size() == 0) {
             binding.etudiantMessageTv.setText("Aucun étudiant");
         } else {
             binding.etudiantMessageTv.setText("");
 
         }
-            AdapterRecyclerEtudiant adapter = new AdapterRecyclerEtudiant(etudiants, viewModel);
-            recyclerView.setAdapter(adapter);
+        AdapterRecyclerEtudiant adapter = new AdapterRecyclerEtudiant(etudiants, viewModel);
+        recyclerView.setAdapter(adapter);
 
     }
 
-    public void onSelectEtudiant(int etudiantId){
-        if(etudiantId >= 0) {
+    public void onSelectEtudiant(int etudiantId) {
+        if (etudiantId >= 0) {
             Intent intent = new Intent(getApplicationContext(), CursusActivity.class);
             intent.putExtra("student_id", etudiantId);
             startActivity(intent);
         }
     }
+
     public void displayToast(String text) {
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
     }

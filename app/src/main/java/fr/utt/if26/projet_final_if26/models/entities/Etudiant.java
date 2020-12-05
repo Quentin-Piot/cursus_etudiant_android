@@ -14,9 +14,12 @@ public class Etudiant {
 
     private String prenom;
 
-    public Etudiant(@NonNull String nom, @NonNull String prenom) {
+    private String programme;
+
+    public Etudiant(@NonNull String nom, @NonNull String prenom, @NonNull String programme) {
         this.nom = nom;
         this.prenom = prenom;
+        this.programme = programme;
     }
 
     public int getId() {
@@ -41,5 +44,23 @@ public class Etudiant {
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+
+    public String getProgramme() {
+        return programme;
+    }
+
+    public void setProgramme(String programme) {
+        this.programme = programme;
+    }
+
+    public enum Programme {
+        ISI,
+        RT,
+        MTE,
+        GM,
+        GI,
+        MM,
+        A2I
     }
 }
