@@ -13,6 +13,7 @@ import fr.utt.if26.projet_final_if26.models.dao.ModuleDao;
 import fr.utt.if26.projet_final_if26.models.dao.SemestreDao;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
 import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
+import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 
 public class CursusEtudiantRepository {
 
@@ -68,7 +69,7 @@ public class CursusEtudiantRepository {
         });
     }
 
-    public LiveData<List<Cursus>> getAllCursusFromEtudiantId(int id) {
+    public LiveData<List<Cursus>> getAllCursusForEtudiantId(int id) {
         return mCursusDao.getCursusById(id);
     }
 
@@ -77,6 +78,30 @@ public class CursusEtudiantRepository {
             int infos = mCursusDao.updateCursus(cursus);
         });
     }
+
+    public void insertSemestre(Semestre semestre) {
+        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
+            mSemestreDao.insert(semestre);
+        });
+    }
+
+    public void deleteSemestreById(int id) {
+        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
+            mSemestreDao.deleteSemestreById(id);
+        });
+    }
+
+    public LiveData<List<Semestre>> getAllSemestreForCursusId(int id) {
+        return mSemestreDao.getSemestreByCursusId(id);
+    }
+
+    public void updateSemestre(Semestre semestre) {
+        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
+            mSemestreDao.updateSemestre(semestre);
+        });
+    }
+
+
 
 }
 

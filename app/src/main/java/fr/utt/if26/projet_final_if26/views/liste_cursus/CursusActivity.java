@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+import java.util.Objects;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ActivityListeCursusBinding;
@@ -27,27 +28,29 @@ public class CursusActivity extends AppCompatActivity {
     private ActivityListeCursusBinding binding;
     private RecyclerView recyclerView;
 
+    private String studentName;
+    private int studentId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        studentName = getIntent().getStringExtra("student_name");
+        studentId = getIntent().getIntExtra("student_id", -1);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Liste des cursus de " + studentName);
 
         initBinding();
 
 
         viewModel.getmCursus().observe(this, cursus -> initAdapter(recyclerView, cursus, viewModel));
-        viewModel.getVmEvent().observe(this, event-> onRecieveVMEvent(event));
+        viewModel.getVmEvent().observe(this, this::onRecieveVMEvent);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-
-
-
-        FloatingActionButton fab = binding.fabCursus;
     }
 
     private void initBinding() {
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_liste_cursus);
-        getSupportActionBar().setTitle("Liste des cursus");
-        int studentId = getIntent().getIntExtra("student_id", -1);
         CursusViewModelFactory factory = new CursusViewModelFactory(getApplication(), studentId);
         viewModel = new ViewModelProvider(this, factory).get(CursusViewModel.class);
         binding.setViewModel(viewModel);
@@ -57,7 +60,7 @@ public class CursusActivity extends AppCompatActivity {
 
     public void initAdapter(RecyclerView recyclerView, List<Cursus> cursus, CursusViewModel viewModel) {
         if (cursus.size() == 0) {
-            binding.messageTvCursus.setText("Aucun cursus");
+            binding.messageTvCursus.setText(R.string.aucun_cursus);
         } else {
             binding.messageTvCursus.setText("");
 
@@ -68,7 +71,8 @@ public class CursusActivity extends AppCompatActivity {
 
     public void onEditCursus(Cursus cursus) {
         EditCursusDialogFragment editCursusDialogFragment = new EditCursusDialogFragment(viewModel, cursus);
-        editCursusDialogFragment.show(getSupportFragmentManager(), "edit_cursus");    }
+        editCursusDialogFragment.show(getSupportFragmentManager(), "edit_cursus");
+    }
 
     public void onClickAddCursus() {
         AddCursusDialogFragment addCursusDialogFragment = new AddCursusDialogFragment();
@@ -87,8 +91,11 @@ public class CursusActivity extends AppCompatActivity {
 
     public void onRecieveVMEvent(VMEventsEnum event) {
         switch (event) {
-            case close_add_etudiant:
-                finish();
+            case success_operation:
+                Toast.makeText(getApplicationContext(), "Opération réussie", Toast.LENGTH_SHORT).show();
+                break;
+            case empty_fields:
+                Toast.makeText(getApplicationContext(), "Veuillez compléter l'ensemble des champs", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

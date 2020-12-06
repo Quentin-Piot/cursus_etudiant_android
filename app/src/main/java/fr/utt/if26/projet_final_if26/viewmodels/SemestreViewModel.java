@@ -12,10 +12,10 @@ import java.util.List;
 import fr.utt.if26.projet_final_if26.models.CursusEtudiantRepository;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
 
-public class CursusViewModel extends AndroidViewModel {
+public class SemestreViewModel extends AndroidViewModel {
 
-    private final CursusEtudiantRepository mRepository;
-    private final int mEtudiantId;
+    private CursusEtudiantRepository mRepository;
+    private int mEtudiantId;
 
     public MutableLiveData<String> cursusName = new MutableLiveData<>();
 
@@ -23,7 +23,7 @@ public class CursusViewModel extends AndroidViewModel {
     private final LiveData<VMEventsEnum> vmEvent = _vmEvent;
 
 
-    public CursusViewModel(@NonNull Application application, int mEtudiantId) {
+    public SemestreViewModel(@NonNull Application application, int mEtudiantId) {
         super(application);
         mRepository = new CursusEtudiantRepository(application);
         this.mEtudiantId = mEtudiantId;
@@ -66,7 +66,7 @@ public class CursusViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Cursus>> getmCursus() {
-        return mRepository.getAllCursusForEtudiantId(mEtudiantId);
+        return mRepository.getAllCursusFromEtudiantId(mEtudiantId);
     }
 
 

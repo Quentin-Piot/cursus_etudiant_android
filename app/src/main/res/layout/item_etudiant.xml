@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/darker_bg"
-        android:onClick="@{()-> viewModel.setSelectedEtudiantId(etudiant.id)}"
+        android:onClick="@{()-> viewModel.setSelectedEtudiant(etudiant)}"
         android:paddingTop="6dp"
         android:paddingBottom="6dp">
 

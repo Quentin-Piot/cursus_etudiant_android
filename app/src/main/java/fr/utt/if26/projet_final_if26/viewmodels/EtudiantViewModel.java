@@ -23,12 +23,12 @@ public class EtudiantViewModel extends AndroidViewModel {
     public MutableLiveData<String> firstName = new MutableLiveData<>();
     public MutableLiveData<String> programme = new MutableLiveData<>();
 
-    private final MutableLiveData<String> _messageToView = new MutableLiveData<>();
-    private final LiveData<String> messageToView = _messageToView;
+    private final MutableLiveData<Etudiant> _selectedEtudiant = new MutableLiveData<>();
+    private final LiveData<Etudiant> selectedEtudiant = _selectedEtudiant;
 
-    private final MutableLiveData<Integer> _selectedEtudiantId = new MutableLiveData<>();
-    private final LiveData<Integer> selectedEtudiantId = _selectedEtudiantId;
 
+    private final MutableLiveData<VMEventsEnum> _vmEvent = new MutableLiveData<>();
+    private final LiveData<VMEventsEnum> vmEvent = _vmEvent;
 
     private final CursusEtudiantRepository mRepository;
 
@@ -42,16 +42,16 @@ public class EtudiantViewModel extends AndroidViewModel {
 
         if (name.getValue() != null && firstName.getValue() != null) {
             mRepository.insertEtudiant(new Etudiant(name.getValue(), firstName.getValue(), programme.getValue().toString()));
-            _messageToView.setValue("Etudiant ajouté");
+            _vmEvent.setValue(VMEventsEnum.success_operation);
         } else {
-            _messageToView.setValue("Veuillez remplir tous les champs");
+            _vmEvent.setValue(VMEventsEnum.empty_fields);
         }
     }
 
     public void onClickDelEtudiant(Etudiant etudiant) {
         if (etudiant.getId() > -1) {
             mRepository.deleteEtudiantById(etudiant.getId());
-            _messageToView.setValue("Étudiant supprimé");
+            _vmEvent.setValue(VMEventsEnum.success_operation);
         }
     }
 
@@ -71,21 +71,21 @@ public class EtudiantViewModel extends AndroidViewModel {
     }
 
 
-    public LiveData<Integer> getSelectedEtudiantId() {
-        return selectedEtudiantId;
+    public LiveData<Etudiant> getSelectedEtudiant() {
+        return selectedEtudiant;
     }
 
-    public void setSelectedEtudiantId(int selectedEtudiantId) {
-        this._selectedEtudiantId.setValue(selectedEtudiantId);
-        ;
-    }
-
-    public LiveData<String> getMessageToView() {
-        return messageToView;
+    public void setSelectedEtudiant(Etudiant selectedEtudiant) {
+        this._selectedEtudiant.setValue(selectedEtudiant);
     }
 
 
     public LiveData<List<Etudiant>> getmEtudiants() {
         return mEtudiants;
     }
+
+    public LiveData<VMEventsEnum> getVmEvent() {
+        return vmEvent;
+    }
+
 }
