@@ -21,19 +21,19 @@
             android:gravity="center"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:text="@string/ajout_cursus"
+            android:text="@string/edit_cursus"
             android:textAlignment="center"
             android:textSize="22sp" />
 
         <EditText
-            android:id="@+id/add_cursus_et"
+            android:id="@+id/edit_cursus_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="4dp"
             android:layout_marginBottom="4dp"
-            android:hint="@string/nom_du_cursus"
+            android:hint="@string/nouveau_nom"
             android:inputType="textCapWords"
             android:maxLength="15"
             android:text="@={viewModel.cursusName}" />

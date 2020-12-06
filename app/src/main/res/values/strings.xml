@@ -14,11 +14,16 @@
     <string name="nom_etudiant">Nom de l\'étudiant :</string>
     <string name="ajouter">Ajouter</string>
     <string name="annuler">Annuler</string>
+    <string name="modifier">Modifier</string>
+
     <string name="title_activity_cursus">CursusActivity</string>
     <string name="programme">Programme</string>
     <string name="ajout_etudiant">Ajout d\'un étudiant</string>
     <string name="ajout_cursus">Ajout d\'un cursus</string>
+    <string name="edit_cursus">Modification d\'un cursus</string>
 
     <string name="title_activity_main">MainActivity</string>
     <string name="nom_du_cursus">Nom du cursus</string>
+    <string name="add_a_student">Add a student</string>
+    <string name="nouveau_nom">Nouveau nom</string>
 </resources>

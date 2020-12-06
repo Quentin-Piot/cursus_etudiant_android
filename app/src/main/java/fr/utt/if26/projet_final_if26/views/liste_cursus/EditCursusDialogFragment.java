@@ -1,7 +1,6 @@
 package fr.utt.if26.projet_final_if26.views.liste_cursus;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
@@ -11,21 +10,30 @@ import androidx.fragment.app.DialogFragment;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.DialogAddCursusBinding;
+import fr.utt.if26.projet_final_if26.databinding.DialogEditCursusBinding;
+import fr.utt.if26.projet_final_if26.models.entities.Cursus;
 import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
 
-public class AddCursusDialogFragment extends DialogFragment {
+public class EditCursusDialogFragment extends DialogFragment {
 
     private CursusViewModel viewModel;
+    private Cursus selectedCursus;
+
+    public EditCursusDialogFragment(CursusViewModel viewModel, Cursus cursus) {
+        super();
+        this.viewModel = viewModel;
+        this.selectedCursus = cursus;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
-        DialogAddCursusBinding binding = DataBindingUtil.inflate(inflater, R.layout.dialog_add_cursus, null, false);
+        DialogEditCursusBinding binding = DataBindingUtil.inflate(inflater, R.layout.dialog_edit_cursus, null, false);
         binding.setViewModel(viewModel);
                 builder.setView(binding.getRoot())
-                .setPositiveButton(R.string.ajouter, (dialog, id) -> viewModel.onClickAddEtudiant())
+                .setPositiveButton(R.string.modifier, (dialog, id) -> viewModel.onClickUpdateCursus(this.selectedCursus))
                 .setNegativeButton(R.string.annuler, (dialog, id) -> {
                 });
         return builder.create();

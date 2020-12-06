@@ -21,11 +21,14 @@ public class CursusViewModel extends AndroidViewModel {
 
     public MutableLiveData<String> cursusName = new MutableLiveData<>();
 
+    private final MutableLiveData<VMEventsEnum> _vmEvent= new MutableLiveData<>();
+    private final LiveData<VMEventsEnum> vmEvent = _vmEvent;
+
     private final MutableLiveData<String> _messageToView = new MutableLiveData<>();
     private final LiveData<String> messageToView = _messageToView;
+    private int selectedCursusId = -1;
 
-    private final MutableLiveData<String> _addSuccess = new MutableLiveData<>();
-    private final LiveData<String> addSuccess = _addSuccess;
+
 
 
     public CursusViewModel(@NonNull Application application, int mEtudiantId) {
@@ -38,10 +41,23 @@ public class CursusViewModel extends AndroidViewModel {
 
         if (cursusName.getValue() != null && mEtudiantId > -1) {
             mRepository.insertCursus(new Cursus(cursusName.getValue(), mEtudiantId));
-            _addSuccess.setValue("SUCCESS");
+            _messageToView.setValue("Cursus ajouté");
+            _vmEvent.setValue(VMEventsEnum.close_add_etudiant);
         } else {
-            _addSuccess.setValue("EMPTY");
+            _messageToView.setValue("Veuillez remplir tous les champs");
         }
+    }
+
+    public void onClickUpdateCursus(Cursus selectedCursus){
+
+
+
+        if(cursusName.getValue() != null) {
+            selectedCursus.setNom(cursusName.getValue());
+            mRepository.updateCursus(selectedCursus);
+        }
+
+
     }
 
     public void onSelectedCursusId(int id) {
@@ -55,6 +71,10 @@ public class CursusViewModel extends AndroidViewModel {
         }
     }
 
+    public void updateCursus(Cursus cursus) {
+        mRepository.updateCursus(cursus);
+    }
+
     public LiveData<List<Cursus>> getmCursus() {
         return mRepository.getAllCursusFromEtudiantId(mEtudiantId);
     }
@@ -64,7 +84,11 @@ public class CursusViewModel extends AndroidViewModel {
         return messageToView;
     }
 
-    public LiveData<String> getAddSuccess() {
-        return addSuccess;
+    public void setSelectedCursusId(int selectedCursusId) {
+        this.selectedCursusId = selectedCursusId;
+    }
+
+    public LiveData<VMEventsEnum> getVmEvent() {
+        return vmEvent;
     }
 }

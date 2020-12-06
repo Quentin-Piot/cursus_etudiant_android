@@ -1,7 +1,6 @@
 package fr.utt.if26.projet_final_if26.viewmodels;
 
 import android.app.Application;
-import android.graphics.Color;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -27,9 +26,6 @@ public class EtudiantViewModel extends AndroidViewModel {
     private final MutableLiveData<String> _messageToView = new MutableLiveData<>();
     private final LiveData<String> messageToView = _messageToView;
 
-    private final MutableLiveData<String> _addSuccess = new MutableLiveData<>();
-    private final LiveData<String> addSuccess = _addSuccess;
-
     private final MutableLiveData<Integer> _selectedEtudiantId = new MutableLiveData<>();
     private final LiveData<Integer> selectedEtudiantId = _selectedEtudiantId;
 
@@ -46,9 +42,9 @@ public class EtudiantViewModel extends AndroidViewModel {
 
         if (name.getValue() != null && firstName.getValue() != null) {
             mRepository.insertEtudiant(new Etudiant(name.getValue(), firstName.getValue(), programme.getValue().toString()));
-            _addSuccess.setValue("SUCCESS");
+            _messageToView.setValue("Etudiant ajouté");
         } else {
-            _addSuccess.setValue("EMPTY");
+            _messageToView.setValue("Veuillez remplir tous les champs");
         }
     }
 
@@ -59,10 +55,9 @@ public class EtudiantViewModel extends AndroidViewModel {
         }
     }
 
-    public void onSelectItem(AdapterView<?> parent, View view, int pos, long id)
-    {
+    public void onSelectItem(AdapterView<?> parent, View view, int pos, long id) {
         programme.setValue(parent.getSelectedItem().toString());
-        ((TextView)parent.getChildAt(0)).setTextSize(16);
+        ((TextView) parent.getChildAt(0)).setTextSize(16);
 
     }
 
@@ -89,9 +84,6 @@ public class EtudiantViewModel extends AndroidViewModel {
         return messageToView;
     }
 
-    public LiveData<String> getAddSuccess() {
-        return addSuccess;
-    }
 
     public LiveData<List<Etudiant>> getmEtudiants() {
         return mEtudiants;

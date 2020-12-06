@@ -3,6 +3,7 @@ package fr.utt.if26.projet_final_if26.models;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
@@ -21,6 +22,9 @@ public class CursusEtudiantRepository {
     private ModuleDao mModuleDao;
 
     private LiveData<List<Etudiant>> mAllEtudiants;
+
+
+
     private CursusEtudiantDatabase db;
 
     public CursusEtudiantRepository(Application application) {
@@ -66,6 +70,12 @@ public class CursusEtudiantRepository {
 
     public LiveData<List<Cursus>> getAllCursusFromEtudiantId(int id) {
         return mCursusDao.getCursusById(id);
+    }
+
+    public void updateCursus(Cursus cursus) {
+        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
+            int infos = mCursusDao.updateCursus(cursus);
+        });
     }
 
 }

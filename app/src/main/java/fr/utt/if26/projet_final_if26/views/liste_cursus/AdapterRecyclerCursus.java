@@ -19,10 +19,12 @@ public class AdapterRecyclerCursus extends RecyclerView.Adapter<AdapterRecyclerC
 
     private List<Cursus> cursusList;
     private CursusViewModel viewModel;
+    private CursusActivity cursusActivity;
 
-    public AdapterRecyclerCursus(List<Cursus> cursusList, CursusViewModel viewModel) {
+    public AdapterRecyclerCursus(List<Cursus> cursusList, CursusViewModel viewModel, CursusActivity cursusActivity) {
         this.cursusList = cursusList;
         this.viewModel = viewModel;
+        this.cursusActivity = cursusActivity;
     }
 
     @NonNull
@@ -36,6 +38,7 @@ public class AdapterRecyclerCursus extends RecyclerView.Adapter<AdapterRecyclerC
     public void onBindViewHolder(@NonNull CursusHolder holder, int position) {
         holder.binding.setCursus(cursusList.get(position));
         holder.binding.setViewModel(viewModel);
+        holder.binding.setListeCursusActivity(cursusActivity);
         holder.binding.executePendingBindings();
 
     }

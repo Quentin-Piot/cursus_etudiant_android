@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/darker_bg</item>
+        <item name="colorPrimary">@color/dark_bg</item>
         <item name="colorPrimaryDark">@color/darker_bg</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">@color/text_color</item>
-        <item name="android:statusBarColor">@color/darker_bg</item>
-
+        <item name="android:statusBarColor">@color/dark_bg</item>
+        <item name="android:windowBackground">@color/bg_color</item>
     </style>
     <style name="Projet.Spinner" parent="@style/Widget.AppCompat.Spinner.Underlined">
 

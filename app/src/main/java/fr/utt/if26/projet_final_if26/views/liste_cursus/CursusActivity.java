@@ -15,15 +15,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import fr.utt.if26.projet_final_if26.R;
-import fr.utt.if26.projet_final_if26.databinding.ActivityCursusBinding;
+import fr.utt.if26.projet_final_if26.databinding.ActivityListeCursusBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
 import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
 import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModelFactory;
+import fr.utt.if26.projet_final_if26.viewmodels.VMEventsEnum;
 
 public class CursusActivity extends AppCompatActivity {
 
     private CursusViewModel viewModel;
-    private ActivityCursusBinding binding;
+    private ActivityListeCursusBinding binding;
     private RecyclerView recyclerView;
 
     @Override
@@ -34,20 +35,13 @@ public class CursusActivity extends AppCompatActivity {
 
 
         viewModel.getmCursus().observe(this, cursus -> initAdapter(recyclerView, cursus, viewModel));
+        viewModel.getVmEvent().observe(this, event-> onRecieveVMEvent(event));
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
 
 
+
         FloatingActionButton fab = binding.fabCursus;
-
-        fab.setOnClickListener(view -> {
-
-            AddCursusDialogFragment addCursusDialogFragment = new AddCursusDialogFragment();
-            addCursusDialogFragment.setViewModel(viewModel);
-            addCursusDialogFragment.show(getSupportFragmentManager(), "ajout_cursus");
-
-
-        });
     }
 
     private void initBinding() {
@@ -57,6 +51,7 @@ public class CursusActivity extends AppCompatActivity {
         CursusViewModelFactory factory = new CursusViewModelFactory(getApplication(), studentId);
         viewModel = new ViewModelProvider(this, factory).get(CursusViewModel.class);
         binding.setViewModel(viewModel);
+        binding.setListeCursusActivity(this);
         recyclerView = binding.cursusRecyclerView;
     }
 
@@ -67,8 +62,19 @@ public class CursusActivity extends AppCompatActivity {
             binding.messageTvCursus.setText("");
 
         }
-        AdapterRecyclerCursus adapter = new AdapterRecyclerCursus(cursus, viewModel);
+        AdapterRecyclerCursus adapter = new AdapterRecyclerCursus(cursus, viewModel, this);
         recyclerView.setAdapter(adapter);
+    }
+
+    public void onEditCursus(Cursus cursus) {
+        EditCursusDialogFragment editCursusDialogFragment = new EditCursusDialogFragment(viewModel, cursus);
+        editCursusDialogFragment.show(getSupportFragmentManager(), "edit_cursus");    }
+
+    public void onClickAddCursus() {
+        AddCursusDialogFragment addCursusDialogFragment = new AddCursusDialogFragment();
+        addCursusDialogFragment.setViewModel(viewModel);
+        addCursusDialogFragment.show(getSupportFragmentManager(), "ajout_cursus");
+
     }
 
     public void onSelectCursus(int etudiantId) {
@@ -79,8 +85,12 @@ public class CursusActivity extends AppCompatActivity {
         }
     }
 
-    public void displayToast(String text) {
-        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+    public void onRecieveVMEvent(VMEventsEnum event) {
+        switch (event) {
+            case close_add_etudiant:
+                finish();
+                break;
+        }
     }
 
 }

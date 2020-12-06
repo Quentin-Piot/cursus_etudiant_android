@@ -22,7 +22,7 @@ public interface CursusDao {
     public void deleteCursus(Cursus... cursus);
 
     @Update
-    public void updateCursus(Cursus... cursus);
+    public int updateCursus(Cursus... cursus);
 
     @Query("select * from cursus_table")
     LiveData<List<Cursus>> getAllCursus();

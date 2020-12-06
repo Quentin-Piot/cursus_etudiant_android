@@ -15,13 +15,14 @@ import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
 public class AddEtudiantActivity extends AppCompatActivity {
     private EtudiantViewModel viewModel;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         initBinding();
 
-        viewModel.getAddSuccess().observe(this, this::onAddSuccess);
+        viewModel.getMessageToView().observe(this, this::displayToast);
 
     }
 
@@ -41,14 +42,8 @@ public class AddEtudiantActivity extends AppCompatActivity {
         overridePendingTransition(R.transition.slide_up_in, R.transition.slide_up_out);
     }
 
-    public void onAddSuccess(String text) {
-        if (text.equals("SUCCESS")) {
-            Toast.makeText(getApplicationContext(), "Étudiant ajouté", Toast.LENGTH_SHORT).show();
-            finish();
-            overridePendingTransition(R.transition.slide_up_in, R.transition.slide_up_out);
-        } else if (text.equals("EMPTY")) {
-            Toast.makeText(getApplicationContext(), "Veuillez completer tous les champs", Toast.LENGTH_SHORT).show();
-
-        }
+    public void displayToast(String text) {
+        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
     }
+
 }
