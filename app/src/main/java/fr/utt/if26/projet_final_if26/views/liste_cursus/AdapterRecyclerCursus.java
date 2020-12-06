@@ -1,4 +1,4 @@
-package fr.utt.if26.projet_final_if26.views.cursus;
+package fr.utt.if26.projet_final_if26.views.liste_cursus;
 
 
 import android.view.LayoutInflater;

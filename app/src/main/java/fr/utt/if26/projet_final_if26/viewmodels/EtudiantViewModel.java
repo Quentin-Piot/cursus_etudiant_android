@@ -42,7 +42,7 @@ public class EtudiantViewModel extends AndroidViewModel {
         mEtudiants = mRepository.getAllEtudiants();
     }
 
-    public void handleOnClickAddEtudiant() {
+    public void onClickAddEtudiant() {
 
         if (name.getValue() != null && firstName.getValue() != null) {
             mRepository.insertEtudiant(new Etudiant(name.getValue(), firstName.getValue(), programme.getValue().toString()));
@@ -52,7 +52,7 @@ public class EtudiantViewModel extends AndroidViewModel {
         }
     }
 
-    public void handleOnClickDelEtudiant(Etudiant etudiant) {
+    public void onClickDelEtudiant(Etudiant etudiant) {
         if (etudiant.getId() > -1) {
             mRepository.deleteEtudiantById(etudiant.getId());
             _messageToView.setValue("Étudiant supprimé");

@@ -1,4 +1,4 @@
-package fr.utt.if26.projet_final_if26.views.etudiant;
+package fr.utt.if26.projet_final_if26.views.liste_etudiants;
 
 
 import android.view.LayoutInflater;

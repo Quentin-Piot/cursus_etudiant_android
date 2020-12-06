@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Projet_Final_IF26</string>
+    <string name="app_name">Projet Final Quentin Piot</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -13,6 +13,12 @@
     <string name="nom">Nom</string>
     <string name="nom_etudiant">Nom de l\'étudiant :</string>
     <string name="ajouter">Ajouter</string>
+    <string name="annuler">Annuler</string>
     <string name="title_activity_cursus">CursusActivity</string>
     <string name="programme">Programme</string>
+    <string name="ajout_etudiant">Ajout d\'un étudiant</string>
+    <string name="ajout_cursus">Ajout d\'un cursus</string>
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="nom_du_cursus">Nom du cursus</string>
 </resources>

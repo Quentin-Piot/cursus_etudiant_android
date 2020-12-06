@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.etudiant.AddEtudiantActivity">
+        tools:context=".views.liste_etudiants.AddEtudiantActivity">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -28,21 +28,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">
 
-            <TextView
-                android:id="@+id/name_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/nom_etudiant" />
-
             <EditText
                 android:id="@+id/name_student_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLength="10"
                 android:ems="10"
                 android:hint="@string/nom"
                 android:importantForAutofill="no"
                 android:inputType="textCapSentences|textPersonName"
+                android:maxLength="10"
                 android:text="@={viewModel.name}" />
 
             <EditText
@@ -85,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:onClick="@{()->viewModel.handleOnClickAddEtudiant()}"
+                android:onClick="@{()->viewModel.onClickAddEtudiant()}"
                 android:text="@string/ajouter"
                 android:textSize="18sp" />
         </LinearLayout>
