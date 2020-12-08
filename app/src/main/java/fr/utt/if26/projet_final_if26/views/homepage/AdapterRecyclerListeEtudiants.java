@@ -1,4 +1,4 @@
-package fr.utt.if26.projet_final_if26.views.liste_etudiants;
+package fr.utt.if26.projet_final_if26.views.homepage;
 
 
 import android.view.LayoutInflater;
@@ -13,14 +13,14 @@ import java.util.List;
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ItemEtudiantBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
-import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
+import fr.utt.if26.projet_final_if26.viewmodels.MainActivityViewModel;
 
-public class AdapterRecyclerEtudiant extends RecyclerView.Adapter<AdapterRecyclerEtudiant.EtudiantHolder> {
+public class AdapterRecyclerListeEtudiants extends RecyclerView.Adapter<AdapterRecyclerListeEtudiants.EtudiantHolder> {
 
-    private List<Etudiant> etudiantList;
-    private EtudiantViewModel viewModel;
+    private final List<Etudiant> etudiantList;
+    private final MainActivityViewModel viewModel;
 
-    public AdapterRecyclerEtudiant(List<Etudiant> etudiantList, EtudiantViewModel viewModel) {
+    public AdapterRecyclerListeEtudiants(List<Etudiant> etudiantList, MainActivityViewModel viewModel) {
         this.etudiantList = etudiantList;
         this.viewModel = viewModel;
     }
@@ -45,9 +45,9 @@ public class AdapterRecyclerEtudiant extends RecyclerView.Adapter<AdapterRecycle
         return this.etudiantList.size();
     }
 
-    class EtudiantHolder extends RecyclerView.ViewHolder {
+    static class EtudiantHolder extends RecyclerView.ViewHolder {
 
-        private ItemEtudiantBinding binding;
+        private final ItemEtudiantBinding binding;
 
         public EtudiantHolder(ItemEtudiantBinding binding) {
             super(binding.getRoot());

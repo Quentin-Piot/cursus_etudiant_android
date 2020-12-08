@@ -11,19 +11,24 @@ import java.util.List;
 
 import fr.utt.if26.projet_final_if26.models.CursusEtudiantRepository;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
+import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
 
-public class CursusViewModel extends AndroidViewModel {
+public class EtudiantActivityViewModel extends AndroidViewModel {
 
     private final CursusEtudiantRepository mRepository;
     private final int mEtudiantId;
 
-    public MutableLiveData<String> cursusName = new MutableLiveData<>();
+    private final MutableLiveData<Cursus> _selectedCursus = new MutableLiveData<>();
+    private final LiveData<Cursus> selectedCursus = _selectedCursus;
+
+
+    public MutableLiveData<String> cursusLabel = new MutableLiveData<>();
 
     private final MutableLiveData<VMEventsEnum> _vmEvent = new MutableLiveData<>();
     private final LiveData<VMEventsEnum> vmEvent = _vmEvent;
 
 
-    public CursusViewModel(@NonNull Application application, int mEtudiantId) {
+    public EtudiantActivityViewModel(@NonNull Application application, int mEtudiantId) {
         super(application);
         mRepository = new CursusEtudiantRepository(application);
         this.mEtudiantId = mEtudiantId;
@@ -31,9 +36,9 @@ public class CursusViewModel extends AndroidViewModel {
 
     public void onClickAddEtudiant() {
 
-        if (cursusName.getValue() != null && mEtudiantId > -1) {
-            mRepository.insertCursus(new Cursus(cursusName.getValue(), mEtudiantId));
-            _vmEvent.setValue(VMEventsEnum.close_add_etudiant);
+        if (cursusLabel.getValue() != null && !cursusLabel.getValue().isEmpty() && mEtudiantId > -1) {
+            mRepository.insertCursus(new Cursus(cursusLabel.getValue(), mEtudiantId));
+            _vmEvent.setValue(VMEventsEnum.success_operation);
         } else {
             _vmEvent.setValue(VMEventsEnum.empty_fields);
         }
@@ -42,16 +47,20 @@ public class CursusViewModel extends AndroidViewModel {
     public void onClickUpdateCursus(Cursus selectedCursus) {
 
 
-        if (cursusName.getValue() != null) {
-            selectedCursus.setNom(cursusName.getValue());
+        if (cursusLabel.getValue() != null && !cursusLabel.getValue().isEmpty()) {
+            selectedCursus.setLabel(cursusLabel.getValue());
             mRepository.updateCursus(selectedCursus);
+            _vmEvent.setValue(VMEventsEnum.success_operation);
+        } else {
+            _vmEvent.setValue(VMEventsEnum.empty_fields);
         }
 
 
     }
 
-    public void onSelectedCursusId(int id) {
+    public void setSelectedEtudiant(Cursus cursus) {
 
+        this._selectedCursus.setValue(cursus);
     }
 
     public void onClickDelCursus(Cursus cursus) {
@@ -61,19 +70,15 @@ public class CursusViewModel extends AndroidViewModel {
         }
     }
 
-    public void updateCursus(Cursus cursus) {
-        mRepository.updateCursus(cursus);
-    }
-
     public LiveData<List<Cursus>> getmCursus() {
         return mRepository.getAllCursusForEtudiantId(mEtudiantId);
     }
 
-
-    public void setSelectedCursusId(int selectedCursusId) {
-    }
-
     public LiveData<VMEventsEnum> getVmEvent() {
         return vmEvent;
+    }
+
+    public LiveData<Cursus> getSelectedCursus() {
+        return selectedCursus;
     }
 }

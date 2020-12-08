@@ -15,7 +15,7 @@ import java.util.List;
 import fr.utt.if26.projet_final_if26.models.CursusEtudiantRepository;
 import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
 
-public class EtudiantViewModel extends AndroidViewModel {
+public class MainActivityViewModel extends AndroidViewModel {
 
     private final LiveData<List<Etudiant>> mEtudiants;
 
@@ -32,7 +32,8 @@ public class EtudiantViewModel extends AndroidViewModel {
 
     private final CursusEtudiantRepository mRepository;
 
-    public EtudiantViewModel(@NonNull Application application) {
+
+    public MainActivityViewModel(@NonNull Application application) {
         super(application);
         mRepository = new CursusEtudiantRepository(application);
         mEtudiants = mRepository.getAllEtudiants();
@@ -40,9 +41,9 @@ public class EtudiantViewModel extends AndroidViewModel {
 
     public void onClickAddEtudiant() {
 
-        if (name.getValue() != null && firstName.getValue() != null) {
-            mRepository.insertEtudiant(new Etudiant(name.getValue(), firstName.getValue(), programme.getValue().toString()));
-            _vmEvent.setValue(VMEventsEnum.success_operation);
+        if (name.getValue() != null && firstName.getValue() != null && programme.getValue() != null && !name.getValue().isEmpty() && !firstName.getValue().isEmpty()) {
+            mRepository.insertEtudiant(new Etudiant(name.getValue(), firstName.getValue(), programme.getValue()));
+            _vmEvent.setValue(VMEventsEnum.close_add_etudiant);
         } else {
             _vmEvent.setValue(VMEventsEnum.empty_fields);
         }
@@ -66,9 +67,6 @@ public class EtudiantViewModel extends AndroidViewModel {
         mRepository.insertEtudiant(etudiant);
     }
 
-    public void deleteById(int id) {
-        mRepository.deleteEtudiantById(id);
-    }
 
 
     public LiveData<Etudiant> getSelectedEtudiant() {
@@ -87,5 +85,6 @@ public class EtudiantViewModel extends AndroidViewModel {
     public LiveData<VMEventsEnum> getVmEvent() {
         return vmEvent;
     }
+
 
 }

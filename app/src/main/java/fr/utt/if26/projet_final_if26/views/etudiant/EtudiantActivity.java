@@ -1,4 +1,4 @@
-package fr.utt.if26.projet_final_if26.views.liste_cursus;
+package fr.utt.if26.projet_final_if26.views.etudiant;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,62 +10,78 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.List;
 import java.util.Objects;
 
 import fr.utt.if26.projet_final_if26.R;
-import fr.utt.if26.projet_final_if26.databinding.ActivityListeCursusBinding;
+import fr.utt.if26.projet_final_if26.databinding.ActivityEtudiantBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
-import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
 import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModelFactory;
+import fr.utt.if26.projet_final_if26.viewmodels.EtudiantActivityViewModel;
 import fr.utt.if26.projet_final_if26.viewmodels.VMEventsEnum;
+import fr.utt.if26.projet_final_if26.views.Cursus.CursusActivity;
 
-public class CursusActivity extends AppCompatActivity {
+public class EtudiantActivity extends AppCompatActivity {
 
-    private CursusViewModel viewModel;
-    private ActivityListeCursusBinding binding;
+    private EtudiantActivityViewModel viewModel;
+    private ActivityEtudiantBinding binding;
     private RecyclerView recyclerView;
 
     private String studentName;
+    private String studentFirstName;
+    private String studentProgramme;
+
     private int studentId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         studentName = getIntent().getStringExtra("student_name");
+        studentFirstName = getIntent().getStringExtra("student_first_name");
+        studentProgramme = getIntent().getStringExtra("student_programme");
+
         studentId = getIntent().getIntExtra("student_id", -1);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Liste des cursus de " + studentName);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Page de l\'étudiant");
 
         initBinding();
 
 
-        viewModel.getmCursus().observe(this, cursus -> initAdapter(recyclerView, cursus, viewModel));
+        viewModel.getmCursus().observe(this, cursus -> {
+            initAdapter(recyclerView, cursus, viewModel);
+            if (cursus != null)
+                binding.studentCursusNumberTv.setText(Integer.toString(cursus.size()));
+        });
         viewModel.getVmEvent().observe(this, this::onRecieveVMEvent);
+        viewModel.getSelectedCursus().observe(this, this::onSelectCursus);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
     }
 
     private void initBinding() {
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_liste_cursus);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_etudiant);
         CursusViewModelFactory factory = new CursusViewModelFactory(getApplication(), studentId);
-        viewModel = new ViewModelProvider(this, factory).get(CursusViewModel.class);
+        viewModel = new ViewModelProvider(this, factory).get(EtudiantActivityViewModel.class);
         binding.setViewModel(viewModel);
-        binding.setListeCursusActivity(this);
+        binding.setEtudiantActivity(this);
         recyclerView = binding.cursusRecyclerView;
+
+        binding.studentNameTv.setText(studentName);
+        binding.studentFirstnameTv.setText(studentFirstName);
+        binding.studentProgrammeTv.setText(studentProgramme);
+
     }
 
-    public void initAdapter(RecyclerView recyclerView, List<Cursus> cursus, CursusViewModel viewModel) {
+    public void initAdapter(RecyclerView recyclerView, List<Cursus> cursus, EtudiantActivityViewModel viewModel) {
         if (cursus.size() == 0) {
             binding.messageTvCursus.setText(R.string.aucun_cursus);
         } else {
             binding.messageTvCursus.setText("");
 
         }
-        AdapterRecyclerCursus adapter = new AdapterRecyclerCursus(cursus, viewModel, this);
+        AdapterRecyclerListeCursus adapter = new AdapterRecyclerListeCursus(cursus, viewModel, this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -81,10 +97,9 @@ public class CursusActivity extends AppCompatActivity {
 
     }
 
-    public void onSelectCursus(int etudiantId) {
-        if (etudiantId >= 0) {
+    public void onSelectCursus(Cursus cursus) {
+        if (cursus.getId() >= 0) {
             Intent intent = new Intent(getApplicationContext(), CursusActivity.class);
-            intent.putExtra("student_id", etudiantId);
             startActivity(intent);
         }
     }

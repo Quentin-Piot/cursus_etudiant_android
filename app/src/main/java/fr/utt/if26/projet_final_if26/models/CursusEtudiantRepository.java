@@ -49,6 +49,7 @@ public class CursusEtudiantRepository {
 
     public void deleteEtudiantById(int id) {
         CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
+            mCursusDao.deleteCursusOfEtudiant(id);
             mEtudiantDao.deleteEtudiantById(id);
         });
     }

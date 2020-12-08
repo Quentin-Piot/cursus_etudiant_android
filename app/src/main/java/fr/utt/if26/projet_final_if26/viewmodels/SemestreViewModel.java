@@ -43,7 +43,7 @@ public class SemestreViewModel extends AndroidViewModel {
 
 
         if (cursusName.getValue() != null) {
-            selectedCursus.setNom(cursusName.getValue());
+            selectedCursus.setLabel(cursusName.getValue());
             mRepository.updateCursus(selectedCursus);
         }
 
@@ -66,7 +66,7 @@ public class SemestreViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Cursus>> getmCursus() {
-        return mRepository.getAllCursusFromEtudiantId(mEtudiantId);
+        return mRepository.getAllCursusForEtudiantId(mEtudiantId);
     }
 
 

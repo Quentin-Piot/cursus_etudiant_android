@@ -1,4 +1,4 @@
-package fr.utt.if26.projet_final_if26.views.liste_cursus;
+package fr.utt.if26.projet_final_if26.views.etudiant;
 
 
 import android.view.LayoutInflater;
@@ -13,18 +13,18 @@ import java.util.List;
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ItemCursusBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
-import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
+import fr.utt.if26.projet_final_if26.viewmodels.EtudiantActivityViewModel;
 
-public class AdapterRecyclerCursus extends RecyclerView.Adapter<AdapterRecyclerCursus.CursusHolder> {
+public class AdapterRecyclerListeCursus extends RecyclerView.Adapter<AdapterRecyclerListeCursus.CursusHolder> {
 
-    private List<Cursus> cursusList;
-    private CursusViewModel viewModel;
-    private CursusActivity cursusActivity;
+    private final List<Cursus> cursusList;
+    private final EtudiantActivityViewModel viewModel;
+    private final EtudiantActivity etudiantActivity;
 
-    public AdapterRecyclerCursus(List<Cursus> cursusList, CursusViewModel viewModel, CursusActivity cursusActivity) {
+    public AdapterRecyclerListeCursus(List<Cursus> cursusList, EtudiantActivityViewModel viewModel, EtudiantActivity etudiantActivity) {
         this.cursusList = cursusList;
         this.viewModel = viewModel;
-        this.cursusActivity = cursusActivity;
+        this.etudiantActivity = etudiantActivity;
     }
 
     @NonNull
@@ -38,7 +38,7 @@ public class AdapterRecyclerCursus extends RecyclerView.Adapter<AdapterRecyclerC
     public void onBindViewHolder(@NonNull CursusHolder holder, int position) {
         holder.binding.setCursus(cursusList.get(position));
         holder.binding.setViewModel(viewModel);
-        holder.binding.setListeCursusActivity(cursusActivity);
+        holder.binding.setEtudiantActivity(etudiantActivity);
         holder.binding.executePendingBindings();
 
     }
@@ -50,7 +50,7 @@ public class AdapterRecyclerCursus extends RecyclerView.Adapter<AdapterRecyclerC
 
     class CursusHolder extends RecyclerView.ViewHolder {
 
-        private ItemCursusBinding binding;
+        private final ItemCursusBinding binding;
 
         public CursusHolder(ItemCursusBinding binding) {
             super(binding.getRoot());

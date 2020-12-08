@@ -19,6 +19,6 @@ public class CursusViewModelFactory implements ViewModelProvider.Factory {
 
     @Override
     public <T extends ViewModel> T create(Class<T> modelClass) {
-        return (T) new CursusViewModel(mApplication, mEtudiantId);
+        return (T) new EtudiantActivityViewModel(mApplication, mEtudiantId);
     }
 }

@@ -7,7 +7,7 @@
             type="fr.utt.if26.projet_final_if26.models.entities.Etudiant" />
         <variable
             name="viewModel"
-            type="fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel" />
+            type="fr.utt.if26.projet_final_if26.viewmodels.MainActivityViewModel" />
     </data>
 
     <LinearLayout

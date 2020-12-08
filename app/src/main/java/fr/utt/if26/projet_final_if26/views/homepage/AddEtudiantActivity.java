@@ -1,4 +1,4 @@
-package fr.utt.if26.projet_final_if26.views.liste_etudiants;
+package fr.utt.if26.projet_final_if26.views.homepage;
 
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -12,11 +12,11 @@ import java.util.Objects;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ActivityAddEtudiantBinding;
-import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
+import fr.utt.if26.projet_final_if26.viewmodels.MainActivityViewModel;
 import fr.utt.if26.projet_final_if26.viewmodels.VMEventsEnum;
 
 public class AddEtudiantActivity extends AppCompatActivity {
-    private EtudiantViewModel viewModel;
+    private MainActivityViewModel viewModel;
 
 
     @Override
@@ -31,7 +31,7 @@ public class AddEtudiantActivity extends AppCompatActivity {
 
     private void initBinding() {
         ActivityAddEtudiantBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_add_etudiant);
-        viewModel = new ViewModelProvider(this).get(EtudiantViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         InputFilter[] filters = new InputFilter[]{new InputFilter.AllCaps(), new InputFilter.LengthFilter(10)};
         binding.nameStudentEt.setFilters(filters);
         binding.setViewModel(viewModel);
@@ -46,8 +46,10 @@ public class AddEtudiantActivity extends AppCompatActivity {
 
     public void onRecieveVMEvent(VMEventsEnum event) {
         switch (event) {
-            case success_operation:
-                Toast.makeText(getApplicationContext(),"Opération réussie", Toast.LENGTH_SHORT).show();
+            case close_add_etudiant:
+                Toast.makeText(getApplicationContext(),"Le cursus a été bien ajouté", Toast.LENGTH_SHORT).show();
+                finish();
+                overridePendingTransition(R.transition.slide_up_in,R.transition.slide_up_out);
                 break;
             case empty_fields:
                 Toast.makeText(getApplicationContext(),"Veuillez compléter l'ensemble des champs", Toast.LENGTH_SHORT).show();

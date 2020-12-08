@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel" />
+            type="fr.utt.if26.projet_final_if26.viewmodels.EtudiantActivityViewModel" />
     </data>
 
     <LinearLayout
@@ -36,7 +36,7 @@
             android:hint="@string/nom_du_cursus"
             android:inputType="textCapWords"
             android:maxLength="15"
-            android:text="@={viewModel.cursusName}" />
+            android:text="@={viewModel.cursusLabel}" />
 
     </LinearLayout>
 </layout>

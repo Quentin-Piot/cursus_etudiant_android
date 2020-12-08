@@ -1,6 +1,7 @@
 package fr.utt.if26.projet_final_if26.models.entities;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Entity;
@@ -16,20 +17,27 @@ public class Cursus {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private String nom;
+    private String label;
+    @ColumnInfo(name = "etudiant_id")
     private int etudiantId;
+    @ColumnInfo(name = "semestre_etranger", defaultValue = "false")
+    private boolean semestreEtranger = false;
+    @ColumnInfo(name = "npml", defaultValue = "false")
+    private boolean npml;
 
-    public Cursus(@NonNull String nom, @NonNull int etudiantId) {
-        this.nom = nom;
+    public Cursus(@NonNull String label, @NonNull int etudiantId) {
+        this.label = label;
         this.etudiantId = etudiantId;
+        this.npml = false;
+        this.semestreEtranger = true;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public void setEtudiantId(int etudiantId) {
@@ -40,11 +48,27 @@ public class Cursus {
         return id;
     }
 
-    public String getNom() {
-        return nom;
+    public String getLabel() {
+        return label;
     }
 
     public int getEtudiantId() {
         return etudiantId;
+    }
+
+    public boolean isSemestreEtranger() {
+        return semestreEtranger;
+    }
+
+    public void setSemestreEtranger(boolean semestreEtranger) {
+        this.semestreEtranger = semestreEtranger;
+    }
+
+    public boolean isNpml() {
+        return npml;
+    }
+
+    public void setNpml(boolean npml) {
+        this.npml = npml;
     }
 }

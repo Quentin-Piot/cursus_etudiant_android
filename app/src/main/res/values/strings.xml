@@ -28,4 +28,7 @@
     <string name="nouveau_nom">Nouveau nom</string>
     <string name="aucun_cursus">Aucun cursus</string>
     <string name="aucun_etudiant">Aucun étudiant</string>
+    <string name="cursus_tv">Cursus :</string>
+    <string name="modules_tv">Modules :</string>
+    <string name="semestres_tv">Semestres :</string>
 </resources>

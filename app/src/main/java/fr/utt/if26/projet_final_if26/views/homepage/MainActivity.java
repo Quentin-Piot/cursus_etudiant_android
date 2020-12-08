@@ -1,4 +1,4 @@
-package fr.utt.if26.projet_final_if26.views.liste_etudiants;
+package fr.utt.if26.projet_final_if26.views.homepage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,28 +10,26 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.List;
 import java.util.Objects;
 
 import fr.utt.if26.projet_final_if26.R;
-import fr.utt.if26.projet_final_if26.databinding.ActivityListeEtudiantsBinding;
+import fr.utt.if26.projet_final_if26.databinding.ActivityMainBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
-import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
+import fr.utt.if26.projet_final_if26.viewmodels.MainActivityViewModel;
 import fr.utt.if26.projet_final_if26.viewmodels.VMEventsEnum;
-import fr.utt.if26.projet_final_if26.views.liste_cursus.CursusActivity;
+import fr.utt.if26.projet_final_if26.views.etudiant.EtudiantActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EtudiantViewModel viewModel;
-    private ActivityListeEtudiantsBinding binding;
+    private MainActivityViewModel viewModel;
+    private ActivityMainBinding binding;
     private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Liste des étudiants");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Accueil");
 
         initBinding();
 
@@ -51,45 +49,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initBinding() {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_liste_etudiants);
-        viewModel = new ViewModelProvider(this).get(EtudiantViewModel.class);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         binding.setViewModel(viewModel);
         recyclerView = binding.etudiantRecyclerView;
     }
 
-    public void initAdapter(RecyclerView recyclerView, List<Etudiant> etudiants, EtudiantViewModel viewModel) {
+    public void initAdapter(RecyclerView recyclerView, List<Etudiant> etudiants, MainActivityViewModel viewModel) {
         if (etudiants.size() == 0) {
             binding.etudiantMessageTv.setText(R.string.aucun_etudiant);
         } else {
             binding.etudiantMessageTv.setText("");
 
         }
-        AdapterRecyclerEtudiant adapter = new AdapterRecyclerEtudiant(etudiants, viewModel);
+        AdapterRecyclerListeEtudiants adapter = new AdapterRecyclerListeEtudiants(etudiants, viewModel);
         recyclerView.setAdapter(adapter);
 
     }
 
     public void onSelectEtudiant(Etudiant etudiant) {
         if (etudiant.getId() >= 0) {
-            Intent intent = new Intent(getApplicationContext(), CursusActivity.class);
+            Intent intent = new Intent(getApplicationContext(), EtudiantActivity.class);
             intent.putExtra("student_id", etudiant.getId());
-            intent.putExtra("student_nom", etudiant.getNom());
+            intent.putExtra("student_name", etudiant.getNom());
+            intent.putExtra("student_first_name", etudiant.getPrenom());
+            intent.putExtra("student_programme", etudiant.getProgramme());
 
             startActivity(intent);
         }
     }
+
     public void onRecieveVMEvent(VMEventsEnum event) {
         switch (event) {
-            case close_add_etudiant:
-                Toast.makeText(getApplicationContext(),"Le cursus a été bien ajouté", Toast.LENGTH_SHORT).show();
-                finish();
-                overridePendingTransition(R.transition.slide_up_in,R.transition.slide_up_out);
-                break;
             case success_operation:
-                Toast.makeText(getApplicationContext(),"Opération réussie", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Opération réussie", Toast.LENGTH_SHORT).show();
                 break;
             case empty_fields:
-                Toast.makeText(getApplicationContext(),"Veuillez compléter l'ensemble des champs", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Veuillez compléter l'ensemble des champs", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

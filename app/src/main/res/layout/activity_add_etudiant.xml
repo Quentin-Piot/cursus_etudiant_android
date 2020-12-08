@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel" />
+            type="fr.utt.if26.projet_final_if26.viewmodels.MainActivityViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.liste_etudiants.AddEtudiantActivity">
+        tools:context=".views.homepage.AddEtudiantActivity">
 
         <LinearLayout
             android:id="@+id/linearLayout"

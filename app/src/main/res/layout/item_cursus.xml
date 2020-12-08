@@ -7,17 +7,17 @@
             type="fr.utt.if26.projet_final_if26.models.entities.Cursus" />
         <variable
             name="viewModel"
-            type="fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel" />
+            type="fr.utt.if26.projet_final_if26.viewmodels.EtudiantActivityViewModel" />
         <variable
-            name="listeCursusActivity"
-            type="fr.utt.if26.projet_final_if26.views.liste_cursus.CursusActivity" />
+            name="EtudiantActivity"
+            type="fr.utt.if26.projet_final_if26.views.etudiant.EtudiantActivity" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/darker_bg"
-        android:onClick="@{()-> viewModel.onSelectedCursusId(cursus.id)}"
+        android:onClick="@{()-> viewModel.setSelectedEtudiant(cursus)}"
         android:paddingTop="6dp"
         android:paddingBottom="6dp">
 
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight=".8"
-            android:text="@{cursus.nom}"
+            android:text="@{cursus.label}"
             android:textColor="@color/text_color"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -54,7 +54,7 @@
             android:layout_weight="0.1"
             android:background="@android:drawable/ic_menu_edit"
             android:backgroundTint="#FFFFFF"
-            android:onClick="@{() -> listeCursusActivity.onEditCursus(cursus)}" />
+            android:onClick="@{() -> EtudiantActivity.onEditCursus(cursus)}" />
         />
 
         <Button

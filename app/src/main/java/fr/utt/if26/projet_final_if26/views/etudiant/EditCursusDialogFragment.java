@@ -1,4 +1,4 @@
-package fr.utt.if26.projet_final_if26.views.liste_cursus;
+package fr.utt.if26.projet_final_if26.views.etudiant;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -9,17 +9,16 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 
 import fr.utt.if26.projet_final_if26.R;
-import fr.utt.if26.projet_final_if26.databinding.DialogAddCursusBinding;
 import fr.utt.if26.projet_final_if26.databinding.DialogEditCursusBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
-import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
+import fr.utt.if26.projet_final_if26.viewmodels.EtudiantActivityViewModel;
 
 public class EditCursusDialogFragment extends DialogFragment {
 
-    private CursusViewModel viewModel;
+    private EtudiantActivityViewModel viewModel;
     private Cursus selectedCursus;
 
-    public EditCursusDialogFragment(CursusViewModel viewModel, Cursus cursus) {
+    public EditCursusDialogFragment(EtudiantActivityViewModel viewModel, Cursus cursus) {
         super();
         this.viewModel = viewModel;
         this.selectedCursus = cursus;
@@ -32,18 +31,19 @@ public class EditCursusDialogFragment extends DialogFragment {
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         DialogEditCursusBinding binding = DataBindingUtil.inflate(inflater, R.layout.dialog_edit_cursus, null, false);
         binding.setViewModel(viewModel);
-                builder.setView(binding.getRoot())
+        viewModel.cursusLabel.setValue("");
+        builder.setView(binding.getRoot())
                 .setPositiveButton(R.string.modifier, (dialog, id) -> viewModel.onClickUpdateCursus(this.selectedCursus))
                 .setNegativeButton(R.string.annuler, (dialog, id) -> {
                 });
         return builder.create();
     }
 
-    public CursusViewModel getViewModel() {
+    public EtudiantActivityViewModel getViewModel() {
         return viewModel;
     }
 
-    public void setViewModel(CursusViewModel viewModel) {
+    public void setViewModel(EtudiantActivityViewModel viewModel) {
         this.viewModel = viewModel;
     }
 }

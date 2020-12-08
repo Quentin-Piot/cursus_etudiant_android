@@ -1,7 +1,6 @@
-package fr.utt.if26.projet_final_if26.views.liste_cursus;
+package fr.utt.if26.projet_final_if26.views.etudiant;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
@@ -11,11 +10,11 @@ import androidx.fragment.app.DialogFragment;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.DialogAddCursusBinding;
-import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
+import fr.utt.if26.projet_final_if26.viewmodels.EtudiantActivityViewModel;
 
 public class AddCursusDialogFragment extends DialogFragment {
 
-    private CursusViewModel viewModel;
+    private EtudiantActivityViewModel viewModel;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -24,18 +23,19 @@ public class AddCursusDialogFragment extends DialogFragment {
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         DialogAddCursusBinding binding = DataBindingUtil.inflate(inflater, R.layout.dialog_add_cursus, null, false);
         binding.setViewModel(viewModel);
-                builder.setView(binding.getRoot())
+        viewModel.cursusLabel.setValue("");
+        builder.setView(binding.getRoot())
                 .setPositiveButton(R.string.ajouter, (dialog, id) -> viewModel.onClickAddEtudiant())
                 .setNegativeButton(R.string.annuler, (dialog, id) -> {
                 });
         return builder.create();
     }
 
-    public CursusViewModel getViewModel() {
+    public EtudiantActivityViewModel getViewModel() {
         return viewModel;
     }
 
-    public void setViewModel(CursusViewModel viewModel) {
+    public void setViewModel(EtudiantActivityViewModel viewModel) {
         this.viewModel = viewModel;
     }
 }
