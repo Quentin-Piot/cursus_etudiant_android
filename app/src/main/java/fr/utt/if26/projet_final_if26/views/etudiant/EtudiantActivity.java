@@ -16,14 +16,14 @@ import java.util.Objects;
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ActivityEtudiantBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
-import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModelFactory;
-import fr.utt.if26.projet_final_if26.viewmodels.EtudiantActivityViewModel;
+import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
+import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModelFactory;
 import fr.utt.if26.projet_final_if26.viewmodels.VMEventsEnum;
-import fr.utt.if26.projet_final_if26.views.Cursus.CursusActivity;
+import fr.utt.if26.projet_final_if26.views.cursus.CursusActivity;
 
 public class EtudiantActivity extends AppCompatActivity {
 
-    private EtudiantActivityViewModel viewModel;
+    private EtudiantViewModel viewModel;
     private ActivityEtudiantBinding binding;
     private RecyclerView recyclerView;
 
@@ -62,8 +62,8 @@ public class EtudiantActivity extends AppCompatActivity {
     private void initBinding() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_etudiant);
-        CursusViewModelFactory factory = new CursusViewModelFactory(getApplication(), studentId);
-        viewModel = new ViewModelProvider(this, factory).get(EtudiantActivityViewModel.class);
+        EtudiantViewModelFactory factory = new EtudiantViewModelFactory(getApplication(), studentId);
+        viewModel = new ViewModelProvider(this, factory).get(EtudiantViewModel.class);
         binding.setViewModel(viewModel);
         binding.setEtudiantActivity(this);
         recyclerView = binding.cursusRecyclerView;
@@ -74,13 +74,14 @@ public class EtudiantActivity extends AppCompatActivity {
 
     }
 
-    public void initAdapter(RecyclerView recyclerView, List<Cursus> cursus, EtudiantActivityViewModel viewModel) {
+    public void initAdapter(RecyclerView recyclerView, List<Cursus> cursus, EtudiantViewModel viewModel) {
         if (cursus.size() == 0) {
             binding.messageTvCursus.setText(R.string.aucun_cursus);
         } else {
             binding.messageTvCursus.setText("");
 
         }
+
         AdapterRecyclerListeCursus adapter = new AdapterRecyclerListeCursus(cursus, viewModel, this);
         recyclerView.setAdapter(adapter);
     }
@@ -91,8 +92,7 @@ public class EtudiantActivity extends AppCompatActivity {
     }
 
     public void onClickAddCursus() {
-        AddCursusDialogFragment addCursusDialogFragment = new AddCursusDialogFragment();
-        addCursusDialogFragment.setViewModel(viewModel);
+        AddCursusDialogFragment addCursusDialogFragment = new AddCursusDialogFragment(viewModel);
         addCursusDialogFragment.show(getSupportFragmentManager(), "ajout_cursus");
 
     }
@@ -100,6 +100,7 @@ public class EtudiantActivity extends AppCompatActivity {
     public void onSelectCursus(Cursus cursus) {
         if (cursus.getId() >= 0) {
             Intent intent = new Intent(getApplicationContext(), CursusActivity.class);
+            intent.putExtra("cursus_id", cursus.getId());
             startActivity(intent);
         }
     }

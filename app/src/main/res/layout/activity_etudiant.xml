@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="fr.utt.if26.projet_final_if26.viewmodels.EtudiantActivityViewModel" />
+            type="fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel" />
         <variable
             name="EtudiantActivity"
             type="fr.utt.if26.projet_final_if26.views.etudiant.EtudiantActivity" />
@@ -136,7 +136,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_cursus"
+            android:id="@+id/fab_etudiant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"

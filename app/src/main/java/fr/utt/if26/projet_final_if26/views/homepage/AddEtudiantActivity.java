@@ -12,11 +12,11 @@ import java.util.Objects;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ActivityAddEtudiantBinding;
-import fr.utt.if26.projet_final_if26.viewmodels.MainActivityViewModel;
+import fr.utt.if26.projet_final_if26.viewmodels.AccueilViewModel;
 import fr.utt.if26.projet_final_if26.viewmodels.VMEventsEnum;
 
 public class AddEtudiantActivity extends AppCompatActivity {
-    private MainActivityViewModel viewModel;
+    private AccueilViewModel viewModel;
 
 
     @Override
@@ -31,7 +31,7 @@ public class AddEtudiantActivity extends AppCompatActivity {
 
     private void initBinding() {
         ActivityAddEtudiantBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_add_etudiant);
-        viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        viewModel = new ViewModelProvider(this).get(AccueilViewModel.class);
         InputFilter[] filters = new InputFilter[]{new InputFilter.AllCaps(), new InputFilter.LengthFilter(10)};
         binding.nameStudentEt.setFilters(filters);
         binding.setViewModel(viewModel);

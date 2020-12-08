@@ -13,14 +13,14 @@ import java.util.List;
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ItemEtudiantBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
-import fr.utt.if26.projet_final_if26.viewmodels.MainActivityViewModel;
+import fr.utt.if26.projet_final_if26.viewmodels.AccueilViewModel;
 
 public class AdapterRecyclerListeEtudiants extends RecyclerView.Adapter<AdapterRecyclerListeEtudiants.EtudiantHolder> {
 
     private final List<Etudiant> etudiantList;
-    private final MainActivityViewModel viewModel;
+    private final AccueilViewModel viewModel;
 
-    public AdapterRecyclerListeEtudiants(List<Etudiant> etudiantList, MainActivityViewModel viewModel) {
+    public AdapterRecyclerListeEtudiants(List<Etudiant> etudiantList, AccueilViewModel viewModel) {
         this.etudiantList = etudiantList;
         this.viewModel = viewModel;
     }

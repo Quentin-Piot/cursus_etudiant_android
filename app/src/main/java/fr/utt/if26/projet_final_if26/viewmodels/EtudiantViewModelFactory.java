@@ -5,20 +5,20 @@ import android.app.Application;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-public class CursusViewModelFactory implements ViewModelProvider.Factory {
+public class EtudiantViewModelFactory implements ViewModelProvider.Factory {
 
     private Application mApplication;
-    private int mCursusId;
+    private int mEtudiantId;
 
 
-    public CursusViewModelFactory(Application application, int mCursusId) {
+    public EtudiantViewModelFactory(Application application, int etudiantId) {
         mApplication = application;
-        this.mCursusId = mCursusId;
+        mEtudiantId = etudiantId;
     }
 
 
     @Override
     public <T extends ViewModel> T create(Class<T> modelClass) {
-        return (T) new CursusViewModel(mApplication, mCursusId);
+        return (T) new EtudiantViewModel(mApplication, mEtudiantId);
     }
 }

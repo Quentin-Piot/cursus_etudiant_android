@@ -1,6 +1,7 @@
 package fr.utt.if26.projet_final_if26.models.entities;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -9,11 +10,14 @@ public class Semestre {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private String nom;
+    private String label;
+    @ColumnInfo(name = "cursus_id")
     private int cursusId;
+    @ColumnInfo(name = "nombre_modules", defaultValue = "0")
+    private int nombreModules;
 
-    public Semestre(@NonNull String nom, @NonNull int cursusId) {
-        this.nom = nom;
+    public Semestre(@NonNull String label, @NonNull int cursusId) {
+        this.label = label;
         this.cursusId = cursusId;
     }
 
@@ -21,8 +25,8 @@ public class Semestre {
         return id;
     }
 
-    public String getNom() {
-        return nom;
+    public String getLabel() {
+        return label;
     }
 
     public int getCursusID() {
@@ -33,8 +37,8 @@ public class Semestre {
         this.id = id;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public int getCursusId() {
@@ -43,5 +47,13 @@ public class Semestre {
 
     public void setCursusId(int cursusId) {
         this.cursusId = cursusId;
+    }
+
+    public int getNombreModules() {
+        return nombreModules;
+    }
+
+    public void setNombreModules(int nombreModules) {
+        this.nombreModules = nombreModules;
     }
 }

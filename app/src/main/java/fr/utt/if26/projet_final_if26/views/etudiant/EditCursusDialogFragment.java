@@ -11,14 +11,14 @@ import androidx.fragment.app.DialogFragment;
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.DialogEditCursusBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
-import fr.utt.if26.projet_final_if26.viewmodels.EtudiantActivityViewModel;
+import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
 
 public class EditCursusDialogFragment extends DialogFragment {
 
-    private EtudiantActivityViewModel viewModel;
+    private EtudiantViewModel viewModel;
     private Cursus selectedCursus;
 
-    public EditCursusDialogFragment(EtudiantActivityViewModel viewModel, Cursus cursus) {
+    public EditCursusDialogFragment(EtudiantViewModel viewModel, Cursus cursus) {
         super();
         this.viewModel = viewModel;
         this.selectedCursus = cursus;
@@ -39,11 +39,11 @@ public class EditCursusDialogFragment extends DialogFragment {
         return builder.create();
     }
 
-    public EtudiantActivityViewModel getViewModel() {
+    public EtudiantViewModel getViewModel() {
         return viewModel;
     }
 
-    public void setViewModel(EtudiantActivityViewModel viewModel) {
+    public void setViewModel(EtudiantViewModel viewModel) {
         this.viewModel = viewModel;
     }
 }

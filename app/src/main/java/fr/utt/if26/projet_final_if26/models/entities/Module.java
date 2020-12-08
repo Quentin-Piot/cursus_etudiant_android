@@ -1,6 +1,7 @@
 package fr.utt.if26.projet_final_if26.models.entities;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -13,6 +14,7 @@ public class Module {
     private String parcours;
     private String categorie;
     private int credits;
+    @ColumnInfo(name = "semestre_id")
     private int semestreId;
 
     public Module(@NonNull String sigle, @NonNull String parcours, @NonNull String categorie, @NonNull int credits, int semestreId) {

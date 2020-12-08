@@ -15,7 +15,7 @@ import java.util.List;
 import fr.utt.if26.projet_final_if26.models.CursusEtudiantRepository;
 import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
 
-public class MainActivityViewModel extends AndroidViewModel {
+public class AccueilViewModel extends AndroidViewModel {
 
     private final LiveData<List<Etudiant>> mEtudiants;
 
@@ -33,7 +33,7 @@ public class MainActivityViewModel extends AndroidViewModel {
     private final CursusEtudiantRepository mRepository;
 
 
-    public MainActivityViewModel(@NonNull Application application) {
+    public AccueilViewModel(@NonNull Application application) {
         super(application);
         mRepository = new CursusEtudiantRepository(application);
         mEtudiants = mRepository.getAllEtudiants();

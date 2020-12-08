@@ -16,13 +16,13 @@ import java.util.Objects;
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ActivityMainBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
-import fr.utt.if26.projet_final_if26.viewmodels.MainActivityViewModel;
+import fr.utt.if26.projet_final_if26.viewmodels.AccueilViewModel;
 import fr.utt.if26.projet_final_if26.viewmodels.VMEventsEnum;
 import fr.utt.if26.projet_final_if26.views.etudiant.EtudiantActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MainActivityViewModel viewModel;
+    private AccueilViewModel viewModel;
     private ActivityMainBinding binding;
     private RecyclerView recyclerView;
 
@@ -50,12 +50,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void initBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        viewModel = new ViewModelProvider(this).get(AccueilViewModel.class);
         binding.setViewModel(viewModel);
         recyclerView = binding.etudiantRecyclerView;
     }
 
-    public void initAdapter(RecyclerView recyclerView, List<Etudiant> etudiants, MainActivityViewModel viewModel) {
+    public void initAdapter(RecyclerView recyclerView, List<Etudiant> etudiants, AccueilViewModel viewModel) {
         if (etudiants.size() == 0) {
             binding.etudiantMessageTv.setText(R.string.aucun_etudiant);
         } else {

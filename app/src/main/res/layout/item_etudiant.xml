@@ -7,13 +7,13 @@
             type="fr.utt.if26.projet_final_if26.models.entities.Etudiant" />
         <variable
             name="viewModel"
-            type="fr.utt.if26.projet_final_if26.viewmodels.MainActivityViewModel" />
+            type="fr.utt.if26.projet_final_if26.viewmodels.AccueilViewModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/darker_bg"
+        android:background="@color/dark_bg"
         android:onClick="@{()-> viewModel.setSelectedEtudiant(etudiant)}"
         android:paddingTop="6dp"
         android:paddingBottom="6dp">

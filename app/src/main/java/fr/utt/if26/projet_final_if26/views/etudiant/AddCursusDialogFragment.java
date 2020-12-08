@@ -7,14 +7,20 @@ import android.view.LayoutInflater;
 import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModel;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.DialogAddCursusBinding;
-import fr.utt.if26.projet_final_if26.viewmodels.EtudiantActivityViewModel;
+import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
 
 public class AddCursusDialogFragment extends DialogFragment {
 
-    private EtudiantActivityViewModel viewModel;
+    private EtudiantViewModel viewModel;
+
+    public AddCursusDialogFragment(EtudiantViewModel viewModel) {
+        super();
+        this.viewModel = viewModel;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -31,11 +37,11 @@ public class AddCursusDialogFragment extends DialogFragment {
         return builder.create();
     }
 
-    public EtudiantActivityViewModel getViewModel() {
+    public EtudiantViewModel getViewModel() {
         return viewModel;
     }
 
-    public void setViewModel(EtudiantActivityViewModel viewModel) {
+    public void setViewModel(EtudiantViewModel viewModel) {
         this.viewModel = viewModel;
     }
 }

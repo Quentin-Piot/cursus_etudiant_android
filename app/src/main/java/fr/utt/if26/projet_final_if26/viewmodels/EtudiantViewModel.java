@@ -13,7 +13,7 @@ import fr.utt.if26.projet_final_if26.models.CursusEtudiantRepository;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
 import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
 
-public class EtudiantActivityViewModel extends AndroidViewModel {
+public class EtudiantViewModel extends AndroidViewModel {
 
     private final CursusEtudiantRepository mRepository;
     private final int mEtudiantId;
@@ -28,7 +28,7 @@ public class EtudiantActivityViewModel extends AndroidViewModel {
     private final LiveData<VMEventsEnum> vmEvent = _vmEvent;
 
 
-    public EtudiantActivityViewModel(@NonNull Application application, int mEtudiantId) {
+    public EtudiantViewModel(@NonNull Application application, int mEtudiantId) {
         super(application);
         mRepository = new CursusEtudiantRepository(application);
         this.mEtudiantId = mEtudiantId;

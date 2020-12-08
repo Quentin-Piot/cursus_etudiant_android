@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="fr.utt.if26.projet_final_if26.viewmodels.MainActivityViewModel" />
+            type="fr.utt.if26.projet_final_if26.viewmodels.AccueilViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
