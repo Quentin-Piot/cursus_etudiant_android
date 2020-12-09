@@ -16,7 +16,7 @@ import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 public class CursusViewModel extends AndroidViewModel {
 
     private final CursusEtudiantRepository mRepository;
-    private final int mCursusId;
+    private final String mCursusLabel;
 
     private final MutableLiveData<Semestre> _selectedSemestre = new MutableLiveData<>();
     private final LiveData<Semestre> selectedSemestre = _selectedSemestre;
@@ -28,16 +28,16 @@ public class CursusViewModel extends AndroidViewModel {
     private final LiveData<VMEventsEnum> vmEvent = _vmEvent;
 
 
-    public CursusViewModel(@NonNull Application application, int mCursusId) {
+    public CursusViewModel(@NonNull Application application, String mCursusLabel) {
         super(application);
         mRepository = new CursusEtudiantRepository(application);
-        this.mCursusId = mCursusId;
+        this.mCursusLabel = mCursusLabel;
     }
 
     public void onClickAddSemestre() {
 
         if (semestreLabel.getValue() != null && !semestreLabel.getValue().isEmpty()) {
-            mRepository.insertSemestre(new Semestre(semestreLabel.getValue(), mCursusId));
+            mRepository.insertSemestre(new Semestre(semestreLabel.getValue(), mCursusLabel));
             _vmEvent.setValue(VMEventsEnum.success_operation);
         } else {
             _vmEvent.setValue(VMEventsEnum.empty_fields);
@@ -71,7 +71,7 @@ public class CursusViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Semestre>> getmSemestres() {
-        return mRepository.getAllSemestreForCursusId(mCursusId);
+        return mRepository.getAllSemestreForCursusLabel(mCursusLabel);
     }
 
     public LiveData<VMEventsEnum> getVmEvent() {

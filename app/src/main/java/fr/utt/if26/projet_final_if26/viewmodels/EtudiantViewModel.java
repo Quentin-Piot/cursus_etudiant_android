@@ -64,8 +64,8 @@ public class EtudiantViewModel extends AndroidViewModel {
     }
 
     public void onClickDelCursus(Cursus cursus) {
-        if (cursus.getId() > -1) {
-            mRepository.deleteCursusById(cursus.getId());
+        if (!cursus.getLabel().isEmpty()) {
+            mRepository.deleteCursusByLabel(cursus.getLabel());
             _vmEvent.setValue(VMEventsEnum.success_operation);
         }
     }

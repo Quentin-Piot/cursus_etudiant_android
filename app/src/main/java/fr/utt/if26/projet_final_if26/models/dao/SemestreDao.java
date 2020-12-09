@@ -27,8 +27,8 @@ public interface SemestreDao {
     @Query("select * from semestre_table")
     LiveData<List<Semestre>> getAllSemestres();
 
-    @Query("select * from semestre_table where cursus_id = :cursusId")
-    LiveData<List<Semestre>> getSemestreByCursusId(int cursusId);
+    @Query("select * from semestre_table where cursus_label = :mCursusLabel")
+    LiveData<List<Semestre>> getSemestreByCursusLabel(String mCursusLabel);
 
     @Query("DELETE FROM semestre_table WHERE id = :id")
     void deleteSemestreById(int id);

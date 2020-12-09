@@ -64,9 +64,9 @@ public class CursusEtudiantRepository {
         });
     }
 
-    public void deleteCursusById(int id) {
+    public void deleteCursusByLabel(String label) {
         CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
-            mCursusDao.deleteCursusById(id);
+            mCursusDao.deleteCursusByLabel(label);
         });
     }
 
@@ -92,8 +92,8 @@ public class CursusEtudiantRepository {
         });
     }
 
-    public LiveData<List<Semestre>> getAllSemestreForCursusId(int id) {
-        return mSemestreDao.getSemestreByCursusId(id);
+    public LiveData<List<Semestre>> getAllSemestreForCursusLabel(String mCursusLabel) {
+        return mSemestreDao.getSemestreByCursusLabel(mCursusLabel);
     }
 
     public void updateSemestre(Semestre semestre) {

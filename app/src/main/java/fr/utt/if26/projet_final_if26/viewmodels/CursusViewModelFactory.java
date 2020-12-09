@@ -8,17 +8,17 @@ import androidx.lifecycle.ViewModelProvider;
 public class CursusViewModelFactory implements ViewModelProvider.Factory {
 
     private Application mApplication;
-    private int mCursusId;
+    private String mCursusLabel;
 
 
-    public CursusViewModelFactory(Application application, int mCursusId) {
+    public CursusViewModelFactory(Application application, String mCursusLabel) {
         mApplication = application;
-        this.mCursusId = mCursusId;
+        this.mCursusLabel = mCursusLabel;
     }
 
 
     @Override
     public <T extends ViewModel> T create(Class<T> modelClass) {
-        return (T) new CursusViewModel(mApplication, mCursusId);
+        return (T) new CursusViewModel(mApplication, mCursusLabel);
     }
 }

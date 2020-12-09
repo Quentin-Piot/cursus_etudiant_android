@@ -14,9 +14,8 @@ import androidx.room.Update;
 @Entity(tableName = "cursus_table")
 public class Cursus {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-
+    @PrimaryKey
+    @NonNull
     private String label;
     @ColumnInfo(name = "etudiant_id")
     private int etudiantId;
@@ -32,9 +31,6 @@ public class Cursus {
         this.semestreEtranger = true;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public void setLabel(String label) {
         this.label = label;
@@ -44,9 +40,6 @@ public class Cursus {
         this.etudiantId = etudiantId;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public String getLabel() {
         return label;

@@ -19,20 +19,12 @@
         android:background="@color/dark_bg"
         android:onClick="@{()-> viewModel.setSelectedEtudiant(cursus)}"
         android:paddingTop="6dp"
-        android:paddingBottom="6dp">
+        android:paddingBottom="6dp"><![CDATA[
 
 
-        <TextView
-            android:id="@+id/tv_id"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight=".2"
-            android:text="@{Integer.toString(cursus.id)}"
-            android:textAlignment="center"
-            android:textColor="@color/text_color"
-            android:textSize="16sp" />
         />
+
+        ]]>
 
         <TextView
             android:id="@+id/tv_name"

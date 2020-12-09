@@ -28,14 +28,14 @@ public class CursusActivity extends AppCompatActivity {
     private ActivityCursusBinding binding;
     private RecyclerView recyclerView;
 
-    private int mCursusId;
+    private String mCursusLabel;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mCursusId = getIntent().getIntExtra("cursus_id", -1);
+        mCursusLabel = getIntent().getStringExtra("cursus_label");
         initBinding();
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         viewModel.getmSemestres().observe(this, this::onChanged);
@@ -46,8 +46,9 @@ public class CursusActivity extends AppCompatActivity {
 
     private void initBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_cursus);
-        CursusViewModelFactory factory = new CursusViewModelFactory(getApplication(), mCursusId);
+        CursusViewModelFactory factory = new CursusViewModelFactory(getApplication(), mCursusLabel);
         viewModel = new ViewModelProvider(this, factory).get(CursusViewModel.class);
+        binding.cursusNameTv.setText(mCursusLabel);
         binding.setViewModel(viewModel);
         binding.setCursusActivity(this);
         recyclerView = binding.semestreRecyclerView;
@@ -63,24 +64,27 @@ public class CursusActivity extends AppCompatActivity {
         }
         AdapterRecyclerListeSemestres adapter = new AdapterRecyclerListeSemestres(semestres, viewModel, this);
         recyclerView.setAdapter(adapter);
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
+      /*  recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                int visibility = ((LinearLayout) view.findViewById(R.id.semester_collapsed_layout)).getVisibility();
+                System.out.println("touchs");
+                int visibility = ((LinearLayout) view.findViewById(R.id.layout_collapsed)).getVisibility();
                 if (visibility == View.GONE) {
-                    ((LinearLayout) view.findViewById(R.id.semester_collapsed_layout)).setVisibility(View.VISIBLE);
+                    ((LinearLayout) view.findViewById(R.id.layout_collapsed)).setVisibility(View.VISIBLE);
 
                 } else {
-                    ((LinearLayout) view.findViewById(R.id.semester_collapsed_layout)).setVisibility(View.GONE);
+                    ((LinearLayout) view.findViewById(R.id.layout_collapsed)).setVisibility(View.GONE);
 
                 }
             }
+
+
 
             @Override
             public void onLongClick(View view, int position) {
 
             }
-        }));
+        })); */
     }
 
     public void onEditCursus(Cursus cursus) {
@@ -110,5 +114,6 @@ public class CursusActivity extends AppCompatActivity {
         if (semestres.size() >= 7) {
             binding.fabCursus.setVisibility(View.INVISIBLE);
         }
+        binding.semestreRecyclerView.scheduleLayoutAnimation();
     }
 }

@@ -11,14 +11,14 @@ public class Semestre {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String label;
-    @ColumnInfo(name = "cursus_id")
-    private int cursusId;
+    @ColumnInfo(name = "cursus_label")
+    private String cursusLabel;
     @ColumnInfo(name = "nombre_modules", defaultValue = "0")
     private int nombreModules;
 
-    public Semestre(@NonNull String label, @NonNull int cursusId) {
+    public Semestre(@NonNull String label, @NonNull String cursusLabel) {
         this.label = label;
-        this.cursusId = cursusId;
+        this.cursusLabel = cursusLabel;
     }
 
     public int getId() {
@@ -29,8 +29,8 @@ public class Semestre {
         return label;
     }
 
-    public int getCursusID() {
-        return cursusId;
+    public String getCursusLabel() {
+        return cursusLabel;
     }
 
     public void setId(int id) {
@@ -41,12 +41,8 @@ public class Semestre {
         this.label = label;
     }
 
-    public int getCursusId() {
-        return cursusId;
-    }
-
-    public void setCursusId(int cursusId) {
-        this.cursusId = cursusId;
+    public void setCursusLabel(String cursusLabel) {
+        this.cursusLabel = cursusLabel;
     }
 
     public int getNombreModules() {

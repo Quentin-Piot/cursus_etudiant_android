@@ -2,7 +2,6 @@ package fr.utt.if26.projet_final_if26.views.cursus;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -21,7 +20,7 @@ import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
 import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModelFactory;
 import fr.utt.if26.projet_final_if26.viewmodels.VMEventsEnum;
 
-public class CursusActivity extends AppCompatActivity {
+public class EditCursusActivity extends AppCompatActivity {
 
 
     private CursusViewModel viewModel;

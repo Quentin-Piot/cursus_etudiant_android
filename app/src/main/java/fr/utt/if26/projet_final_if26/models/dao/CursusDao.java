@@ -30,9 +30,9 @@ public interface CursusDao {
     @Query("select * from cursus_table where etudiant_id = :id")
     LiveData<List<Cursus>> getCursusById(int id);
 
-    @Query("DELETE FROM cursus_table WHERE id = :id")
+    @Query("DELETE FROM cursus_table WHERE label = :label")
 
-    void deleteCursusById(int id);
+    void deleteCursusByLabel(String label);
 
     @Query("DELETE FROM cursus_table WHERE etudiant_id = :etudiantId")
     void deleteCursusOfEtudiant(int etudiantId);

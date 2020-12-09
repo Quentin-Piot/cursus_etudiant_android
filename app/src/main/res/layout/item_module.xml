@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight=".2"
+            android:text="bons"
             android:textAlignment="center"
             android:textColor="@color/text_color"
             android:textSize="16sp" />
@@ -36,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight=".7"
-            android:text="@{etudiant.nom}"
+            android:text="bons"
             android:textColor="@color/text_color"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -47,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight=".7"
-            android:text="@{etudiant.prenom}"
+            android:text="bons"
             android:textColor="@color/text_color"
             android:textSize="16sp" />
 
@@ -57,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight=".2"
-            android:text="@{etudiant.programme}"
+            android:text="bons"
             android:textColor="@color/text_color"
             android:textSize="16sp" />
 

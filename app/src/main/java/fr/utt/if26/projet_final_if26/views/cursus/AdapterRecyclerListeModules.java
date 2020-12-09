@@ -12,50 +12,45 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import fr.utt.if26.projet_final_if26.R;
+import fr.utt.if26.projet_final_if26.databinding.ItemModuleBinding;
 import fr.utt.if26.projet_final_if26.databinding.ItemSemestreBinding;
-import fr.utt.if26.projet_final_if26.generated.callback.OnClickListener;
+import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
 
-public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterRecyclerListeSemestres.SemestreHolder> {
+public class AdapterRecyclerListeModules extends RecyclerView.Adapter<AdapterRecyclerListeModules.ModuleHolder  > {
 
-    private final List<Semestre> semestres;
-    private final CursusViewModel viewModel;
-    private final CursusActivity cursusActivity;
+    private final List<Module> modules;
 
-    public AdapterRecyclerListeSemestres(List<Semestre> semestres, CursusViewModel viewModel, CursusActivity cursusActivity) {
-        this.semestres = semestres;
-        this.viewModel = viewModel;
-        this.cursusActivity = cursusActivity;
+    public AdapterRecyclerListeModules(List<Module> modules) {
+        this.modules = modules;
     }
 
     @NonNull
     @Override
-    public SemestreHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemSemestreBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_semestre, parent, false);
-        return new SemestreHolder(binding);
+    public ModuleHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemModuleBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_module, parent, false);
+        return new ModuleHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SemestreHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ModuleHolder holder, int position) {
 
-        holder.binding.setSemestre(semestres.get(position));
-        holder.binding.setViewModel(viewModel);
-        holder.binding.recyclerViewModules.setVisibility(View.GONE);
+        //holder.binding.recyclerViewModules.setVisibility(View.GONE);
         holder.binding.executePendingBindings();
 
     }
 
     @Override
     public int getItemCount() {
-        return this.semestres.size();
+        return this.modules.size();
     }
 
-    class SemestreHolder extends RecyclerView.ViewHolder {
+    class ModuleHolder extends RecyclerView.ViewHolder {
 
-        private final ItemSemestreBinding binding;
+        private final ItemModuleBinding binding;
 
-        public SemestreHolder(ItemSemestreBinding binding) {
+        public ModuleHolder(ItemModuleBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 

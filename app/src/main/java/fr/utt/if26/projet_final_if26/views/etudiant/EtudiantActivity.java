@@ -98,9 +98,9 @@ public class EtudiantActivity extends AppCompatActivity {
     }
 
     public void onSelectCursus(Cursus cursus) {
-        if (cursus.getId() >= 0) {
+        if (!cursus.getLabel().isEmpty()) {
             Intent intent = new Intent(getApplicationContext(), CursusActivity.class);
-            intent.putExtra("cursus_id", cursus.getId());
+            intent.putExtra("cursus_label", cursus.getLabel());
             startActivity(intent);
         }
     }
