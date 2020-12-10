@@ -17,7 +17,7 @@ import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ActivityEtudiantBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
 import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
-import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModelFactory;
+import fr.utt.if26.projet_final_if26.viewmodels.factories.EtudiantViewModelFactory;
 import fr.utt.if26.projet_final_if26.viewmodels.VMEventsEnum;
 import fr.utt.if26.projet_final_if26.views.cursus.CursusActivity;
 

@@ -3,7 +3,6 @@ package fr.utt.if26.projet_final_if26.models;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
@@ -13,6 +12,7 @@ import fr.utt.if26.projet_final_if26.models.dao.ModuleDao;
 import fr.utt.if26.projet_final_if26.models.dao.SemestreDao;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
 import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
+import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 
 public class CursusEtudiantRepository {
@@ -23,7 +23,6 @@ public class CursusEtudiantRepository {
     private ModuleDao mModuleDao;
 
     private LiveData<List<Etudiant>> mAllEtudiants;
-
 
 
     private CursusEtudiantDatabase db;
@@ -102,6 +101,28 @@ public class CursusEtudiantRepository {
         });
     }
 
+    public void insertModule(Module module) {
+        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
+            mModuleDao.insert(module);
+        });
+    }
+
+    public void deleteModuleById(int moduleId) {
+        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
+            mModuleDao.deleteModuleById(moduleId);
+        });
+    }
+
+    public void updateModule(Module module) {
+        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
+            mModuleDao.updateModule(module);
+        });
+    }
+
+    public LiveData<List<Module>> getAllModuleForSemesterId(int id) {
+        return mModuleDao.getModulesBySemesterId(id);
+
+    }
 
 
 }

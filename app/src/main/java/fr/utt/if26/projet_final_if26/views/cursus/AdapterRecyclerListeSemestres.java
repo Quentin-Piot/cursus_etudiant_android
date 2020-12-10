@@ -49,6 +49,7 @@ public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterR
 
         holder.binding.setSemestre(semestres.get(position));
         holder.binding.setViewModel(viewModel);
+        holder.binding.setCursusActivity(cursusActivity);
         holder.binding.layoutCollapsed.setVisibility(View.GONE);
         holder.binding.executePendingBindings();
 
@@ -57,7 +58,7 @@ public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterR
         modules.add(new Module("da", "da", "da", 6, 1));
 
         holder.moduleRecyclerView.setLayoutManager(new LinearLayoutManager(holder.moduleRecyclerView.getContext()));
-        AdapterRecyclerListeModules adapterRecyclerListeModules = new AdapterRecyclerListeModules(modules);
+        AdapterRecyclerNestedModules adapterRecyclerListeModules = new AdapterRecyclerNestedModules(modules);
         holder.moduleRecyclerView.setAdapter(adapterRecyclerListeModules);
         holder.moduleRecyclerView.setRecycledViewPool(viewPool);
         holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {

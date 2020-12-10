@@ -27,8 +27,8 @@ public interface ModuleDao {
     @Query("select * from module_table")
     LiveData<List<Module>> getAllModules();
 
-    @Query("select * from module_table where id = :id")
-    LiveData<Module> getModuleById(int id);
+    @Query("select * from module_table where semestre_id = :semesterId")
+    LiveData<List<Module>> getModulesBySemesterId(int semesterId);
 
     @Query("DELETE FROM module_table WHERE id = :id")
     void deleteModuleById(int id);

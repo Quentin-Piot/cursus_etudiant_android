@@ -41,10 +41,6 @@ public class Semestre {
         this.label = label;
     }
 
-    public void setCursusLabel(String cursusLabel) {
-        this.cursusLabel = cursusLabel;
-    }
-
     public int getNombreModules() {
         return nombreModules;
     }

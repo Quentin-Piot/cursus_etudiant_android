@@ -49,7 +49,9 @@
                 android:id="@+id/button"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="@android:drawable/ic_menu_edit" />
+                android:background="@android:drawable/ic_menu_edit"
+                android:onClick="@{()-> cursusActivity.onClickEditSemestre(semestre)}"
+                />
 
         </LinearLayout>
 

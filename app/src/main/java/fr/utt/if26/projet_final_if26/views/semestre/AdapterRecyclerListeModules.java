@@ -1,8 +1,7 @@
-package fr.utt.if26.projet_final_if26.views.cursus;
+package fr.utt.if26.projet_final_if26.views.semestre;
 
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -13,17 +12,17 @@ import java.util.List;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ItemModuleBinding;
-import fr.utt.if26.projet_final_if26.databinding.ItemSemestreBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Module;
-import fr.utt.if26.projet_final_if26.models.entities.Semestre;
-import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
+import fr.utt.if26.projet_final_if26.viewmodels.SemestreViewModel;
 
 public class AdapterRecyclerListeModules extends RecyclerView.Adapter<AdapterRecyclerListeModules.ModuleHolder  > {
 
     private final List<Module> modules;
+    private final SemestreViewModel viewModel;
 
-    public AdapterRecyclerListeModules(List<Module> modules) {
+    public AdapterRecyclerListeModules(List<Module> modules, SemestreViewModel viewModel) {
         this.modules = modules;
+        this.viewModel = viewModel;
     }
 
     @NonNull
@@ -36,7 +35,9 @@ public class AdapterRecyclerListeModules extends RecyclerView.Adapter<AdapterRec
     @Override
     public void onBindViewHolder(@NonNull ModuleHolder holder, int position) {
 
-        //holder.binding.recyclerViewModules.setVisibility(View.GONE);
+        holder.binding.setViewModel(viewModel);
+        holder.binding.setModule(modules.get(position));
+
         holder.binding.executePendingBindings();
 
     }
@@ -46,7 +47,7 @@ public class AdapterRecyclerListeModules extends RecyclerView.Adapter<AdapterRec
         return this.modules.size();
     }
 
-    class ModuleHolder extends RecyclerView.ViewHolder {
+    static class ModuleHolder extends RecyclerView.ViewHolder {
 
         private final ItemModuleBinding binding;
 

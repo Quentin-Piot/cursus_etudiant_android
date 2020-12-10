@@ -44,19 +44,8 @@ public class CursusViewModel extends AndroidViewModel {
         }
     }
 
-    public void onClickUpdateSemestre(Semestre selectedSemestre) {
-
-
-        if (semestreLabel.getValue() != null && !semestreLabel.getValue().isEmpty()) {
-            selectedSemestre.setLabel(semestreLabel.getValue());
-            mRepository.updateSemestre(selectedSemestre);
-            _vmEvent.setValue(VMEventsEnum.success_operation);
-        } else {
-            _vmEvent.setValue(VMEventsEnum.empty_fields);
-        }
-
-
-    }
+    public void onClickEditSemestre(Semestre selectedSemestre) {
+       }
 
     public void setSelectedSemestre(Semestre semestre) {
 

@@ -1,8 +1,8 @@
 package fr.utt.if26.projet_final_if26.views.cursus;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -15,11 +15,11 @@ import java.util.Objects;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ActivityCursusBinding;
-import fr.utt.if26.projet_final_if26.models.entities.Cursus;
 import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
-import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModelFactory;
+import fr.utt.if26.projet_final_if26.viewmodels.factories.CursusViewModelFactory;
 import fr.utt.if26.projet_final_if26.viewmodels.VMEventsEnum;
+import fr.utt.if26.projet_final_if26.views.semestre.EditSemestreActivity;
 
 public class CursusActivity extends AppCompatActivity {
 
@@ -64,30 +64,13 @@ public class CursusActivity extends AppCompatActivity {
         }
         AdapterRecyclerListeSemestres adapter = new AdapterRecyclerListeSemestres(semestres, viewModel, this);
         recyclerView.setAdapter(adapter);
-      /*  recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                System.out.println("touchs");
-                int visibility = ((LinearLayout) view.findViewById(R.id.layout_collapsed)).getVisibility();
-                if (visibility == View.GONE) {
-                    ((LinearLayout) view.findViewById(R.id.layout_collapsed)).setVisibility(View.VISIBLE);
-
-                } else {
-                    ((LinearLayout) view.findViewById(R.id.layout_collapsed)).setVisibility(View.GONE);
-
-                }
-            }
-
-
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        })); */
     }
 
-    public void onEditCursus(Cursus cursus) {
+    public void onClickEditSemestre(Semestre semestre) {
+        Intent intent = new Intent(getApplicationContext(), EditSemestreActivity.class);
+        intent.putExtra("semestre_id", semestre.getId());
+        intent.putExtra("semestre_label", semestre.getLabel());
+        startActivity(intent);
 
     }
 
