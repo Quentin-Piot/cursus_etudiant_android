@@ -14,14 +14,18 @@ public class Module {
     private String parcours;
     private String categorie;
     private int credits;
+    @ColumnInfo(name = "cursus_label")
+    private String cursusLabel;
     @ColumnInfo(name = "semestre_id")
     private int semestreId;
 
-    public Module(@NonNull String sigle, @NonNull String parcours, @NonNull String categorie, @NonNull int credits, int semestreId) {
+
+    public Module(@NonNull String sigle, @NonNull String parcours, @NonNull String categorie, @NonNull int credits, String cursusLabel, int semestreId) {
         this.sigle = sigle;
         this.parcours = parcours;
         this.categorie = categorie;
         this.credits = credits;
+        this.cursusLabel = cursusLabel;
         this.semestreId = semestreId;
 
     }
@@ -70,7 +74,12 @@ public class Module {
         this.credits = credits;
     }
 
-    public void setSemestreId(int semestreId) {
-        this.semestreId = semestreId;
+
+    public String getCursusLabel() {
+        return cursusLabel;
+    }
+
+    public void setCursusLabel(String cursusLabel) {
+        this.cursusLabel = cursusLabel;
     }
 }

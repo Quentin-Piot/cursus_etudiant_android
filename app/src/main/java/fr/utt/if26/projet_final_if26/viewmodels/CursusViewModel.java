@@ -11,6 +11,7 @@ import java.util.List;
 
 import fr.utt.if26.projet_final_if26.models.CursusEtudiantRepository;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
+import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 
 public class CursusViewModel extends AndroidViewModel {
@@ -63,6 +64,9 @@ public class CursusViewModel extends AndroidViewModel {
         return mRepository.getAllSemestreForCursusLabel(mCursusLabel);
     }
 
+    public LiveData<List<Module>> getmModules() {
+        return mRepository.getAllModuleForCursusLabel(mCursusLabel);
+    }
     public LiveData<VMEventsEnum> getVmEvent() {
         return vmEvent;
     }

@@ -22,7 +22,6 @@ public class CursusEtudiantRepository {
     private SemestreDao mSemestreDao;
     private ModuleDao mModuleDao;
 
-    private LiveData<List<Etudiant>> mAllEtudiants;
 
 
     private CursusEtudiantDatabase db;
@@ -121,6 +120,11 @@ public class CursusEtudiantRepository {
 
     public LiveData<List<Module>> getAllModuleForSemesterId(int id) {
         return mModuleDao.getModulesBySemesterId(id);
+
+    }
+
+    public LiveData<List<Module>> getAllModuleForCursusLabel(String label) {
+        return mModuleDao.getModulesByCursusLabel(label);
 
     }
 

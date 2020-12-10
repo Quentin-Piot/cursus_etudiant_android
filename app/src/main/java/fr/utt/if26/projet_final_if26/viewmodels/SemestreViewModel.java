@@ -17,7 +17,7 @@ public class SemestreViewModel extends AndroidViewModel {
 
     private final CursusEtudiantRepository mRepository;
     private final int mSemestreId;
-
+    private final String mCursusLabel;
     public MutableLiveData<String> moduleSigle = new MutableLiveData<>();
     public MutableLiveData<String> moduleCategorie = new MutableLiveData<>();
     public MutableLiveData<String> moduleProgramme = new MutableLiveData<>();
@@ -33,10 +33,11 @@ public class SemestreViewModel extends AndroidViewModel {
     private final LiveData<VMEventsEnum> vmEvent = _vmEvent;
 
 
-    public SemestreViewModel(@NonNull Application application, int semestreId) {
+    public SemestreViewModel(@NonNull Application application, int semestreId, String cursusLabel) {
         super(application);
         mRepository = new CursusEtudiantRepository(application);
         this.mSemestreId = semestreId;
+        this.mCursusLabel = cursusLabel;
     }
 
     public void onClickAddModule() {
@@ -44,7 +45,7 @@ public class SemestreViewModel extends AndroidViewModel {
         if (!moduleSigle.getValue().isEmpty() && !moduleProgramme.getValue().isEmpty() && !moduleCategorie.getValue().isEmpty()
                 && !moduleCredits.getValue().isEmpty()
                 && mSemestreId > -1) {
-            mRepository.insertModule(new Module(moduleSigle.getValue(), moduleProgramme.getValue(), moduleCategorie.getValue(), Integer.parseInt(moduleCredits.getValue()), mSemestreId));
+            mRepository.insertModule(new Module(moduleSigle.getValue(), moduleProgramme.getValue(), moduleCategorie.getValue(), Integer.parseInt(moduleCredits.getValue()), mCursusLabel, mSemestreId));
             _vmEvent.setValue(VMEventsEnum.success_operation);
         } else {
             _vmEvent.setValue(VMEventsEnum.empty_fields);

@@ -10,11 +10,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ActivityCursusBinding;
+import fr.utt.if26.projet_final_if26.models.SemestreCursus;
+import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
 import fr.utt.if26.projet_final_if26.viewmodels.factories.CursusViewModelFactory;
@@ -30,6 +33,9 @@ public class CursusActivity extends AppCompatActivity {
 
     private String mCursusLabel;
 
+    private List<Semestre> listeSemestres = new ArrayList<>();
+    private List<Module> listeModules = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +44,9 @@ public class CursusActivity extends AppCompatActivity {
         mCursusLabel = getIntent().getStringExtra("cursus_label");
         initBinding();
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        viewModel.getmSemestres().observe(this, this::onChanged);
+        viewModel.getmSemestres().observe(this, semestres -> {listeSemestres = semestres; this.onChanged();});
+        viewModel.getmModules().observe(this, modules -> {listeModules = modules; this.onChanged();});
+
         Objects.requireNonNull(getSupportActionBar()).setTitle("Page du cursus");
 
 
@@ -55,19 +63,20 @@ public class CursusActivity extends AppCompatActivity {
 
     }
 
-    public void initAdapter(RecyclerView recyclerView, List<Semestre> semestres, CursusViewModel viewModel) {
-        if (semestres.size() == 0) {
+    public void initAdapter(RecyclerView recyclerView, List<SemestreCursus> semestreCursus, CursusViewModel viewModel) {
+        if (semestreCursus.size() == 0) {
             binding.messageTvSemestre.setText(R.string.aucun_semestre);
         } else {
             binding.messageTvSemestre.setText("");
 
         }
-        AdapterRecyclerListeSemestres adapter = new AdapterRecyclerListeSemestres(semestres, viewModel, this);
+        AdapterRecyclerListeSemestres adapter = new AdapterRecyclerListeSemestres(semestreCursus, viewModel, this);
         recyclerView.setAdapter(adapter);
     }
 
     public void onClickEditSemestre(Semestre semestre) {
         Intent intent = new Intent(getApplicationContext(), EditSemestreActivity.class);
+        intent.putExtra("cursus_label", mCursusLabel);
         intent.putExtra("semestre_id", semestre.getId());
         intent.putExtra("semestre_label", semestre.getLabel());
         startActivity(intent);
@@ -91,10 +100,26 @@ public class CursusActivity extends AppCompatActivity {
 
     }
 
-    private void onChanged(List<Semestre> semestres) {
-        binding.cursusSemestresNumberTv.setText(Integer.toString(semestres.size()));
-        this.initAdapter(recyclerView, semestres, viewModel);
-        if (semestres.size() >= 7) {
+    private void onChanged() {
+        List<SemestreCursus> semestreCursus = new ArrayList<>();
+
+        listeSemestres.forEach((semestre -> {
+            List<Module> modulesCursus = new ArrayList<>();
+            listeModules.forEach(module -> {
+                if(module.getSemestreId() == semestre.getId()){
+                    modulesCursus.add(module);
+                }
+            });
+                    semestreCursus.add(new SemestreCursus(semestre, modulesCursus));
+
+                })
+
+        );
+
+
+        binding.cursusSemestresNumberTv.setText(Integer.toString(listeSemestres.size()));
+        this.initAdapter(recyclerView, semestreCursus, viewModel);
+        if (listeSemestres.size() >= 7) {
             binding.fabCursus.setVisibility(View.INVISIBLE);
         }
         binding.semestreRecyclerView.scheduleLayoutAnimation();

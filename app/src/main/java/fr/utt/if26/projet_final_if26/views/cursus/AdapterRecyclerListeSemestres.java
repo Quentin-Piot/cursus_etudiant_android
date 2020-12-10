@@ -16,13 +16,14 @@ import java.util.List;
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ItemSemestreBinding;
 import fr.utt.if26.projet_final_if26.generated.callback.OnClickListener;
+import fr.utt.if26.projet_final_if26.models.SemestreCursus;
 import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
 
 public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterRecyclerListeSemestres.SemestreHolder> {
 
-    private final List<Semestre> semestres;
+    private final List<SemestreCursus> semestreCursus;
     private final CursusViewModel viewModel;
     private final CursusActivity cursusActivity;
 
@@ -30,10 +31,11 @@ public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterR
     private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
 
 
-    public AdapterRecyclerListeSemestres(List<Semestre> semestres, CursusViewModel viewModel, CursusActivity cursusActivity) {
-        this.semestres = semestres;
+    public AdapterRecyclerListeSemestres(List<SemestreCursus> semestresCursus, CursusViewModel viewModel, CursusActivity cursusActivity) {
+
         this.viewModel = viewModel;
         this.cursusActivity = cursusActivity;
+        this.semestreCursus = semestresCursus;
     }
 
 
@@ -47,18 +49,18 @@ public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterR
     @Override
     public void onBindViewHolder(@NonNull SemestreHolder holder, int position) {
 
-        holder.binding.setSemestre(semestres.get(position));
+        holder.binding.setSemestre(semestreCursus.get(position).getSemestre());
         holder.binding.setViewModel(viewModel);
         holder.binding.setCursusActivity(cursusActivity);
+        String moduleText = " module";
+        if(semestreCursus.get(position).getModules().size() > 1) moduleText +="s";
+        holder.binding.semestreModulesNumberTv.setText(semestreCursus.get(position).getModules().size() + moduleText);
         holder.binding.layoutCollapsed.setVisibility(View.GONE);
         holder.binding.executePendingBindings();
 
-        List<Module> modules = new ArrayList<>();
-        modules.add(new Module("da", "da", "da", 6, 1));
-        modules.add(new Module("da", "da", "da", 6, 1));
 
         holder.moduleRecyclerView.setLayoutManager(new LinearLayoutManager(holder.moduleRecyclerView.getContext()));
-        AdapterRecyclerNestedModules adapterRecyclerListeModules = new AdapterRecyclerNestedModules(modules);
+        AdapterRecyclerNestedModules adapterRecyclerListeModules = new AdapterRecyclerNestedModules(semestreCursus.get(position).getModules());
         holder.moduleRecyclerView.setAdapter(adapterRecyclerListeModules);
         holder.moduleRecyclerView.setRecycledViewPool(viewPool);
         holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
@@ -80,7 +82,7 @@ public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterR
 
     @Override
     public int getItemCount() {
-        return this.semestres.size();
+        return this.semestreCursus.size();
     }
 
     class SemestreHolder extends RecyclerView.ViewHolder {

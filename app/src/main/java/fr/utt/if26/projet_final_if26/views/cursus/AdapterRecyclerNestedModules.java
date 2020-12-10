@@ -33,7 +33,7 @@ public class AdapterRecyclerNestedModules extends RecyclerView.Adapter<AdapterRe
     @Override
     public void onBindViewHolder(@NonNull ModuleHolder holder, int position) {
 
-        //holder.binding.recyclerViewModules.setVisibility(View.GONE);
+        holder.binding.setModule(modules.get(position));
         holder.binding.executePendingBindings();
 
     }

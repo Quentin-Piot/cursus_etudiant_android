@@ -28,6 +28,7 @@ public class EditSemestreActivity extends AppCompatActivity {
 
     private int mSemestreId;
     private String mSemestreLabel;
+    private String mCursusLabel;
 
 
     @Override
@@ -36,6 +37,8 @@ public class EditSemestreActivity extends AppCompatActivity {
 
         mSemestreId = getIntent().getIntExtra("semestre_id", -1);
         mSemestreLabel = getIntent().getStringExtra("semestre_label");
+        mCursusLabel = getIntent().getStringExtra("cursus_label");
+
 
         initBinding();
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -47,7 +50,7 @@ public class EditSemestreActivity extends AppCompatActivity {
 
     private void initBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_semestre);
-        SemestreViewModelFactory factory = new SemestreViewModelFactory(getApplication(), mSemestreId);
+        SemestreViewModelFactory factory = new SemestreViewModelFactory(getApplication(), mSemestreId, mCursusLabel);
         viewModel = new ViewModelProvider(this, factory).get(SemestreViewModel.class);
         binding.setViewModel(viewModel);
         binding.setActivity(this);

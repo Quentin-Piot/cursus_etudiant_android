@@ -11,16 +11,19 @@ public class SemestreViewModelFactory implements ViewModelProvider.Factory {
 
     private final Application mApplication;
     private final int mSemestreId;
+    private final String mCursusLabel;
 
 
-    public SemestreViewModelFactory(Application application, int semestreId) {
+    public SemestreViewModelFactory(Application application, int semestreId, String cursusLabel) {
         mApplication = application;
         mSemestreId = semestreId;
+        mCursusLabel = cursusLabel;
+
     }
 
 
     @Override
     public <T extends ViewModel> T create(Class<T> modelClass) {
-        return (T) new SemestreViewModel(mApplication, mSemestreId);
+        return (T) new SemestreViewModel(mApplication, mSemestreId, mCursusLabel);
     }
 }

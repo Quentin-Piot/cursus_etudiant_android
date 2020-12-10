@@ -38,7 +38,7 @@
                 android:textAlignment="center" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/semestre_modules_number_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

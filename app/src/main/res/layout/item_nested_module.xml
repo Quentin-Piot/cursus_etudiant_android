@@ -3,8 +3,8 @@
 
     <data>
         <variable
-            name="etudiant"
-            type="fr.utt.if26.projet_final_if26.models.entities.Etudiant" />
+            name="module"
+            type="fr.utt.if26.projet_final_if26.models.entities.Module" />
         <variable
             name="viewModel"
             type="fr.utt.if26.projet_final_if26.viewmodels.AccueilViewModel" />
@@ -14,51 +14,51 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/dark_bg"
-        android:onClick="@{()-> viewModel.setSelectedEtudiant(etudiant)}"
+        android:onClick="@{}"
         android:paddingTop="6dp"
         android:paddingBottom="6dp">
 
 
         <TextView
-            android:id="@+id/tv_id_etudiant"
+            android:id="@+id/tv_sigle_nested"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight=".2"
-            android:text="bons"
+            android:layout_weight="1"
+            android:text="@{module.sigle}"
             android:textAlignment="center"
-            android:textColor="@color/text_color"
-            android:textSize="16sp" />
-        />
-
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight=".7"
-            android:text="bons"
             android:textColor="@color/text_color"
             android:textSize="16sp"
             android:textStyle="bold" />
+        />
 
         <TextView
-            android:id="@+id/tv_firstname"
+            android:id="@+id/tv_cetegorie_nested"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight=".7"
-            android:text="bons"
+            android:layout_weight="1"
+            android:text="@{module.categorie}"
             android:textColor="@color/text_color"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tv_programme"
+            android:id="@+id/tv_parcours_nested"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight=".2"
-            android:text="bons"
+            android:layout_weight="1"
+            android:text="@{module.parcours}"
+            android:textColor="@color/text_color"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_credits_nested"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="@{Integer.toString(module.credits)}"
             android:textColor="@color/text_color"
             android:textSize="16sp" />
 
