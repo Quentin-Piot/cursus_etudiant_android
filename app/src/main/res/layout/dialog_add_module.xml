@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="fr.utt.if26.projet_final_if26.viewmodels.SemestreViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/dark_bg"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/ajout_d_un_module"
+            android:textAlignment="center"
+            android:textSize="22sp" />
+
+        <EditText
+            android:id="@+id/module_sigle_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="@string/sigle"
+            android:inputType="textCapWords"
+            android:maxLength="4"
+            android:text="@={viewModel.moduleSigle}" />
+        <EditText
+            android:id="@+id/module_categorie_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="@string/cat_gorie"
+            android:inputType="textCapWords"
+            android:maxLength="3"
+            android:text="@={viewModel.moduleCategorie}" />
+
+        <EditText
+            android:id="@+id/module_programme_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="@string/programme"
+            android:inputType="textCapWords"
+            android:maxLength="3"
+            android:text="@={viewModel.moduleProgramme}" />
+
+
+        <EditText
+            android:id="@+id/module_credits_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="@string/_0"
+            android:inputType="textCapWords"
+            android:maxLength="3"
+            android:text="@={viewModel.moduleCredits}" />
+    </LinearLayout>
+</layout>

@@ -24,7 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight=".2"
+            android:layout_weight="1"
             android:text="@{module.sigle}"
             android:textAlignment="center"
             android:textColor="@color/text_color"
@@ -36,7 +36,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight=".7"
+            android:layout_weight="1"
             android:text="@{module.categorie}"
             android:textColor="@color/text_color"
             android:textSize="16sp"
@@ -47,7 +47,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight=".7"
+            android:layout_weight="1"
             android:text="@{module.parcours}"
             android:textColor="@color/text_color"
             android:textSize="16sp" />
@@ -57,18 +57,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight=".2"
+            android:layout_weight="1"
             android:text="@{Integer.toString(module.credits)}"
             android:textColor="@color/text_color"
             android:textSize="16sp" />
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="0dp"
+            android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginEnd="10dp"
-            android:layout_weight="0.15"
             android:background="@drawable/ic_baseline_close_24"
             android:backgroundTint="#FF0000"
             android:onClick="@{() -> viewModel.onClickDelModule(module)}" />

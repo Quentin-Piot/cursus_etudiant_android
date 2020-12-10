@@ -1,9 +1,11 @@
-package fr.utt.if26.projet_final_if26.viewmodels;
+package fr.utt.if26.projet_final_if26.viewmodels.factories;
 
 import android.app.Application;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+
+import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
 
 public class EtudiantViewModelFactory implements ViewModelProvider.Factory {
 

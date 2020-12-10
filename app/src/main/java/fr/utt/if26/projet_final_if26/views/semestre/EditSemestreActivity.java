@@ -50,6 +50,7 @@ public class EditSemestreActivity extends AppCompatActivity {
         SemestreViewModelFactory factory = new SemestreViewModelFactory(getApplication(), mSemestreId);
         viewModel = new ViewModelProvider(this, factory).get(SemestreViewModel.class);
         binding.setViewModel(viewModel);
+        binding.setActivity(this);
         binding.cursusSemestreLabelTv.setText(mSemestreLabel);
         recyclerView = binding.semesterModulesRecyclerView;
 
@@ -65,12 +66,10 @@ public class EditSemestreActivity extends AppCompatActivity {
     }
 
     public void onClickAddCursus() {
-        /*
-        AddSemestreDialogFragment addSemestreDialogFragment = new AddSemestreDialogFragment(viewModel);
-        addSemestreDialogFragment.show(getSupportFragmentManager(), "ajout_semestre");
 
+        AddModuleDialogFragment addModuleDialogFragment = new AddModuleDialogFragment(viewModel);
+        addModuleDialogFragment.show(getSupportFragmentManager(), "ajout_module");
 
-         */
     }
 
     public void onSelectCursus(int etudiantId) {

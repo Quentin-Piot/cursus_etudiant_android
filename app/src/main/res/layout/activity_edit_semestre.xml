@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="fr.utt.if26.projet_final_if26.viewmodels.SemestreViewModel" />
+
+        <variable
+            name="activity"
+            type="fr.utt.if26.projet_final_if26.views.semestre.EditSemestreActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -97,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Liste des  modules:"
+            android:text="@string/liste_des_modules"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -107,7 +112,9 @@
             android:id="@+id/add_module_bt"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginTop="5dp"
             android:background="@android:drawable/ic_menu_add"
+            android:onClick="@{()->activity.onClickAddCursus()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/semester_modules_recycler_view" />

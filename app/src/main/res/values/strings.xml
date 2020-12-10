@@ -34,4 +34,9 @@
     <string name="ajout_semestre">Ajout d\'un semestre</string>
     <string name="nom_du_semestre">Nom du semestre</string>
     <string name="aucun_semestre">Aucun semestre</string>
+    <string name="ajout_d_un_module">Ajout d\'un module</string>
+    <string name="sigle">Sigle</string>
+    <string name="cat_gorie">Catégorie</string>
+    <string name="_0">0</string>
+    <string name="liste_des_modules">Liste des modules:</string>
 </resources>
