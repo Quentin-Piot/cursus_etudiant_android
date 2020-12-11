@@ -1,6 +1,9 @@
 package fr.utt.if26.projet_final_if26.viewmodels;
 
 import android.app.Application;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -45,12 +48,24 @@ public class SemestreViewModel extends AndroidViewModel {
         if (!moduleSigle.getValue().isEmpty() && !moduleProgramme.getValue().isEmpty() && !moduleCategorie.getValue().isEmpty()
                 && !moduleCredits.getValue().isEmpty()
                 && mSemestreId > -1) {
-            mRepository.insertModule(new Module(moduleSigle.getValue(), moduleProgramme.getValue(), moduleCategorie.getValue(), Integer.parseInt(moduleCredits.getValue()), mCursusLabel, mSemestreId));
+            mRepository.insertModule(new Module(moduleSigle.getValue(), moduleProgramme.getValue(), moduleCategorie.getValue(), Double.parseDouble(moduleCredits.getValue()), mCursusLabel, mSemestreId));
             _vmEvent.setValue(VMEventsEnum.success_operation);
         } else {
             _vmEvent.setValue(VMEventsEnum.empty_fields);
         }
 
+
+    }
+
+    public void onSelectProgramme(AdapterView<?> parent, View view, int pos, long id) {
+        moduleProgramme.setValue(parent.getSelectedItem().toString());
+        ((TextView) parent.getChildAt(0)).setTextSize(16);
+
+    }
+
+    public void onSelectCategorie(AdapterView<?> parent, View view, int pos, long id) {
+        moduleCategorie.setValue(parent.getSelectedItem().toString());
+        ((TextView) parent.getChildAt(0)).setTextSize(16);
 
     }
 

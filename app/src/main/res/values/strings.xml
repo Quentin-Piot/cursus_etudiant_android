@@ -17,7 +17,7 @@
     <string name="modifier">Modifier</string>
 
     <string name="title_activity_cursus">CursusActivity</string>
-    <string name="programme">Programme</string>
+    <string name="programme">Programme :</string>
     <string name="ajout_etudiant">Ajout d\'un étudiant</string>
     <string name="ajout_cursus">Ajout d\'un cursus</string>
     <string name="edit_cursus">Modification d\'un cursus</string>
@@ -39,4 +39,5 @@
     <string name="cat_gorie">Catégorie</string>
     <string name="_0">0</string>
     <string name="liste_des_modules">Liste des modules:</string>
+    <string name="cr_dits">Crédits</string>
 </resources>

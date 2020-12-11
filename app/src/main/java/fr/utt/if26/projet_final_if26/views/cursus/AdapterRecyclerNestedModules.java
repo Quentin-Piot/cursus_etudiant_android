@@ -11,11 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import fr.utt.if26.projet_final_if26.R;
-import fr.utt.if26.projet_final_if26.databinding.ItemModuleBinding;
 import fr.utt.if26.projet_final_if26.databinding.ItemNestedModuleBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Module;
 
-public class AdapterRecyclerNestedModules extends RecyclerView.Adapter<AdapterRecyclerNestedModules.ModuleHolder  > {
+public class AdapterRecyclerNestedModules extends RecyclerView.Adapter<AdapterRecyclerNestedModules.ModuleHolder> {
 
     private final List<Module> modules;
 

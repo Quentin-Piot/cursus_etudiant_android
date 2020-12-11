@@ -47,7 +47,6 @@ public class CursusEtudiantRepository {
 
     public void deleteEtudiantById(int id) {
         CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
-            mCursusDao.deleteCursusOfEtudiant(id);
             mEtudiantDao.deleteEtudiantById(id);
         });
     }
@@ -84,9 +83,9 @@ public class CursusEtudiantRepository {
         });
     }
 
-    public void deleteSemestreById(int id) {
+    public void deleteSemestre(Semestre semestre) {
         CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
-            mSemestreDao.deleteSemestreById(id);
+            mSemestreDao.deleteSemestre(semestre);
         });
     }
 

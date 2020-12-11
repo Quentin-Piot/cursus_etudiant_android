@@ -10,15 +10,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ItemSemestreBinding;
-import fr.utt.if26.projet_final_if26.generated.callback.OnClickListener;
 import fr.utt.if26.projet_final_if26.models.SemestreCursus;
-import fr.utt.if26.projet_final_if26.models.entities.Module;
-import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
 
 public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterRecyclerListeSemestres.SemestreHolder> {
@@ -28,7 +24,7 @@ public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterR
     private final CursusActivity cursusActivity;
 
 
-    private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
+    private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
 
 
     public AdapterRecyclerListeSemestres(List<SemestreCursus> semestresCursus, CursusViewModel viewModel, CursusActivity cursusActivity) {
@@ -53,7 +49,7 @@ public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterR
         holder.binding.setViewModel(viewModel);
         holder.binding.setCursusActivity(cursusActivity);
         String moduleText = " module";
-        if(semestreCursus.get(position).getModules().size() > 1) moduleText +="s";
+        if (semestreCursus.get(position).getModules().size() > 1) moduleText += "s";
         holder.binding.semestreModulesNumberTv.setText(semestreCursus.get(position).getModules().size() + moduleText);
         holder.binding.layoutCollapsed.setVisibility(View.GONE);
         holder.binding.executePendingBindings();

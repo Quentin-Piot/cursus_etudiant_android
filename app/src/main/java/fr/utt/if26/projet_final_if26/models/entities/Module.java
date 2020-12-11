@@ -3,9 +3,19 @@ package fr.utt.if26.projet_final_if26.models.entities;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "module_table")
+@Entity(tableName = "module_table",
+        foreignKeys = {@ForeignKey(entity = Cursus.class,
+        parentColumns = "label",
+        childColumns = "cursus_label",
+        onDelete = ForeignKey.CASCADE),
+        @ForeignKey(entity =Semestre.class,
+                parentColumns = "id",
+                childColumns = "semestre_id",
+                onDelete = ForeignKey.CASCADE)}
+)
 public class Module {
 
     @PrimaryKey(autoGenerate = true)
@@ -13,14 +23,14 @@ public class Module {
     private String sigle;
     private String parcours;
     private String categorie;
-    private int credits;
+    private double credits;
     @ColumnInfo(name = "cursus_label")
     private String cursusLabel;
     @ColumnInfo(name = "semestre_id")
     private int semestreId;
 
 
-    public Module(@NonNull String sigle, @NonNull String parcours, @NonNull String categorie, @NonNull int credits, String cursusLabel, int semestreId) {
+    public Module(@NonNull String sigle, @NonNull String parcours, @NonNull String categorie, @NonNull double credits, String cursusLabel, int semestreId) {
         this.sigle = sigle;
         this.parcours = parcours;
         this.categorie = categorie;
@@ -42,7 +52,7 @@ public class Module {
         return categorie;
     }
 
-    public int getCredits() {
+    public double getCredits() {
         return credits;
     }
 

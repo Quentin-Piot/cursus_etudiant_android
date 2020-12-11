@@ -2,16 +2,16 @@ package fr.utt.if26.projet_final_if26.models.entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
-import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Entity;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-import androidx.room.Query;
-import androidx.room.Update;
 
-@Entity(tableName = "cursus_table")
+@Entity(tableName = "cursus_table",
+        foreignKeys = @ForeignKey(entity = Etudiant.class,
+                parentColumns = "id",
+                childColumns = "etudiant_id",
+                onDelete = ForeignKey.CASCADE)
+)
 public class Cursus {
 
     @PrimaryKey

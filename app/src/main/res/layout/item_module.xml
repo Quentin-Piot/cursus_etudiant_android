@@ -23,10 +23,10 @@
             android:id="@+id/module_sigle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
             android:layout_weight="1"
             android:text="@{module.sigle}"
-            android:textAlignment="center"
             android:textColor="@color/text_color"
             android:textSize="16sp" />
         />
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@{Integer.toString(module.credits)}"
+            android:text="@{Double.toString(module.credits)}"
             android:textColor="@color/text_color"
             android:textSize="16sp" />
 
