@@ -10,7 +10,6 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 
 import fr.utt.if26.projet_final_if26.models.CursusEtudiantRepository;
-import fr.utt.if26.projet_final_if26.models.entities.Cursus;
 import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 
@@ -46,7 +45,7 @@ public class CursusViewModel extends AndroidViewModel {
     }
 
     public void onClickEditSemestre(Semestre selectedSemestre) {
-       }
+    }
 
     public void setSelectedSemestre(Semestre semestre) {
 
@@ -58,14 +57,20 @@ public class CursusViewModel extends AndroidViewModel {
         return mRepository.getAllSemestreForCursusLabel(mCursusLabel);
     }
 
-    public LiveData<List<Module>> getmModules() {
-        return mRepository.getAllModuleForCursusLabel(mCursusLabel);
+    public LiveData<List<Module>> getmModulesForSemesterId(int id) {
+        return mRepository.getAllModuleForSemesterId(id);
     }
+
     public LiveData<VMEventsEnum> getVmEvent() {
         return vmEvent;
     }
 
     public LiveData<Semestre> getSelectedSemestre() {
         return selectedSemestre;
+    }
+
+    public LiveData<Integer> getCreditsForCategorie(Integer semestreId, String categorie) {
+
+        return mRepository.getCreditsForCategorie(semestreId, categorie);
     }
 }

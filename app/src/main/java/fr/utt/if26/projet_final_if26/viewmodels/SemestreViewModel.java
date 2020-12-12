@@ -48,7 +48,7 @@ public class SemestreViewModel extends AndroidViewModel {
         if (!moduleSigle.getValue().isEmpty() && !moduleProgramme.getValue().isEmpty() && !moduleCategorie.getValue().isEmpty()
                 && !moduleCredits.getValue().isEmpty()
                 && mSemestreId > -1) {
-            mRepository.insertModule(new Module(moduleSigle.getValue(), moduleProgramme.getValue(), moduleCategorie.getValue(), Double.parseDouble(moduleCredits.getValue()), mCursusLabel, mSemestreId));
+            mRepository.insertModule(new Module(moduleSigle.getValue(), moduleProgramme.getValue(), moduleCategorie.getValue(), Double.parseDouble(moduleCredits.getValue()), mSemestreId));
             _vmEvent.setValue(VMEventsEnum.success_operation);
         } else {
             _vmEvent.setValue(VMEventsEnum.empty_fields);

@@ -7,14 +7,11 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "module_table",
-        foreignKeys = {@ForeignKey(entity = Cursus.class,
-        parentColumns = "label",
-        childColumns = "cursus_label",
-        onDelete = ForeignKey.CASCADE),
+        foreignKeys =
         @ForeignKey(entity =Semestre.class,
                 parentColumns = "id",
                 childColumns = "semestre_id",
-                onDelete = ForeignKey.CASCADE)}
+                onDelete = ForeignKey.CASCADE)
 )
 public class Module {
 
@@ -24,18 +21,15 @@ public class Module {
     private String parcours;
     private String categorie;
     private double credits;
-    @ColumnInfo(name = "cursus_label")
-    private String cursusLabel;
     @ColumnInfo(name = "semestre_id")
-    private int semestreId;
+    private final int semestreId;
 
 
-    public Module(@NonNull String sigle, @NonNull String parcours, @NonNull String categorie, @NonNull double credits, String cursusLabel, int semestreId) {
+    public Module(@NonNull String sigle, @NonNull String parcours, @NonNull String categorie, double credits, int semestreId) {
         this.sigle = sigle;
         this.parcours = parcours;
         this.categorie = categorie;
         this.credits = credits;
-        this.cursusLabel = cursusLabel;
         this.semestreId = semestreId;
 
     }
@@ -82,14 +76,5 @@ public class Module {
 
     public void setCredits(int credits) {
         this.credits = credits;
-    }
-
-
-    public String getCursusLabel() {
-        return cursusLabel;
-    }
-
-    public void setCursusLabel(String cursusLabel) {
-        this.cursusLabel = cursusLabel;
     }
 }

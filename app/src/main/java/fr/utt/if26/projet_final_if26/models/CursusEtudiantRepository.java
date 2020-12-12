@@ -17,17 +17,14 @@ import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 
 public class CursusEtudiantRepository {
 
-    private EtudiantDao mEtudiantDao;
-    private CursusDao mCursusDao;
-    private SemestreDao mSemestreDao;
-    private ModuleDao mModuleDao;
+    private final EtudiantDao mEtudiantDao;
+    private final CursusDao mCursusDao;
+    private final SemestreDao mSemestreDao;
+    private final ModuleDao mModuleDao;
 
-
-
-    private CursusEtudiantDatabase db;
 
     public CursusEtudiantRepository(Application application) {
-        db = CursusEtudiantDatabase.getDatabase(application);
+        CursusEtudiantDatabase db = CursusEtudiantDatabase.getDatabase(application);
         mEtudiantDao = db.etudiantDao();
         mCursusDao = db.cursusDao();
         mSemestreDao = db.semestreDao();
@@ -119,12 +116,10 @@ public class CursusEtudiantRepository {
 
     public LiveData<List<Module>> getAllModuleForSemesterId(int id) {
         return mModuleDao.getModulesBySemesterId(id);
-
     }
 
-    public LiveData<List<Module>> getAllModuleForCursusLabel(String label) {
-        return mModuleDao.getModulesByCursusLabel(label);
-
+    public LiveData<Integer> getCreditsForCategorie(Integer semesterId, String categorie) {
+        return mModuleDao.getCreditsForCategorie(semesterId, categorie);
     }
 
 

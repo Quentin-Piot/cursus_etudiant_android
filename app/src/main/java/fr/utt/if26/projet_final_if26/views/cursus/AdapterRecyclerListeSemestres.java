@@ -10,18 +10,23 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ItemSemestreBinding;
 import fr.utt.if26.projet_final_if26.models.SemestreCursus;
+import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
 
 public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterRecyclerListeSemestres.SemestreHolder> {
 
-    private final List<SemestreCursus> semestreCursus;
+    private List<SemestreCursus> semestreCursus;
     private final CursusViewModel viewModel;
     private final CursusActivity cursusActivity;
+
+
+
 
 
     private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
@@ -51,11 +56,13 @@ public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterR
         String moduleText = " module";
         if (semestreCursus.get(position).getModules().size() > 1) moduleText += "s";
         holder.binding.semestreModulesNumberTv.setText(semestreCursus.get(position).getModules().size() + moduleText);
-        holder.binding.layoutCollapsed.setVisibility(View.GONE);
+        if(position > 0) {
+        holder.binding.layoutCollapsed.setVisibility(View.GONE);}
         holder.binding.executePendingBindings();
 
 
         holder.moduleRecyclerView.setLayoutManager(new LinearLayoutManager(holder.moduleRecyclerView.getContext()));
+
         AdapterRecyclerNestedModules adapterRecyclerListeModules = new AdapterRecyclerNestedModules(semestreCursus.get(position).getModules());
         holder.moduleRecyclerView.setAdapter(adapterRecyclerListeModules);
         holder.moduleRecyclerView.setRecycledViewPool(viewPool);
@@ -74,6 +81,14 @@ public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterR
         });
 
 
+    }
+
+    public List<SemestreCursus> getSemestreCursus() {
+        return semestreCursus;
+    }
+
+    public void setSemestreCursus(List<SemestreCursus> semestreCursus) {
+        this.semestreCursus = semestreCursus;
     }
 
     @Override
