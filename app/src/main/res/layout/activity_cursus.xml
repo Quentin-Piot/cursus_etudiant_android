@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel" />
+
         <variable
             name="cursusActivity"
             type="fr.utt.if26.projet_final_if26.views.cursus.CursusActivity" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,103 +39,14 @@
             android:id="@+id/message_tv_semestre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:text="Message"
             android:textColor="@color/text_color"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            custom:layout_constraintStart_toStartOf="parent"
-            custom:layout_constraintTop_toTopOf="parent"
-            custom:layout_constraintVertical_bias="0.0">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/cursus_tv"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/cursus_name_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5" />
-
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.8"
-                    android:text="@string/modules_tv"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/cursus_modules_number_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="0" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:text="@string/semestres_tv"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/cursus_semestres_number_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5" />
-
-            </LinearLayout>
-
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="6dp"
-                android:background="#FFFFFF" />
-
-        </LinearLayout>
+            app:layout_constraintTop_toTopOf="@+id/semestre_recycler_view" />
 
         <LinearLayout
             android:id="@+id/linearLayout3"
@@ -145,13 +59,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Indicateurs :"
-                android:textSize="18sp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -160,165 +67,153 @@
                 android:orientation="horizontal">
 
                 <com.github.lzyzsd.circleprogress.ArcProgress
-                    android:id="@+id/arc_progress"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
+                    android:id="@+id/arc_progress_cs"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     custom:arc_bottom_text="CS"
-                    custom:arc_max="12"
-                    custom:arc_progress="6"
-                    custom:arc_suffix_text="/12"
+                    custom:arc_finished_color="@color/text_color"
+                    custom:arc_max="66"
+                    custom:arc_progress="0"
+                    custom:arc_suffix_text="/66"
                     custom:arc_suffix_text_padding="1dp"
                     custom:arc_suffix_text_size="8sp"
-                    custom:arc_text_size="18sp" />
+                    custom:arc_text_color="@color/text_color"
+                    custom:arc_text_size="18sp"
+
+                    custom:arc_unfinished_color="@color/dark_bg" />
 
                 <com.github.lzyzsd.circleprogress.ArcProgress
-                    android:id="@+id/arc_progress3"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:layout_marginStart="10dp"
+                    android:id="@+id/arc_progress_tm"
+                    android:layout_width="60dp"
+                    android:layout_height="58dp"
+                    android:layout_marginStart="5dp"
                     custom:arc_bottom_text="TM"
-                    custom:arc_max="16"
-                    custom:arc_progress="5"
-                    custom:arc_suffix_text="/12"
+                    custom:arc_finished_color="@color/text_color"
+                    custom:arc_max="48"
+                    custom:arc_progress="0"
+                    custom:arc_suffix_text="/48"
                     custom:arc_suffix_text_padding="1dp"
                     custom:arc_suffix_text_size="8sp"
-                    custom:arc_text_size="18sp" />
+                    custom:arc_text_color="@color/text_color"
+                    custom:arc_text_size="18sp"
+                    custom:arc_unfinished_color="@color/dark_bg" />
 
                 <com.github.lzyzsd.circleprogress.ArcProgress
-                    android:id="@+id/arc_progress4"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:layout_marginStart="10dp"
+                    android:id="@+id/arc_progress_st"
+                    android:layout_width="60dp"
+                    android:layout_height="58dp"
+                    android:layout_marginStart="5dp"
                     custom:arc_bottom_text="ST"
-                    custom:arc_max="64"
-
-                    custom:arc_progress="36"
-                    custom:arc_suffix_text="/64"
+                    custom:arc_finished_color="@color/text_color"
+                    custom:arc_max="66"
+                    custom:arc_progress="0"
+                    custom:arc_suffix_text="/66"
                     custom:arc_suffix_text_padding="1dp"
                     custom:arc_suffix_text_size="8sp"
-                    custom:arc_text_size="18sp" />
+                    custom:arc_text_color="@color/text_color"
+                    custom:arc_text_size="18sp"
+                    custom:arc_unfinished_color="@color/dark_bg" />
 
                 <com.github.lzyzsd.circleprogress.ArcProgress
-                    android:id="@+id/arc_progress2"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:layout_marginStart="10dp"
+                    android:id="@+id/arc_progress_ec"
+                    android:layout_width="60dp"
+                    android:layout_height="58dp"
+                    android:layout_marginStart="5dp"
+                    custom:arc_bottom_text="EC"
+                    custom:arc_finished_color="@color/text_color"
+                    custom:arc_max="20"
+                    custom:arc_progress="0"
+                    custom:arc_suffix_text="/20"
+                    custom:arc_suffix_text_padding="1dp"
+                    custom:arc_suffix_text_size="8sp"
+                    custom:arc_text_color="@color/text_color"
+                    custom:arc_text_size="18sp"
+                    custom:arc_unfinished_color="@color/dark_bg" />
+
+                <com.github.lzyzsd.circleprogress.ArcProgress
+                    android:id="@+id/arc_progress_me"
+                    android:layout_width="60dp"
+                    android:layout_height="58dp"
+                    android:layout_marginStart="5dp"
                     custom:arc_bottom_text="ME"
-
-                    custom:arc_max="64"
-                    custom:arc_progress="36"
-                    custom:arc_suffix_text="/64"
+                    custom:arc_finished_color="@color/text_color"
+                    custom:arc_max="8"
+                    custom:arc_progress="0"
+                    custom:arc_suffix_text="/8"
                     custom:arc_suffix_text_padding="1dp"
                     custom:arc_suffix_text_size="8sp"
-                    custom:arc_text_size="18sp" />
+                    custom:arc_text_color="@color/text_color"
+                    custom:arc_text_size="18sp"
+                    custom:arc_unfinished_color="@color/dark_bg" />
 
                 <com.github.lzyzsd.circleprogress.ArcProgress
-                    android:id="@+id/arc_progress5"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:layout_marginStart="10dp"
-
+                    android:id="@+id/arc_progress_ht"
+                    android:layout_width="60dp"
+                    android:layout_height="58dp"
+                    android:layout_marginStart="5dp"
                     custom:arc_bottom_text="HT"
-                    custom:arc_max="64"
-                    custom:arc_progress="36"
-                    custom:arc_suffix_text="/64"
+                    custom:arc_finished_color="@color/text_color"
+                    custom:arc_max="8"
+                    custom:arc_progress="0"
+                    custom:arc_suffix_text="/8"
                     custom:arc_suffix_text_padding="1dp"
                     custom:arc_suffix_text_size="8sp"
-                    custom:arc_text_size="18sp" />
+                    custom:arc_text_color="@color/text_color"
+                    custom:arc_text_size="18sp"
+                    custom:arc_unfinished_color="@color/dark_bg" />
 
-                <com.github.lzyzsd.circleprogress.ArcProgress
-                    android:id="@+id/arc_progress6"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:layout_marginStart="10dp"
-
-                    custom:arc_bottom_text="CT"
-                    custom:arc_max="64"
-                    custom:arc_progress="36"
-                    custom:arc_suffix_text="/64"
-                    custom:arc_suffix_text_padding="1dp"
-                    custom:arc_suffix_text_size="8sp"
-                    custom:arc_text_size="18sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:orientation="vertical">
+                    android:text="Total : " />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                <ProgressBar
+                    android:id="@+id/determinateBar"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="150dp"
+                    android:layout_height="8dp"
+                    android:layout_gravity="clip_horizontal|center"
+                    android:max="300"
+                    android:progress="0"
+                    android:progressBackgroundTint="@color/dark_bg"
+                    android:progressTint="#FFFFFF" />
 
-                        <TextView
-                            android:id="@+id/textView11"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="Semesestre à l'étranger :" />
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="26/300" />
 
-                        <TextView
-                            android:id="@+id/textView13"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
-                            android:background="@drawable/back_done"
-                            android:padding="4dp"
-                            android:text="VALIDE"
-                            android:textColor="#ADF8CF"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/back_done"
+                    android:text="NPML"
+                    android:textAlignment="center" />
 
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView8"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="NPML" />
-
-                        <TextView
-                            android:id="@+id/textView14"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
-                            android:background="@drawable/back_undone"
-                            android:padding="4dp"
-                            android:text="À FAIRE"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <com.github.lzyzsd.circleprogress.ArcProgress
-                    android:id="@+id/arc_progress7"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-
-                    android:layout_marginEnd="40dp"
-                    custom:arc_bottom_text="Total"
-                    custom:arc_max="64"
-                    custom:arc_progress="36"
-                    custom:arc_suffix_text="/64"
-                    custom:arc_suffix_text_padding="1dp"
-                    custom:arc_suffix_text_size="8sp"
-                    custom:arc_text_size="18sp" />
-
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/back_undone"
+                    android:text="ETRANGER"
+                    android:textAlignment="center" />
             </LinearLayout>
 
         </LinearLayout>
@@ -332,7 +227,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

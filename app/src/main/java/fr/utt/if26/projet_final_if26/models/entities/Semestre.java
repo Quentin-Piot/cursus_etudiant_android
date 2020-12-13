@@ -7,6 +7,7 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "semestre_table",
@@ -23,7 +24,7 @@ public class Semestre {
     @ColumnInfo(name = "cursus_label")
     private String cursusLabel;
     @Ignore
-    private List<Module> listeModules;
+    private List<Module> listeModules = new ArrayList<>();
 
     public Semestre(@NonNull String label, @NonNull String cursusLabel) {
         this.label = label;
@@ -50,4 +51,11 @@ public class Semestre {
         this.label = label;
     }
 
+    public List<Module> getListeModules() {
+        return listeModules;
+    }
+
+    public void setListeModules(List<Module> listeModules) {
+        this.listeModules = listeModules;
+    }
 }

@@ -13,13 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ActivityCursusBinding;
-import fr.utt.if26.projet_final_if26.models.SemestreCursus;
 import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
@@ -35,10 +31,10 @@ public class CursusActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
     private String mCursusLabel;
-    private List<SemestreCursus> semestreCursus = new ArrayList<>();
+
+    private List<Semestre> listeSemestres = new ArrayList<>();
 
     private AdapterRecyclerListeSemestres adapter;
-
 
 
     @Override
@@ -49,7 +45,7 @@ public class CursusActivity extends AppCompatActivity {
         initBinding();
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         viewModel.getmSemestres().observe(this, this::updateSemestres);
-
+        viewModel.getModuleCatCredit().observe(this, this::updateProgressCredits);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Page du cursus");
 
 
@@ -59,19 +55,18 @@ public class CursusActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_cursus);
         CursusViewModelFactory factory = new CursusViewModelFactory(getApplication(), mCursusLabel);
         viewModel = new ViewModelProvider(this, factory).get(CursusViewModel.class);
-        binding.cursusNameTv.setText(mCursusLabel);
         binding.setViewModel(viewModel);
         binding.setCursusActivity(this);
         recyclerView = binding.semestreRecyclerView;
-        this.initAdapter(recyclerView, semestreCursus, viewModel);
+        this.initAdapter(recyclerView, listeSemestres, viewModel);
     }
 
-    public void initAdapter(RecyclerView recyclerView, List<SemestreCursus> semestreCursus, CursusViewModel viewModel) {
-            binding.messageTvSemestre.setText(R.string.aucun_semestre);
+    public void initAdapter(RecyclerView recyclerView, List<Semestre> listeSemestres, CursusViewModel viewModel) {
 
-        adapter = new AdapterRecyclerListeSemestres(semestreCursus, viewModel, this);
+        binding.messageTvSemestre.setText(R.string.aucun_semestre);
+        adapter = new AdapterRecyclerListeSemestres(listeSemestres, viewModel, this);
         recyclerView.setAdapter(adapter);
-        ;
+
     }
 
 
@@ -101,56 +96,71 @@ public class CursusActivity extends AppCompatActivity {
 
     }
 
+    private void updateProgressCredits(CursusViewModel.ModuleCatCredit mcc) {
+        binding.arcProgressCs.setMax(mcc.getMaxProgress().get(0));
+
+        binding.arcProgressCs.setProgress(mcc.getCs());
+        binding.arcProgressTm.setMax(mcc.getMaxProgress().get(1));
+
+        binding.arcProgressTm.setProgress(mcc.getTm());
+        binding.arcProgressSt.setMax(mcc.getMaxProgress().get(2));
+
+        binding.arcProgressSt.setProgress(mcc.getSt());
+        binding.arcProgressEc.setMax(mcc.getMaxProgress().get(3));
+
+        binding.arcProgressEc.setProgress(mcc.getEc());
+        binding.arcProgressMe.setMax(mcc.getMaxProgress().get(4));
+
+        binding.arcProgressMe.setProgress(mcc.getMe());
+        binding.arcProgressHt.setMax(mcc.getMaxProgress().get(5));
+
+        binding.arcProgressHt.setProgress(mcc.getHt());
+
+        binding.determinateBar.setProgress(mcc.getTotal());
+
+    }
+
     private void updateSemestres(List<Semestre> semestres) {
         if (semestres.size() > 0) {
-            semestreCursus = new ArrayList<>();
-
+            listeSemestres = semestres;
             semestres.forEach(semestre -> {
 
-                semestreCursus.add(new SemestreCursus(semestre));
                 viewModel.getmModulesForSemesterId(semestre.getId()).observe(this, modules -> updateModules(modules, semestres.indexOf(semestre)));
 
             });
+
             onChanged();
 
         }
 
 
-
     }
 
     private void updateModules(List<Module> modules, int pos) {
-
         if (modules.size() > 0) {
-            semestreCursus.get(pos).setModules(modules);
-            updateCircleProgress();
-            adapter.setSemestreCursus(semestreCursus);
+            listeSemestres.get(pos).setListeModules(modules);
+            adapter.setListeSemestres(listeSemestres);
             adapter.notifyItemChanged(pos);
+            viewModel.onUpdateModulesCredits(listeSemestres);
         }
 
     }
 
-    private void updateCircleProgress() {
-        List<Module> listeModules = new ArrayList<>();
-        semestreCursus.stream().map(SemestreCursus::getModules).collect(Collectors.toList()).forEach(listeModules::addAll);
-        int cs = listeModules.stream().filter(module -> module.getCategorie().equals("CS")).mapToInt(a->(int) a.getCredits()).sum();
-        binding.arcProgress.setProgress(cs);
-    }
-
     private void onChanged() {
 
-        if (semestreCursus.size() == 0) {
+        if (listeSemestres.size() == 0) {
             binding.messageTvSemestre.setText(R.string.aucun_semestre);
         } else {
             binding.messageTvSemestre.setText("");
 
         }
-        binding.cursusSemestresNumberTv.setText(Integer.toString(semestreCursus.size()));
-        adapter.setSemestreCursus(semestreCursus);
+        adapter.setListeSemestres(listeSemestres);
         adapter.notifyDataSetChanged();
-        if (semestreCursus.size() >= 7) {
+        if (listeSemestres.size() >= 7) {
             binding.fabCursus.setVisibility(View.INVISIBLE);
         }
         binding.semestreRecyclerView.scheduleLayoutAnimation();
     }
+
+
 }

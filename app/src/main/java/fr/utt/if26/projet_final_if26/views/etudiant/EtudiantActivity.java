@@ -48,15 +48,16 @@ public class EtudiantActivity extends AppCompatActivity {
         initBinding();
 
 
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        viewModel.getVmEvent().observe(this, this::onRecieveVMEvent);
+        viewModel.getSelectedCursus().observe(this, this::onSelectCursus);
         viewModel.getmCursus().observe(this, cursus -> {
             initAdapter(recyclerView, cursus, viewModel);
             if (cursus != null)
                 binding.studentCursusNumberTv.setText(Integer.toString(cursus.size()));
         });
-        viewModel.getVmEvent().observe(this, this::onRecieveVMEvent);
-        viewModel.getSelectedCursus().observe(this, this::onSelectCursus);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
     }
 
     private void initBinding() {

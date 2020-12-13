@@ -20,12 +20,12 @@ public class Module {
     private String sigle;
     private String parcours;
     private String categorie;
-    private double credits;
+    private int credits;
     @ColumnInfo(name = "semestre_id")
     private final int semestreId;
 
 
-    public Module(@NonNull String sigle, @NonNull String parcours, @NonNull String categorie, double credits, int semestreId) {
+    public Module(@NonNull String sigle, @NonNull String parcours, @NonNull String categorie, int credits, int semestreId) {
         this.sigle = sigle;
         this.parcours = parcours;
         this.categorie = categorie;
@@ -46,7 +46,7 @@ public class Module {
         return categorie;
     }
 
-    public double getCredits() {
+    public int getCredits() {
         return credits;
     }
 
