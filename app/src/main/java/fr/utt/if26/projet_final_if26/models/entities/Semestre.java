@@ -22,7 +22,13 @@ public class Semestre {
     private int id;
     private String label;
     @ColumnInfo(name = "cursus_label")
-    private String cursusLabel;
+    private final String cursusLabel;
+    @ColumnInfo(name = "semestre_etranger", defaultValue = "false")
+    private boolean semestreEtranger = false;
+    @ColumnInfo(name = "npml", defaultValue = "false")
+    private boolean npml;
+
+
     @Ignore
     private List<Module> listeModules = new ArrayList<>();
 
@@ -57,5 +63,21 @@ public class Semestre {
 
     public void setListeModules(List<Module> listeModules) {
         this.listeModules = listeModules;
+    }
+
+    public boolean isSemestreEtranger() {
+        return semestreEtranger;
+    }
+
+    public void setSemestreEtranger(boolean semestreEtranger) {
+        this.semestreEtranger = semestreEtranger;
+    }
+
+    public boolean isNpml() {
+        return npml;
+    }
+
+    public void setNpml(boolean npml) {
+        this.npml = npml;
     }
 }

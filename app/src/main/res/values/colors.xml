@@ -2,10 +2,12 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#6914db</color>
+    <color name="colorAccent">#09E7FB</color>
     <color name="bg_color">#363941</color>
     <color name="text_color">#ffffffff</color>
     <color name="dark_bg">#303136</color>
     <color name="darker_bg">#1f1f1f</color>
+    <color name="done">#2AED15</color>
+    <color name="undone">#D31010</color>
 
 </resources>

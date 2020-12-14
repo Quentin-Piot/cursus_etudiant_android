@@ -33,6 +33,15 @@ public interface SemestreDao {
     @Query("DELETE FROM semestre_table WHERE id = :id")
     void deleteSemestreById(int id);
 
+    @Query("UPDATE semestre_table SET npml = :checked WHERE id = :id")
+    void updateNpmlField(boolean checked, int id);
 
+    @Query("UPDATE semestre_table SET semestre_etranger = :checked WHERE id = :id")
+    void updateSeField(boolean checked, int id);
 
+    @Query("select npml from semestre_table where id = :semestreId")
+    LiveData<Boolean> getNpml(int semestreId);
+
+    @Query("select semestre_etranger from semestre_table where id = :semestreId")
+    LiveData<Boolean> getSe(int semestreId);
 }

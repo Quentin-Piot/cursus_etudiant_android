@@ -8,29 +8,34 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ActivityEditSemestreBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
 import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.viewmodels.SemestreViewModel;
-import fr.utt.if26.projet_final_if26.viewmodels.factories.SemestreViewModelFactory;
 import fr.utt.if26.projet_final_if26.viewmodels.VMEventsEnum;
+import fr.utt.if26.projet_final_if26.viewmodels.factories.SemestreViewModelFactory;
 
 public class EditSemestreActivity extends AppCompatActivity {
 
 
     private SemestreViewModel viewModel;
     private ActivityEditSemestreBinding binding;
-    private RecyclerView recyclerView;
-
+    private RecyclerView modulesRecyclerView;
+    private RecyclerView historiqueModulesRecyclerView;
     private int mSemestreId;
     private String mSemestreLabel;
     private String mCursusLabel;
 
+    private List<Module> modulesInSemestre = new ArrayList<>();
 
+    private AdapterRecyclerListeHistoriqueModules historiqueAdapter;
+    private AdapterRecyclerListeModules adapterModules;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +46,14 @@ public class EditSemestreActivity extends AppCompatActivity {
 
 
         initBinding();
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        modulesRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        historiqueModulesRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
         viewModel.getmModules().observe(this, this::onChanged);
+        viewModel.getNpml().observe(this, result -> binding.switchNpml.setChecked(result));
+        viewModel.getSe().observe(this, result -> binding.switchSe.setChecked(result));
+
+        viewModel.getDistinctModules(mSemestreId).observe(this, this::onHistoriqueChanged);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Page du cursus");
 
 
@@ -55,14 +66,16 @@ public class EditSemestreActivity extends AppCompatActivity {
         binding.setViewModel(viewModel);
         binding.setActivity(this);
         binding.cursusSemestreLabelTv.setText(mSemestreLabel);
-        recyclerView = binding.semesterModulesRecyclerView;
-
+        modulesRecyclerView = binding.semesterModulesRecyclerView;
+        historiqueModulesRecyclerView = binding.historiqueRecyclerView;
+        historiqueAdapter = new AdapterRecyclerListeHistoriqueModules(new ArrayList<>(), viewModel);
+        historiqueModulesRecyclerView.setAdapter(historiqueAdapter);
+        adapterModules = new AdapterRecyclerListeModules(new ArrayList<>(), viewModel);
+        modulesRecyclerView.setAdapter(adapterModules);
     }
 
-    public void initAdapter(RecyclerView recyclerView, List<Module> modules, SemestreViewModel viewModel) {
-        AdapterRecyclerListeModules adapter = new AdapterRecyclerListeModules(modules, viewModel);
-        recyclerView.setAdapter(adapter);
-    }
+
+
 
     public void onEditCursus(Cursus cursus) {
 
@@ -87,14 +100,32 @@ public class EditSemestreActivity extends AppCompatActivity {
     }
 
     private void onChanged(List<Module> modules) {
+        if(modules.size() > 0)
         binding.cursusModulesNumberTv.setText(Integer.toString(modules.size()));
-        this.initAdapter(recyclerView, modules, viewModel);
-        /*
-        if (semestres.size() >= 7) {
-            binding.fabCursus.setVisibility(View.INVISIBLE);
-        }
+        modulesInSemestre = modules;
 
-         */
-        //binding.semestreRecyclerView.scheduleLayoutAnimation();
+        adapterModules.setModules(modules);
+        adapterModules.notifyDataSetChanged();
+
+
+        historiqueAdapter.setModules(suppressDuplicateModules(historiqueAdapter.getModules(), modulesInSemestre));
+
+
+    }
+
+
+    private void onHistoriqueChanged(List<Module> modules) {
+
+
+
+        historiqueAdapter.setModules(suppressDuplicateModules(modules, modulesInSemestre));
+        historiqueAdapter.notifyDataSetChanged();
+    }
+
+    private List<Module> suppressDuplicateModules(List<Module> list1, List<Module> list2){
+
+        return list1.stream()
+                .filter(s -> list2.stream().noneMatch(f -> f.getSigle().equals(s.getSigle())))
+                .collect(Collectors.toList());
     }
 }

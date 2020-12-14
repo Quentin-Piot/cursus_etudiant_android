@@ -7,6 +7,7 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "module_table",
+        primaryKeys = {"sigle","semestre_id"},
         foreignKeys =
         @ForeignKey(entity =Semestre.class,
                 parentColumns = "id",
@@ -15,14 +16,13 @@ import androidx.room.PrimaryKey;
 )
 public class Module {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-    private String sigle;
+    @NonNull
+    private final String sigle;
     private String parcours;
     private String categorie;
     private int credits;
     @ColumnInfo(name = "semestre_id")
-    private final int semestreId;
+    private int semestreId;
 
 
     public Module(@NonNull String sigle, @NonNull String parcours, @NonNull String categorie, int credits, int semestreId) {
@@ -50,20 +50,9 @@ public class Module {
         return credits;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public int getSemestreId() {
         return semestreId;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setSigle(String sigle) {
-        this.sigle = sigle;
     }
 
     public void setParcours(String parcours) {
@@ -76,5 +65,9 @@ public class Module {
 
     public void setCredits(int credits) {
         this.credits = credits;
+    }
+
+    public void setSemestreId(int semestreId) {
+        this.semestreId = semestreId;
     }
 }

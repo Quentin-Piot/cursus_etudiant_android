@@ -33,7 +33,6 @@
             android:layout_marginEnd="10dp"
             android:hint="@string/sigle"
             android:inputType="textCapWords"
-            android:maxLength="4"
             android:text="@={viewModel.moduleSigle}" />
 
         <LinearLayout
@@ -102,7 +101,7 @@
             android:layout_marginEnd="10dp"
             android:hint="@string/cr_dits"
             android:inputType="numberDecimal"
-            android:maxLength="3"
+            android:maxLength="2"
             android:text="@={viewModel.moduleCredits}" />
     </LinearLayout>
 </layout>

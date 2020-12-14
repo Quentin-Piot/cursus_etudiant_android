@@ -11,16 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import fr.utt.if26.projet_final_if26.R;
-import fr.utt.if26.projet_final_if26.databinding.ItemModuleBinding;
+import fr.utt.if26.projet_final_if26.databinding.ItemHistoriqueModuleBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.viewmodels.SemestreViewModel;
 
-public class AdapterRecyclerListeModules extends RecyclerView.Adapter<AdapterRecyclerListeModules.ModuleHolder  > {
+public class AdapterRecyclerListeHistoriqueModules extends RecyclerView.Adapter<AdapterRecyclerListeHistoriqueModules.ModuleHolder  > {
 
     private List<Module> modules;
     private final SemestreViewModel viewModel;
 
-    public AdapterRecyclerListeModules(List<Module> modules, SemestreViewModel viewModel) {
+    public AdapterRecyclerListeHistoriqueModules(List<Module> modules, SemestreViewModel viewModel) {
         this.modules = modules;
         this.viewModel = viewModel;
     }
@@ -28,7 +28,7 @@ public class AdapterRecyclerListeModules extends RecyclerView.Adapter<AdapterRec
     @NonNull
     @Override
     public ModuleHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemModuleBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_module, parent, false);
+        ItemHistoriqueModuleBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_historique_module, parent, false);
         return new ModuleHolder(binding);
     }
 
@@ -42,6 +42,11 @@ public class AdapterRecyclerListeModules extends RecyclerView.Adapter<AdapterRec
 
     }
 
+    @Override
+    public int getItemCount() {
+        return this.modules.size();
+    }
+
     public List<Module> getModules() {
         return modules;
     }
@@ -50,16 +55,11 @@ public class AdapterRecyclerListeModules extends RecyclerView.Adapter<AdapterRec
         this.modules = modules;
     }
 
-    @Override
-    public int getItemCount() {
-        return this.modules.size();
-    }
-
     static class ModuleHolder extends RecyclerView.ViewHolder {
 
-        private final ItemModuleBinding binding;
+        private final ItemHistoriqueModuleBinding binding;
 
-        public ModuleHolder(ItemModuleBinding binding) {
+        public ModuleHolder(ItemHistoriqueModuleBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 

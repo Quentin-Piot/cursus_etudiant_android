@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import java.util.Objects;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ActivityCursusBinding;
+import fr.utt.if26.projet_final_if26.models.NombreCreditsCategorie;
 import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
@@ -36,6 +38,9 @@ public class CursusActivity extends AppCompatActivity {
 
     private AdapterRecyclerListeSemestres adapter;
 
+    private boolean npmlDone;
+    private boolean seDone;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +50,7 @@ public class CursusActivity extends AppCompatActivity {
         initBinding();
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         viewModel.getmSemestres().observe(this, this::updateSemestres);
-        viewModel.getModuleCatCredit().observe(this, this::updateProgressCredits);
+        viewModel.getNombreCreditsCategorie().observe(this, this::updateProgressCredits);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Page du cursus");
 
 
@@ -96,7 +101,7 @@ public class CursusActivity extends AppCompatActivity {
 
     }
 
-    private void updateProgressCredits(CursusViewModel.ModuleCatCredit mcc) {
+    private void updateProgressCredits(NombreCreditsCategorie mcc) {
         binding.arcProgressCs.setMax(mcc.getMaxProgress().get(0));
 
         binding.arcProgressCs.setProgress(mcc.getCs());
@@ -115,20 +120,25 @@ public class CursusActivity extends AppCompatActivity {
         binding.arcProgressHt.setMax(mcc.getMaxProgress().get(5));
 
         binding.arcProgressHt.setProgress(mcc.getHt());
-
+        binding.determinateBar.setMax(mcc.getMaxProgress().get(6));
         binding.determinateBar.setProgress(mcc.getTotal());
+        binding.totalCreditsTv.setText(Integer.toString(mcc.getTotal()));
 
     }
 
     private void updateSemestres(List<Semestre> semestres) {
         if (semestres.size() > 0) {
             listeSemestres = semestres;
+            seDone = false;
+            npmlDone = false;
             semestres.forEach(semestre -> {
+                if(semestre.isNpml()) npmlDone = true;
+                if(semestre.isSemestreEtranger()) seDone = true;
 
                 viewModel.getmModulesForSemesterId(semestre.getId()).observe(this, modules -> updateModules(modules, semestres.indexOf(semestre)));
 
             });
-
+            setBadges(seDone,npmlDone);
             onChanged();
 
         }
@@ -136,6 +146,23 @@ public class CursusActivity extends AppCompatActivity {
 
     }
 
+    private void setBadges(boolean se, boolean npml) {
+        if(se) {
+            binding.badgeSe.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.done));
+            binding.badgeSe.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_done));
+        } else {
+            binding.badgeSe.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.undone));
+            binding.badgeSe.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_undone));
+        }
+
+        if(npml) {
+            binding.badgeNpml.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.done));
+            binding.badgeNpml.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_done));
+        } else {
+            binding.badgeNpml.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.undone));
+            binding.badgeNpml.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_undone));
+        }
+    }
     private void updateModules(List<Module> modules, int pos) {
         if (modules.size() > 0) {
             listeSemestres.get(pos).setListeModules(modules);

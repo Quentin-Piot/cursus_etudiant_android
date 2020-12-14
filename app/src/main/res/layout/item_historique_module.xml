@@ -7,42 +7,43 @@
             type="fr.utt.if26.projet_final_if26.models.entities.Module" />
         <variable
             name="viewModel"
-            type="fr.utt.if26.projet_final_if26.viewmodels.AccueilViewModel" />
+            type="fr.utt.if26.projet_final_if26.viewmodels.SemestreViewModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/dark_bg"
+        android:onClick="@{()-> viewModel.setSelectedModule(module)}"
         android:paddingTop="6dp"
         android:paddingBottom="6dp">
 
 
         <TextView
-            android:id="@+id/tv_sigle_nested"
+            android:id="@+id/module_sigle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:text="@{module.sigle}"
             android:textColor="@color/text_color"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="16sp" />
         />
 
         <TextView
-            android:id="@+id/tv_cetegorie_nested"
+            android:id="@+id/module_categorie"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:text="@{module.categorie}"
             android:textColor="@color/text_color"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_parcours_nested"
+            android:id="@+id/module_parcours"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -52,7 +53,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tv_credits_nested"
+            android:id="@+id/module_credits"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -60,6 +61,16 @@
             android:text="@{Integer.toString(module.credits)}"
             android:textColor="@color/text_color"
             android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_baseline_add_circle_outline_24"
+            android:backgroundTint="#FFFFFF"
+            android:onClick="@{() -> viewModel.onClickAddHistoriqueModule(module)}" />
 
     </LinearLayout>
 </layout>

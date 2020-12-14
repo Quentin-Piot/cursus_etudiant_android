@@ -2,6 +2,7 @@ package fr.utt.if26.projet_final_if26.views.cursus;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 
 import androidx.appcompat.app.AlertDialog;

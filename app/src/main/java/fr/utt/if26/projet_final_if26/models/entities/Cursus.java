@@ -19,16 +19,10 @@ public class Cursus {
     private String label;
     @ColumnInfo(name = "etudiant_id")
     private int etudiantId;
-    @ColumnInfo(name = "semestre_etranger", defaultValue = "false")
-    private boolean semestreEtranger = false;
-    @ColumnInfo(name = "npml", defaultValue = "false")
-    private boolean npml;
 
     public Cursus(@NonNull String label, @NonNull int etudiantId) {
         this.label = label;
         this.etudiantId = etudiantId;
-        this.npml = false;
-        this.semestreEtranger = true;
     }
 
 
@@ -47,21 +41,5 @@ public class Cursus {
 
     public int getEtudiantId() {
         return etudiantId;
-    }
-
-    public boolean isSemestreEtranger() {
-        return semestreEtranger;
-    }
-
-    public void setSemestreEtranger(boolean semestreEtranger) {
-        this.semestreEtranger = semestreEtranger;
-    }
-
-    public boolean isNpml() {
-        return npml;
-    }
-
-    public void setNpml(boolean npml) {
-        this.npml = npml;
     }
 }

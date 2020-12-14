@@ -15,12 +15,14 @@ import java.util.List;
 import fr.utt.if26.projet_final_if26.models.CursusEtudiantRepository;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
 import fr.utt.if26.projet_final_if26.models.entities.Module;
+import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 
 public class SemestreViewModel extends AndroidViewModel {
 
     private final CursusEtudiantRepository mRepository;
     private final int mSemestreId;
     private final String mCursusLabel;
+
     public MutableLiveData<String> moduleSigle = new MutableLiveData<>();
     public MutableLiveData<String> moduleCategorie = new MutableLiveData<>();
     public MutableLiveData<String> moduleProgramme = new MutableLiveData<>();
@@ -39,6 +41,7 @@ public class SemestreViewModel extends AndroidViewModel {
     public SemestreViewModel(@NonNull Application application, int semestreId, String cursusLabel) {
         super(application);
         mRepository = new CursusEtudiantRepository(application);
+
         this.mSemestreId = semestreId;
         this.mCursusLabel = cursusLabel;
     }
@@ -57,6 +60,14 @@ public class SemestreViewModel extends AndroidViewModel {
 
     }
 
+    public void onClickAddHistoriqueModule(Module module) {
+
+            module.setSemestreId(mSemestreId);
+            mRepository.insertModule(module);
+            _vmEvent.setValue(VMEventsEnum.success_operation);
+
+    }
+
     public void onSelectProgramme(AdapterView<?> parent, View view, int pos, long id) {
         moduleProgramme.setValue(parent.getSelectedItem().toString());
         ((TextView) parent.getChildAt(0)).setTextSize(16);
@@ -69,6 +80,12 @@ public class SemestreViewModel extends AndroidViewModel {
 
     }
 
+    public void onSwitchNpml(boolean checked ) {
+        this.mRepository.updateNpmlFieldItem(checked, mSemestreId);
+    }
+    public void onSwitchSe(boolean checked ) {
+        this.mRepository.updateSeFieldItem(checked, mSemestreId);
+    }
     public void onClickUpdateModule(Module module) {
 /*
 
@@ -85,12 +102,15 @@ public class SemestreViewModel extends AndroidViewModel {
 
     }
 
+    public LiveData<List<Module>> getDistinctModules(int mSemestreId) {
+        return mRepository.getDistinctModules(mSemestreId);
+    }
+
 
     public void onClickDelModule(Module module) {
-        if (module.getId()>-1) {
-            mRepository.deleteModuleById(module.getId());
+            mRepository.deleteModule(module);
             _vmEvent.setValue(VMEventsEnum.success_operation);
-        }
+
     }
 
     public void setSelectedModule(Module module) {
@@ -109,5 +129,13 @@ public class SemestreViewModel extends AndroidViewModel {
 
     public LiveData<Module> getselectedModule() {
         return selectedModule;
+    }
+
+    public LiveData<Boolean> getNpml() {
+        return mRepository.getNpmlFieldForSemestreId(mSemestreId);
+    }
+
+    public LiveData<Boolean> getSe() {
+        return mRepository.getSeFieldForSemestreId(mSemestreId);
     }
 }

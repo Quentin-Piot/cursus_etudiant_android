@@ -33,11 +33,11 @@
             android:layout_margin="@dimen/fab_margin"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
+            android:contentDescription="Add a student"
             android:tint="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@android:drawable/ic_input_add"
-            android:contentDescription="Add a student" />
+            app:srcCompat="@drawable/ic_baseline_add_24" />
 
         <TextView
             android:id="@+id/etudiant_message_tv"

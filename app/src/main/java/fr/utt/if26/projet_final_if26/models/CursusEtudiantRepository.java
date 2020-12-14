@@ -86,6 +86,25 @@ public class CursusEtudiantRepository {
         });
     }
 
+    public void updateNpmlFieldItem(boolean checked, int id) {
+        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
+            mSemestreDao.updateNpmlField(checked, id);
+        });
+    }
+
+    public void updateSeFieldItem(boolean checked, int id) {
+        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
+
+            mSemestreDao.updateSeField(checked, id);
+    });
+    }
+
+    public LiveData<Boolean> getNpmlFieldForSemestreId(int semestreId) {
+       return mSemestreDao.getNpml(semestreId);
+    }
+    public LiveData<Boolean> getSeFieldForSemestreId(int semestreId) {
+        return mSemestreDao.getSe(semestreId);
+    }
     public LiveData<List<Semestre>> getAllSemestreForCursusLabel(String mCursusLabel) {
         return mSemestreDao.getSemestreByCursusLabel(mCursusLabel);
     }
@@ -102,9 +121,9 @@ public class CursusEtudiantRepository {
         });
     }
 
-    public void deleteModuleById(int moduleId) {
+    public void deleteModule(Module module) {
         CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
-            mModuleDao.deleteModuleById(moduleId);
+            mModuleDao.deleteModule(module);
         });
     }
 
@@ -120,6 +139,10 @@ public class CursusEtudiantRepository {
 
     public LiveData<Integer> getCreditsForCategorie(Integer semesterId, String categorie) {
         return mModuleDao.getCreditsForCategorie(semesterId, categorie);
+    }
+
+    public LiveData<List<Module>> getDistinctModules(int semestreId) {
+        return mModuleDao.getDistinctModules(semestreId);
     }
 
 

@@ -24,6 +24,8 @@
 
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -119,5 +121,63 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/semester_modules_recycler_view" />
 
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_module_bt">
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_npml"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onCheckedChanged="@{(switch, checked) -> viewModel.onSwitchNpml(checked)}"
+                android:text="NPML : "
+                app:switchMinWidth="60dp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_se"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:onCheckedChanged="@{(switch, checked) -> viewModel.onSwitchSe(checked)}"
+                android:text="Semestre à l'étranger : "
+                android:textColorLink="#F1B3FF"
+                app:switchMinWidth="60dp" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Historique des modules"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/historiqueRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

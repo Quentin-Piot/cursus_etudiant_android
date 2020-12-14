@@ -2,6 +2,7 @@ package fr.utt.if26.projet_final_if26.views.semestre;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 
 import androidx.appcompat.app.AlertDialog;
@@ -31,6 +32,8 @@ public class AddModuleDialogFragment extends DialogFragment {
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         DialogAddModuleBinding binding = DataBindingUtil.inflate(inflater, R.layout.dialog_add_module, null, false);
         binding.setViewModel(viewModel);
+        InputFilter[] filters = new InputFilter[]{new InputFilter.AllCaps(), new InputFilter.LengthFilter(4)};
+        binding.moduleSigleEt.setFilters(filters);
         viewModel.moduleSigle.setValue("");
         viewModel.moduleCategorie.setValue("");
         viewModel.moduleCredits.setValue("");

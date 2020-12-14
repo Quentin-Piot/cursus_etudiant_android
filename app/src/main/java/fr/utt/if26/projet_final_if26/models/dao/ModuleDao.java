@@ -30,10 +30,10 @@ public interface ModuleDao {
     @Query("select * from module_table where semestre_id = :semesterId")
     LiveData<List<Module>> getModulesBySemesterId(int semesterId);
 
-    @Query("DELETE FROM module_table WHERE id = :id")
-    void deleteModuleById(int id);
 
     @Query("SELECT COUNT(*) from module_table WHERE semestre_id = :semesterId AND categorie = :categorie")
     LiveData<Integer> getCreditsForCategorie(int semesterId, String categorie);
 
+    @Query("SELECT * from module_table WHERE semestre_id != :semestreId GROUP BY sigle ")
+    LiveData<List<Module>> getDistinctModules(int semestreId);
 }
