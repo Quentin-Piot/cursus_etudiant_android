@@ -2,9 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="module"
             type="fr.utt.if26.projet_final_if26.models.entities.Module" />
+
         <variable
             name="viewModel"
             type="fr.utt.if26.projet_final_if26.viewmodels.SemestreViewModel" />
@@ -69,7 +71,7 @@
             android:layout_gravity="center"
             android:layout_marginEnd="10dp"
             android:background="@drawable/ic_baseline_close_24"
-            android:backgroundTint="#FF0000"
+            android:backgroundTint="@color/undone"
             android:onClick="@{() -> viewModel.onClickDelModule(module)}" />
 
     </LinearLayout>

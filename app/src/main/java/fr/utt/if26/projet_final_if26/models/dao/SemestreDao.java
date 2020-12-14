@@ -16,7 +16,7 @@ import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 public interface SemestreDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Semestre semestre);
+    long insert(Semestre semestre);
 
     @Delete
     public void deleteSemestre(Semestre... semestres);

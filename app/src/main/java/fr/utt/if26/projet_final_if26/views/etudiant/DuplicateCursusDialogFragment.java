@@ -8,17 +8,22 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 
+import java.util.List;
+
 import fr.utt.if26.projet_final_if26.R;
-import fr.utt.if26.projet_final_if26.databinding.DialogEditCursusBinding;
+import fr.utt.if26.projet_final_if26.databinding.DialogDuplicateCursusBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
+import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
 
-public class EditCursusDialogFragment extends DialogFragment {
+public class DuplicateCursusDialogFragment extends DialogFragment {
 
     private EtudiantViewModel viewModel;
     private Cursus selectedCursus;
 
-    public EditCursusDialogFragment(EtudiantViewModel viewModel, Cursus cursus) {
+    private List<Semestre> semestreList;
+
+    public DuplicateCursusDialogFragment(EtudiantViewModel viewModel, Cursus cursus) {
         super();
         this.viewModel = viewModel;
         this.selectedCursus = cursus;
@@ -29,11 +34,20 @@ public class EditCursusDialogFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
-        DialogEditCursusBinding binding = DataBindingUtil.inflate(inflater, R.layout.dialog_edit_cursus, null, false);
+        DialogDuplicateCursusBinding binding = DataBindingUtil.inflate(inflater, R.layout.dialog_duplicate_cursus, null, false);
         binding.setViewModel(viewModel);
+
+        viewModel.getmSemestres(selectedCursus.getLabel()).observe(this, semestres -> {
+            semestreList = semestres;
+            semestres.forEach(semestre -> {
+                viewModel.getmModulesForSemesterId(semestre.getId()).observe(this, semestre::setListeModules);
+            });
+        });
         viewModel.cursusLabel.setValue("");
         builder.setView(binding.getRoot())
-                .setPositiveButton(R.string.modifier, (dialog, id) -> viewModel.onClickUpdateCursus(this.selectedCursus))
+                .setPositiveButton(R.string.modifier, (dialog, id) -> {
+                    viewModel.onClickDuplicateCursus(viewModel.cursusLabel.getValue(), semestreList);
+                })
                 .setNegativeButton(R.string.annuler, (dialog, id) -> {
                 });
         return builder.create();

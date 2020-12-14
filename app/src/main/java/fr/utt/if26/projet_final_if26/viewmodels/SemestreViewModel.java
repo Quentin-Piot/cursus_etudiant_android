@@ -85,22 +85,6 @@ public class SemestreViewModel extends AndroidViewModel {
         this.mRepository.updateSeFieldItem(checked, mSemestreId);
     }
 
-    public void onClickUpdateModule(Module module) {
-/*
-
-        if (cursusLabel.getValue() != null && !cursusLabel.getValue().isEmpty()) {
-            selectedModule.setLabel(cursusLabel.getValue());
-            mRepository.updateCursus(selectedModule);
-            _vmEvent.setValue(VMEventsEnum.success_operation);
-        } else {
-            _vmEvent.setValue(VMEventsEnum.empty_fields);
-        }
-
- */
-
-
-    }
-
     public LiveData<List<Module>> getDistinctModules(int mSemestreId) {
         return mRepository.getDistinctModules(mSemestreId);
     }

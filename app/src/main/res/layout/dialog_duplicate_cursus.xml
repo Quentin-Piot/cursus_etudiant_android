@@ -21,7 +21,7 @@
             android:gravity="center"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:text="@string/edit_cursus"
+            android:text="@string/duplication_d_un_cursus"
             android:textAlignment="center"
             android:textSize="22sp" />
 

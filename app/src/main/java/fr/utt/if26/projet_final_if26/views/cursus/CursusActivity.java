@@ -84,6 +84,10 @@ public class CursusActivity extends AppCompatActivity {
 
     }
 
+    public void onClickDeleteSemestre(Semestre semestre) {
+
+    }
+
     public void onClickAddCursus() {
         AddSemestreDialogFragment addSemestreDialogFragment = new AddSemestreDialogFragment(viewModel);
         addSemestreDialogFragment.show(getSupportFragmentManager(), "ajout_semestre");
@@ -127,21 +131,18 @@ public class CursusActivity extends AppCompatActivity {
     }
 
     private void updateSemestres(List<Semestre> semestres) {
-        if (semestres.size() > 0) {
-            listeSemestres = semestres;
-            seDone = false;
-            npmlDone = false;
-            semestres.forEach(semestre -> {
-                if (semestre.isNpml()) npmlDone = true;
-                if (semestre.isSemestreEtranger()) seDone = true;
+        listeSemestres = semestres;
+        seDone = false;
+        npmlDone = false;
+        semestres.forEach(semestre -> {
+            if (semestre.isNpml()) npmlDone = true;
+            if (semestre.isSemestreEtranger()) seDone = true;
 
-                viewModel.getmModulesForSemesterId(semestre.getId()).observe(this, modules -> updateModules(modules, semestres.indexOf(semestre)));
+            viewModel.getmModulesForSemesterId(semestre.getId()).observe(this, modules -> updateModules(modules, semestres.indexOf(semestre)));
 
-            });
-            setBadges(seDone, npmlDone);
-            onChanged();
-
-        }
+        });
+        setBadges(seDone, npmlDone);
+        onChanged();
 
 
     }
@@ -165,7 +166,7 @@ public class CursusActivity extends AppCompatActivity {
     }
 
     private void updateModules(List<Module> modules, int pos) {
-        if (modules.size() > 0) {
+        if (modules.size() > 0 && pos < listeSemestres.size()) {
             listeSemestres.get(pos).setListeModules(modules);
             adapter.setListeSemestres(listeSemestres);
             adapter.notifyItemChanged(pos);

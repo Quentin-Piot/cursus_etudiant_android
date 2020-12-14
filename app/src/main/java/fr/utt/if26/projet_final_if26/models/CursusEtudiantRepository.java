@@ -86,6 +86,22 @@ public class CursusEtudiantRepository {
         });
     }
 
+    public void duplicateCursus(Cursus cursus, List<Semestre> semestres) {
+        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
+
+            mCursusDao.insert(cursus);
+            semestres.forEach(semestre -> {
+                Semestre newSemestre = new Semestre(semestre.getLabel(), cursus.getLabel());
+                long id = mSemestreDao.insert(newSemestre);
+                semestre.getListeModules().forEach(module -> {
+                    module.setSemestreId((int) id);
+                    mModuleDao.insert(module);
+                });
+
+            });
+        });
+    }
+
     public void updateNpmlFieldItem(boolean checked, int id) {
         CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
             mSemestreDao.updateNpmlField(checked, id);

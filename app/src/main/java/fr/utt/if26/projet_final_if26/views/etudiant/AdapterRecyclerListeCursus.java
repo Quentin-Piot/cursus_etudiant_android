@@ -38,7 +38,7 @@ public class AdapterRecyclerListeCursus extends RecyclerView.Adapter<AdapterRecy
     public void onBindViewHolder(@NonNull CursusHolder holder, int position) {
         holder.binding.setCursus(cursusList.get(position));
         holder.binding.setViewModel(viewModel);
-        holder.binding.setEtudiantActivity(etudiantActivity);
+        holder.binding.setActivity(etudiantActivity);
         holder.binding.executePendingBindings();
 
     }

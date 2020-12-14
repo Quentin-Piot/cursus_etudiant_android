@@ -86,14 +86,16 @@ public class EtudiantActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    public void onEditCursus(Cursus cursus) {
-        EditCursusDialogFragment editCursusDialogFragment = new EditCursusDialogFragment(viewModel, cursus);
-        editCursusDialogFragment.show(getSupportFragmentManager(), "edit_cursus");
-    }
-
     public void onClickAddCursus() {
         AddCursusDialogFragment addCursusDialogFragment = new AddCursusDialogFragment(viewModel);
         addCursusDialogFragment.show(getSupportFragmentManager(), "ajout_cursus");
+
+    }
+
+
+    public void onClickDuplicateCursus(Cursus selectedCursus) {
+        DuplicateCursusDialogFragment duplicateCursusDialogFragment = new DuplicateCursusDialogFragment(viewModel, selectedCursus);
+        duplicateCursusDialogFragment.show(getSupportFragmentManager(), "duplication_cursus");
 
     }
 

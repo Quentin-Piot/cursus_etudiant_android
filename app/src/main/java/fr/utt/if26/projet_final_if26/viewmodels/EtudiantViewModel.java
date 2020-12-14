@@ -11,6 +11,8 @@ import java.util.List;
 
 import fr.utt.if26.projet_final_if26.models.CursusEtudiantRepository;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
+import fr.utt.if26.projet_final_if26.models.entities.Module;
+import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 
 public class EtudiantViewModel extends AndroidViewModel {
 
@@ -43,15 +45,11 @@ public class EtudiantViewModel extends AndroidViewModel {
         }
     }
 
-    public void onClickUpdateCursus(Cursus selectedCursus) {
+    public void onClickDuplicateCursus(String newCursusLabel, List<Semestre> semestres) {
 
-
-        if (cursusLabel.getValue() != null && !cursusLabel.getValue().isEmpty()) {
-            selectedCursus.setLabel(cursusLabel.getValue());
-            mRepository.updateCursus(selectedCursus);
-            _vmEvent.setValue(VMEventsEnum.success_operation);
-        } else {
-            _vmEvent.setValue(VMEventsEnum.empty_fields);
+        if (!newCursusLabel.isEmpty() && semestres != null) {
+            Cursus newCursus = new Cursus(newCursusLabel, mEtudiantId);
+            mRepository.duplicateCursus(newCursus, semestres);
         }
 
 
@@ -67,6 +65,14 @@ public class EtudiantViewModel extends AndroidViewModel {
             mRepository.deleteCursusByLabel(cursus.getLabel());
             _vmEvent.setValue(VMEventsEnum.success_operation);
         }
+    }
+
+    public LiveData<List<Semestre>> getmSemestres(String cursusLabel) {
+        return mRepository.getAllSemestreForCursusLabel(cursusLabel);
+    }
+
+    public LiveData<List<Module>> getmModulesForSemesterId(int id) {
+        return mRepository.getAllModuleForSemesterId(id);
     }
 
     public LiveData<List<Cursus>> getmCursus() {

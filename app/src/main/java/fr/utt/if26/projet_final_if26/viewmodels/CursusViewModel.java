@@ -71,6 +71,13 @@ public class CursusViewModel extends AndroidViewModel {
     }
 
 
+    public void onClickDelSemestre(Semestre semestre) {
+        mRepository.deleteSemestre(semestre);
+        _vmEvent.setValue(VMEventsEnum.success_operation);
+
+    }
+
+
     public LiveData<List<Semestre>> getmSemestres() {
         return mRepository.getAllSemestreForCursusLabel(mCursusLabel);
     }

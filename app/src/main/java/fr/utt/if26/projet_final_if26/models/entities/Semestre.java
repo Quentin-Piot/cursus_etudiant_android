@@ -22,7 +22,7 @@ public class Semestre {
     private int id;
     private String label;
     @ColumnInfo(name = "cursus_label")
-    private final String cursusLabel;
+    private String cursusLabel;
     @ColumnInfo(name = "semestre_etranger", defaultValue = "false")
     private boolean semestreEtranger = false;
     @ColumnInfo(name = "npml", defaultValue = "false")
@@ -79,5 +79,9 @@ public class Semestre {
 
     public void setNpml(boolean npml) {
         this.npml = npml;
+    }
+
+    public void setCursusLabel(String cursusLabel) {
+        this.cursusLabel = cursusLabel;
     }
 }

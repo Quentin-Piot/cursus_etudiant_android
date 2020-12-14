@@ -41,4 +41,5 @@
     <string name="liste_des_modules">Liste des modules:</string>
     <string name="cr_dits">Crédits</string>
     <string name="message">Message</string>
+    <string name="duplication_d_un_cursus">Duplication d\'un cursus</string>
 </resources>
