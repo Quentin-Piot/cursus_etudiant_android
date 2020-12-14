@@ -96,15 +96,17 @@ public class CursusEtudiantRepository {
         CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
 
             mSemestreDao.updateSeField(checked, id);
-    });
+        });
     }
 
     public LiveData<Boolean> getNpmlFieldForSemestreId(int semestreId) {
-       return mSemestreDao.getNpml(semestreId);
+        return mSemestreDao.getNpml(semestreId);
     }
+
     public LiveData<Boolean> getSeFieldForSemestreId(int semestreId) {
         return mSemestreDao.getSe(semestreId);
     }
+
     public LiveData<List<Semestre>> getAllSemestreForCursusLabel(String mCursusLabel) {
         return mSemestreDao.getSemestreByCursusLabel(mCursusLabel);
     }

@@ -68,7 +68,6 @@ public class AccueilViewModel extends AndroidViewModel {
     }
 
 
-
     public LiveData<Etudiant> getSelectedEtudiant() {
         return selectedEtudiant;
     }

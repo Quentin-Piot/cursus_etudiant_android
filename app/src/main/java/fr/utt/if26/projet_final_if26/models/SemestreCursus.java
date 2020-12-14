@@ -14,10 +14,12 @@ public class SemestreCursus {
     public SemestreCursus(Semestre semestre) {
         this.semestre = semestre;
     }
+
     public SemestreCursus(Semestre semestre, List<Module> modules) {
         this.semestre = semestre;
         this.modules = modules;
     }
+
     public Semestre getSemestre() {
         return semestre;
     }

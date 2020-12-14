@@ -26,7 +26,7 @@ public class NombreCreditsCategorie {
         this.ht = ht;
         this.ct = ct;
         this.hp = hp;
-        this.total = cs + tm + st + ec + me + ht +ct + hp;
+        this.total = cs + tm + st + ec + me + ht + ct + hp;
 
         if (cs > maxProgress.get(0)) maxProgress.set(0, cs);
         if (tm > maxProgress.get(1)) maxProgress.set(1, tm);

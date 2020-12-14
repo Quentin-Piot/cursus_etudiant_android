@@ -4,12 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.PrimaryKey;
 
 @Entity(tableName = "module_table",
-        primaryKeys = {"sigle","semestre_id"},
+        primaryKeys = {"sigle", "semestre_id"},
         foreignKeys =
-        @ForeignKey(entity =Semestre.class,
+        @ForeignKey(entity = Semestre.class,
                 parentColumns = "id",
                 childColumns = "semestre_id",
                 onDelete = ForeignKey.CASCADE)

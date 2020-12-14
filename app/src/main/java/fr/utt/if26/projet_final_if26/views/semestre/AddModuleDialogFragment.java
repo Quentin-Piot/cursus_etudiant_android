@@ -10,10 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 
 import fr.utt.if26.projet_final_if26.R;
-import fr.utt.if26.projet_final_if26.databinding.DialogAddCursusBinding;
 import fr.utt.if26.projet_final_if26.databinding.DialogAddModuleBinding;
-import fr.utt.if26.projet_final_if26.models.entities.Semestre;
-import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
 import fr.utt.if26.projet_final_if26.viewmodels.SemestreViewModel;
 
 public class AddModuleDialogFragment extends DialogFragment {

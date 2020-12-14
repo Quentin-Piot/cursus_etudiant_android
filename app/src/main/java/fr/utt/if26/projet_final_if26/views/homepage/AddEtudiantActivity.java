@@ -47,12 +47,12 @@ public class AddEtudiantActivity extends AppCompatActivity {
     public void onRecieveVMEvent(VMEventsEnum event) {
         switch (event) {
             case close_add_etudiant:
-                Toast.makeText(getApplicationContext(),"Le cursus a été bien ajouté", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Le cursus a été bien ajouté", Toast.LENGTH_SHORT).show();
                 finish();
-                overridePendingTransition(R.transition.slide_up_in,R.transition.slide_up_out);
+                overridePendingTransition(R.transition.slide_up_in, R.transition.slide_up_out);
                 break;
             case empty_fields:
-                Toast.makeText(getApplicationContext(),"Veuillez compléter l'ensemble des champs", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Veuillez compléter l'ensemble des champs", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

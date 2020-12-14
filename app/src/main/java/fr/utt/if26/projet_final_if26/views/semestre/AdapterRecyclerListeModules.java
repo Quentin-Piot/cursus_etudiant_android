@@ -15,7 +15,7 @@ import fr.utt.if26.projet_final_if26.databinding.ItemModuleBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.viewmodels.SemestreViewModel;
 
-public class AdapterRecyclerListeModules extends RecyclerView.Adapter<AdapterRecyclerListeModules.ModuleHolder  > {
+public class AdapterRecyclerListeModules extends RecyclerView.Adapter<AdapterRecyclerListeModules.ModuleHolder> {
 
     private List<Module> modules;
     private final SemestreViewModel viewModel;

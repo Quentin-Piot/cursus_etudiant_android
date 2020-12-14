@@ -132,13 +132,13 @@ public class CursusActivity extends AppCompatActivity {
             seDone = false;
             npmlDone = false;
             semestres.forEach(semestre -> {
-                if(semestre.isNpml()) npmlDone = true;
-                if(semestre.isSemestreEtranger()) seDone = true;
+                if (semestre.isNpml()) npmlDone = true;
+                if (semestre.isSemestreEtranger()) seDone = true;
 
                 viewModel.getmModulesForSemesterId(semestre.getId()).observe(this, modules -> updateModules(modules, semestres.indexOf(semestre)));
 
             });
-            setBadges(seDone,npmlDone);
+            setBadges(seDone, npmlDone);
             onChanged();
 
         }
@@ -147,7 +147,7 @@ public class CursusActivity extends AppCompatActivity {
     }
 
     private void setBadges(boolean se, boolean npml) {
-        if(se) {
+        if (se) {
             binding.badgeSe.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.done));
             binding.badgeSe.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_done));
         } else {
@@ -155,7 +155,7 @@ public class CursusActivity extends AppCompatActivity {
             binding.badgeSe.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_undone));
         }
 
-        if(npml) {
+        if (npml) {
             binding.badgeNpml.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.done));
             binding.badgeNpml.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_done));
         } else {
@@ -163,6 +163,7 @@ public class CursusActivity extends AppCompatActivity {
             binding.badgeNpml.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_undone));
         }
     }
+
     private void updateModules(List<Module> modules, int pos) {
         if (modules.size() > 0) {
             listeSemestres.get(pos).setListeModules(modules);

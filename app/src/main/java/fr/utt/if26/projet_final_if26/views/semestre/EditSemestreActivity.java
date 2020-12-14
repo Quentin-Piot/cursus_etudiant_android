@@ -36,6 +36,7 @@ public class EditSemestreActivity extends AppCompatActivity {
 
     private AdapterRecyclerListeHistoriqueModules historiqueAdapter;
     private AdapterRecyclerListeModules adapterModules;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +76,6 @@ public class EditSemestreActivity extends AppCompatActivity {
     }
 
 
-
-
     public void onEditCursus(Cursus cursus) {
 
     }
@@ -100,8 +99,8 @@ public class EditSemestreActivity extends AppCompatActivity {
     }
 
     private void onChanged(List<Module> modules) {
-        if(modules.size() > 0)
-        binding.cursusModulesNumberTv.setText(Integer.toString(modules.size()));
+        if (modules.size() > 0)
+            binding.cursusModulesNumberTv.setText(Integer.toString(modules.size()));
         modulesInSemestre = modules;
 
         adapterModules.setModules(modules);
@@ -117,12 +116,11 @@ public class EditSemestreActivity extends AppCompatActivity {
     private void onHistoriqueChanged(List<Module> modules) {
 
 
-
         historiqueAdapter.setModules(suppressDuplicateModules(modules, modulesInSemestre));
         historiqueAdapter.notifyDataSetChanged();
     }
 
-    private List<Module> suppressDuplicateModules(List<Module> list1, List<Module> list2){
+    private List<Module> suppressDuplicateModules(List<Module> list1, List<Module> list2) {
 
         return list1.stream()
                 .filter(s -> list2.stream().noneMatch(f -> f.getSigle().equals(s.getSigle())))

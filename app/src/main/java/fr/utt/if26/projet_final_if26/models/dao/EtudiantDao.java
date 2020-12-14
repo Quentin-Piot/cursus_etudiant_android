@@ -34,5 +34,4 @@ public interface EtudiantDao {
     void deleteEtudiantById(int id);
 
 
-
 }

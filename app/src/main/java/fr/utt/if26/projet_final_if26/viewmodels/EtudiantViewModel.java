@@ -11,7 +11,6 @@ import java.util.List;
 
 import fr.utt.if26.projet_final_if26.models.CursusEtudiantRepository;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
-import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
 
 public class EtudiantViewModel extends AndroidViewModel {
 

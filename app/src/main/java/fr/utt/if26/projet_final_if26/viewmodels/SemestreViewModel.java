@@ -13,9 +13,7 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 
 import fr.utt.if26.projet_final_if26.models.CursusEtudiantRepository;
-import fr.utt.if26.projet_final_if26.models.entities.Cursus;
 import fr.utt.if26.projet_final_if26.models.entities.Module;
-import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 
 public class SemestreViewModel extends AndroidViewModel {
 
@@ -31,7 +29,6 @@ public class SemestreViewModel extends AndroidViewModel {
 
     private final MutableLiveData<Module> _selectedModule = new MutableLiveData<>();
     private final LiveData<Module> selectedModule = _selectedModule;
-
 
 
     private final MutableLiveData<VMEventsEnum> _vmEvent = new MutableLiveData<>();
@@ -62,9 +59,9 @@ public class SemestreViewModel extends AndroidViewModel {
 
     public void onClickAddHistoriqueModule(Module module) {
 
-            module.setSemestreId(mSemestreId);
-            mRepository.insertModule(module);
-            _vmEvent.setValue(VMEventsEnum.success_operation);
+        module.setSemestreId(mSemestreId);
+        mRepository.insertModule(module);
+        _vmEvent.setValue(VMEventsEnum.success_operation);
 
     }
 
@@ -80,12 +77,14 @@ public class SemestreViewModel extends AndroidViewModel {
 
     }
 
-    public void onSwitchNpml(boolean checked ) {
+    public void onSwitchNpml(boolean checked) {
         this.mRepository.updateNpmlFieldItem(checked, mSemestreId);
     }
-    public void onSwitchSe(boolean checked ) {
+
+    public void onSwitchSe(boolean checked) {
         this.mRepository.updateSeFieldItem(checked, mSemestreId);
     }
+
     public void onClickUpdateModule(Module module) {
 /*
 
@@ -108,8 +107,8 @@ public class SemestreViewModel extends AndroidViewModel {
 
 
     public void onClickDelModule(Module module) {
-            mRepository.deleteModule(module);
-            _vmEvent.setValue(VMEventsEnum.success_operation);
+        mRepository.deleteModule(module);
+        _vmEvent.setValue(VMEventsEnum.success_operation);
 
     }
 

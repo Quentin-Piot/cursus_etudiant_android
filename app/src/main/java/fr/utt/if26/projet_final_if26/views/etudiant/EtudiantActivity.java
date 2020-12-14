@@ -17,8 +17,8 @@ import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ActivityEtudiantBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Cursus;
 import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
-import fr.utt.if26.projet_final_if26.viewmodels.factories.EtudiantViewModelFactory;
 import fr.utt.if26.projet_final_if26.viewmodels.VMEventsEnum;
+import fr.utt.if26.projet_final_if26.viewmodels.factories.EtudiantViewModelFactory;
 import fr.utt.if26.projet_final_if26.views.cursus.CursusActivity;
 
 public class EtudiantActivity extends AppCompatActivity {
@@ -46,7 +46,6 @@ public class EtudiantActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle("Page de l\'étudiant");
 
         initBinding();
-
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

@@ -22,8 +22,11 @@ import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 public abstract class CursusEtudiantDatabase extends RoomDatabase {
 
     public abstract EtudiantDao etudiantDao();
+
     public abstract CursusDao cursusDao();
+
     public abstract SemestreDao semestreDao();
+
     public abstract ModuleDao moduleDao();
 
     private static volatile CursusEtudiantDatabase INSTANCE;
