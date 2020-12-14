@@ -44,7 +44,6 @@ public class CursusViewModel extends AndroidViewModel {
 
         if (semestreLabel.getValue() != null && !semestreLabel.getValue().isEmpty()) {
             mRepository.insertSemestre(new Semestre(semestreLabel.getValue(), mCursusLabel));
-            _vmEvent.setValue(VMEventsEnum.success_operation);
         } else {
             _vmEvent.setValue(VMEventsEnum.empty_fields);
         }
@@ -73,7 +72,6 @@ public class CursusViewModel extends AndroidViewModel {
 
     public void onClickDelSemestre(Semestre semestre) {
         mRepository.deleteSemestre(semestre);
-        _vmEvent.setValue(VMEventsEnum.success_operation);
 
     }
 

@@ -16,7 +16,7 @@ import fr.utt.if26.projet_final_if26.models.entities.Cursus;
 public interface CursusDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Cursus cursus);
+    long insert(Cursus cursus);
 
     @Delete
     public void deleteCursus(Cursus... cursus);

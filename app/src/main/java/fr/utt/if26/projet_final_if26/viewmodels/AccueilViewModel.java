@@ -43,16 +43,12 @@ public class AccueilViewModel extends AndroidViewModel {
 
         if (name.getValue() != null && firstName.getValue() != null && programme.getValue() != null && !name.getValue().isEmpty() && !firstName.getValue().isEmpty()) {
             mRepository.insertEtudiant(new Etudiant(name.getValue(), firstName.getValue(), programme.getValue()));
-            _vmEvent.setValue(VMEventsEnum.close_add_etudiant);
-        } else {
-            _vmEvent.setValue(VMEventsEnum.empty_fields);
         }
     }
 
     public void onClickDelEtudiant(Etudiant etudiant) {
         if (etudiant.getId() > -1) {
             mRepository.deleteEtudiantById(etudiant.getId());
-            _vmEvent.setValue(VMEventsEnum.success_operation);
         }
     }
 

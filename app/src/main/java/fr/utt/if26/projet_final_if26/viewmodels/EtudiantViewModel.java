@@ -39,7 +39,6 @@ public class EtudiantViewModel extends AndroidViewModel {
 
         if (cursusLabel.getValue() != null && !cursusLabel.getValue().isEmpty() && mEtudiantId > -1) {
             mRepository.insertCursus(new Cursus(cursusLabel.getValue(), mEtudiantId));
-            _vmEvent.setValue(VMEventsEnum.success_operation);
         } else {
             _vmEvent.setValue(VMEventsEnum.empty_fields);
         }
@@ -63,7 +62,6 @@ public class EtudiantViewModel extends AndroidViewModel {
     public void onClickDelCursus(Cursus cursus) {
         if (!cursus.getLabel().isEmpty()) {
             mRepository.deleteCursusByLabel(cursus.getLabel());
-            _vmEvent.setValue(VMEventsEnum.success_operation);
         }
     }
 

@@ -49,7 +49,6 @@ public class SemestreViewModel extends AndroidViewModel {
                 && !moduleCredits.getValue().isEmpty()
                 && mSemestreId > -1) {
             mRepository.insertModule(new Module(moduleSigle.getValue(), moduleProgramme.getValue(), moduleCategorie.getValue(), Integer.parseInt(moduleCredits.getValue()), mSemestreId));
-            _vmEvent.setValue(VMEventsEnum.success_operation);
         } else {
             _vmEvent.setValue(VMEventsEnum.empty_fields);
         }
@@ -61,7 +60,6 @@ public class SemestreViewModel extends AndroidViewModel {
 
         module.setSemestreId(mSemestreId);
         mRepository.insertModule(module);
-        _vmEvent.setValue(VMEventsEnum.success_operation);
 
     }
 
@@ -92,7 +90,6 @@ public class SemestreViewModel extends AndroidViewModel {
 
     public void onClickDelModule(Module module) {
         mRepository.deleteModule(module);
-        _vmEvent.setValue(VMEventsEnum.success_operation);
 
     }
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,6 +56,13 @@ public class EditSemestreActivity extends AppCompatActivity {
         viewModel.getSe().observe(this, result -> binding.switchSe.setChecked(result));
 
         viewModel.getDistinctModules(mSemestreId).observe(this, this::onHistoriqueChanged);
+
+
+        MediatorLiveData liveDataMerger = new MediatorLiveData<>();
+        liveDataMerger.addSource(viewModel.getmModules(), value -> liveDataMerger.setValue(value));
+        liveDataMerger.addSource(viewModel.getDistinctModules(mSemestreId), value -> liveDataMerger.setValue(value));
+
+
         Objects.requireNonNull(getSupportActionBar()).setTitle("Page du cursus");
 
 
@@ -99,17 +107,14 @@ public class EditSemestreActivity extends AppCompatActivity {
     }
 
     private void onChanged(List<Module> modules) {
+
         if (modules.size() > 0)
             binding.cursusModulesNumberTv.setText(Integer.toString(modules.size()));
         modulesInSemestre = modules;
 
         adapterModules.setModules(modules);
         adapterModules.notifyDataSetChanged();
-
-
-        historiqueAdapter.setModules(suppressDuplicateModules(historiqueAdapter.getModules(), modulesInSemestre));
-
-
+        onHistoriqueChanged(historiqueAdapter.getModules());
     }
 
 
@@ -118,6 +123,7 @@ public class EditSemestreActivity extends AppCompatActivity {
 
         historiqueAdapter.setModules(suppressDuplicateModules(modules, modulesInSemestre));
         historiqueAdapter.notifyDataSetChanged();
+
     }
 
     private List<Module> suppressDuplicateModules(List<Module> list1, List<Module> list2) {

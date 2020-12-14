@@ -169,7 +169,7 @@ public class CursusActivity extends AppCompatActivity {
         if (modules.size() > 0 && pos < listeSemestres.size()) {
             listeSemestres.get(pos).setListeModules(modules);
             adapter.setListeSemestres(listeSemestres);
-            adapter.notifyItemChanged(pos);
+            adapter.notifyDataSetChanged();
             viewModel.onUpdateModulesCredits(listeSemestres);
         }
 
