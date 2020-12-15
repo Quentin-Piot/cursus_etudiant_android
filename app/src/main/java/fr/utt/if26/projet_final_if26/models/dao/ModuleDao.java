@@ -19,10 +19,10 @@ public interface ModuleDao {
     void insert(Module module);
 
     @Delete
-    public void deleteModule(Module... modules);
+    void deleteModule(Module... modules);
 
     @Update
-    public void updateModule(Module... modules);
+    void updateModule(Module... modules);
 
     @Query("select * from module_table")
     LiveData<List<Module>> getAllModules();

@@ -42,21 +42,22 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel.getVmEvent().observe(this, this::onRecieveVMEvent);
 
-        binding.fab.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), AddEtudiantActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.transition.slide_down_in, R.transition.slide_down_out);
-
-        });
     }
 
     private void initBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         viewModel = new ViewModelProvider(this).get(AccueilViewModel.class);
         binding.setViewModel(viewModel);
+        binding.setActivity(this);
         recyclerView = binding.etudiantRecyclerView;
         adapter = new AdapterRecyclerListeEtudiants(new ArrayList<>(), viewModel);
         recyclerView.setAdapter(adapter);
+    }
+
+    public void onClickAddEtudiant() {
+        Intent intent = new Intent(getApplicationContext(), AddEtudiantActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.transition.slide_down_in, R.transition.slide_down_out);
     }
 
     public void onListUpdate(List<Etudiant> etudiants) {

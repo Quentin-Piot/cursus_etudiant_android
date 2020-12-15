@@ -21,7 +21,6 @@ import fr.utt.if26.projet_final_if26.models.NombreCreditsCategorie;
 import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
-import fr.utt.if26.projet_final_if26.viewmodels.VMEventsEnum;
 import fr.utt.if26.projet_final_if26.viewmodels.factories.CursusViewModelFactory;
 import fr.utt.if26.projet_final_if26.views.semestre.EditSemestreActivity;
 
@@ -49,7 +48,7 @@ public class CursusActivity extends AppCompatActivity {
         mCursusLabel = getIntent().getStringExtra("cursus_label");
         initBinding();
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        viewModel.getmSemestres().observe(this, this::updateSemestres);
+        viewModel.getmSemestres().observe(this, this::onListUpdate);
         viewModel.getNombreCreditsCategorie().observe(this, this::updateProgressCredits);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Page du cursus");
 
@@ -88,21 +87,11 @@ public class CursusActivity extends AppCompatActivity {
 
     }
 
-    public void onClickAddCursus() {
-        AddSemestreDialogFragment addSemestreDialogFragment = new AddSemestreDialogFragment(viewModel);
-        addSemestreDialogFragment.show(getSupportFragmentManager(), "ajout_semestre");
-
-    }
-
-    public void onSelectCursus(int etudiantId) {
-
-    }
-
-    public void onRecieveVMEvent(VMEventsEnum event) {
-    }
-
-    public void onSemesterClick() {
-
+    public void onClickAddSemestre() {
+        Intent intent = new Intent(getApplicationContext(), AddSemestreActivity.class);
+        intent.putExtra("cursus_label", mCursusLabel);
+        startActivity(intent);
+        overridePendingTransition(R.transition.slide_down_in, R.transition.slide_down_out);
     }
 
     private void updateProgressCredits(NombreCreditsCategorie mcc) {
@@ -130,7 +119,7 @@ public class CursusActivity extends AppCompatActivity {
 
     }
 
-    private void updateSemestres(List<Semestre> semestres) {
+    private void onListUpdate(List<Semestre> semestres) {
         listeSemestres = semestres;
         seDone = false;
         npmlDone = false;

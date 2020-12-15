@@ -42,13 +42,14 @@ public class AccueilViewModel extends AndroidViewModel {
     public void onClickAddEtudiant() {
 
         if (name.getValue() != null && firstName.getValue() != null && programme.getValue() != null && !name.getValue().isEmpty() && !firstName.getValue().isEmpty()) {
+            _vmEvent.setValue(VMEventsEnum.success_add);
             mRepository.insertEtudiant(new Etudiant(name.getValue(), firstName.getValue(), programme.getValue()));
         }
     }
 
     public void onClickDelEtudiant(Etudiant etudiant) {
         if (etudiant.getId() > -1) {
-            mRepository.deleteEtudiantById(etudiant.getId());
+            mRepository.deleteEtudiant(etudiant);
         }
     }
 

@@ -12,6 +12,7 @@
         <activity android:name=".views.cursus.CursusActivity" />
         <activity android:name=".views.etudiant.EtudiantActivity" />
         <activity android:name=".views.homepage.AddEtudiantActivity" />
+        <activity android:name=".views.cursus.AddSemestreActivity" />
         <activity android:name=".views.semestre.EditSemestreActivity" />
         <activity android:name=".views.homepage.MainActivity">
             <intent-filter>

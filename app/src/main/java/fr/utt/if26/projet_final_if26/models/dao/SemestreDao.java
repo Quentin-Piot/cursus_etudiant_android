@@ -19,10 +19,10 @@ public interface SemestreDao {
     long insert(Semestre semestre);
 
     @Delete
-    public void deleteSemestre(Semestre... semestres);
+    void deleteSemestre(Semestre... semestres);
 
     @Update
-    public void updateSemestre(Semestre... semestres);
+    void updateSemestre(Semestre... semestres);
 
     @Query("select * from semestre_table")
     LiveData<List<Semestre>> getAllSemestres();
@@ -44,4 +44,7 @@ public interface SemestreDao {
 
     @Query("select semestre_etranger from semestre_table where id = :semestreId")
     LiveData<Boolean> getSe(int semestreId);
+
+    @Query("SELECT * from semestre_table GROUP BY label ")
+    LiveData<List<Semestre>> getDistinctSemestres();
 }

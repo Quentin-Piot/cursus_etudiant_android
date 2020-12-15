@@ -20,8 +20,8 @@
         android:id="@+id/item_semestre_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
-        android:background="@color/darker_bg"
+        android:layout_marginBottom="4dp"
+        android:background="@color/dark_bg"
         android:orientation="vertical">
 
         <LinearLayout

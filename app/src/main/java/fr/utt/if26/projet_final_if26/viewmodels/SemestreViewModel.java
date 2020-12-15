@@ -19,7 +19,6 @@ public class SemestreViewModel extends AndroidViewModel {
 
     private final CursusEtudiantRepository mRepository;
     private final int mSemestreId;
-    private final String mCursusLabel;
 
     public MutableLiveData<String> moduleSigle = new MutableLiveData<>();
     public MutableLiveData<String> moduleCategorie = new MutableLiveData<>();
@@ -40,7 +39,6 @@ public class SemestreViewModel extends AndroidViewModel {
         mRepository = new CursusEtudiantRepository(application);
 
         this.mSemestreId = semestreId;
-        this.mCursusLabel = cursusLabel;
     }
 
     public void onClickAddModule() {
@@ -101,14 +99,6 @@ public class SemestreViewModel extends AndroidViewModel {
 
     public LiveData<List<Module>> getmModules() {
         return mRepository.getAllModuleForSemesterId(mSemestreId);
-    }
-
-    public LiveData<VMEventsEnum> getVmEvent() {
-        return vmEvent;
-    }
-
-    public LiveData<Module> getselectedModule() {
-        return selectedModule;
     }
 
     public LiveData<Boolean> getNpml() {

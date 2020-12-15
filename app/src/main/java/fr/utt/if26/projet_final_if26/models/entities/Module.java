@@ -33,6 +33,7 @@ public class Module {
 
     }
 
+    @NonNull
     public String getSigle() {
         return sigle;
     }

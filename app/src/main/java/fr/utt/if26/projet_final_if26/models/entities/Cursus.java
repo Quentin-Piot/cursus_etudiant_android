@@ -20,13 +20,13 @@ public class Cursus {
     @ColumnInfo(name = "etudiant_id")
     private int etudiantId;
 
-    public Cursus(@NonNull String label, @NonNull int etudiantId) {
+    public Cursus(@NonNull String label, int etudiantId) {
         this.label = label;
         this.etudiantId = etudiantId;
     }
 
 
-    public void setLabel(String label) {
+    public void setLabel(@NonNull String label) {
         this.label = label;
     }
 
@@ -35,6 +35,7 @@ public class Cursus {
     }
 
 
+    @NonNull
     public String getLabel() {
         return label;
     }

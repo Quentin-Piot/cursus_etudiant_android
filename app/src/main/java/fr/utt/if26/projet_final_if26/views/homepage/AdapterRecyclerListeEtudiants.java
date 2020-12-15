@@ -40,10 +40,6 @@ public class AdapterRecyclerListeEtudiants extends RecyclerView.Adapter<AdapterR
 
     }
 
-    public List<Etudiant> getEtudiantList() {
-        return etudiantList;
-    }
-
     public void setEtudiantList(List<Etudiant> etudiantList) {
         this.etudiantList = etudiantList;
     }

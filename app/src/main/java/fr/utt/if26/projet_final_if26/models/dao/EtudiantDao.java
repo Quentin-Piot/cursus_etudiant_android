@@ -19,10 +19,10 @@ public interface EtudiantDao {
     void insert(Etudiant etudiant);
 
     @Delete
-    public void deleteEtudiant(Etudiant... etudiants);
+    void deleteEtudiant(Etudiant... etudiants);
 
     @Update
-    public void updateEtudiant(Etudiant... etudiants);
+    void updateEtudiant(Etudiant... etudiants);
 
     @Query("select * from etudiant_table")
     LiveData<List<Etudiant>> getAllEtudiants();

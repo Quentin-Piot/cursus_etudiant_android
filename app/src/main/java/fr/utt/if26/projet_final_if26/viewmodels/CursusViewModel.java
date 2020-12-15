@@ -44,17 +44,16 @@ public class CursusViewModel extends AndroidViewModel {
 
         if (semestreLabel.getValue() != null && !semestreLabel.getValue().isEmpty()) {
             mRepository.insertSemestre(new Semestre(semestreLabel.getValue(), mCursusLabel));
+            _vmEvent.setValue(VMEventsEnum.success_add);
+
         } else {
             _vmEvent.setValue(VMEventsEnum.empty_fields);
         }
     }
 
-    public void onClickEditSemestre(Semestre selectedSemestre) {
-    }
+    public LiveData<List<Semestre>> getDistinctSemestres() {
+        return mRepository.getDistinctSemestres();
 
-    public void setSelectedSemestre(Semestre semestre) {
-
-        this._selectedSemestre.setValue(semestre);
     }
 
     public void onUpdateModulesCredits(List<Semestre> semestres) {
@@ -87,16 +86,6 @@ public class CursusViewModel extends AndroidViewModel {
     public LiveData<VMEventsEnum> getVmEvent() {
         return vmEvent;
     }
-
-    public LiveData<Semestre> getSelectedSemestre() {
-        return selectedSemestre;
-    }
-
-    public LiveData<Integer> getCreditsForCategorie(Integer semestreId, String categorie) {
-
-        return mRepository.getCreditsForCategorie(semestreId, categorie);
-    }
-
 
     public LiveData<NombreCreditsCategorie> getNombreCreditsCategorie() {
         return moduleCatCredit;

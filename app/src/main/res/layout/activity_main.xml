@@ -8,6 +8,10 @@
         <variable
             name="viewModel"
             type="fr.utt.if26.projet_final_if26.viewmodels.AccueilViewModel" />
+
+        <variable
+            name="activity"
+            type="fr.utt.if26.projet_final_if26.views.homepage.MainActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +38,8 @@
             android:layout_margin="@dimen/fab_margin"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
-            android:contentDescription="Add a student"
+            android:contentDescription="@string/add_a_student"
+            android:onClick="@{()-> activity.onClickAddEtudiant()}"
             android:tint="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

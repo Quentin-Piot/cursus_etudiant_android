@@ -64,18 +64,15 @@ public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterR
         AdapterRecyclerNestedModules adapterRecyclerListeModules = new AdapterRecyclerNestedModules(listeSemestres.get(position).getListeModules());
         holder.moduleRecyclerView.setAdapter(adapterRecyclerListeModules);
         holder.moduleRecyclerView.setRecycledViewPool(viewPool);
-        holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int visibility = holder.binding.layoutCollapsed.getVisibility();
-                if (visibility == View.GONE) {
-                    holder.binding.layoutCollapsed.setVisibility(View.VISIBLE);
-                    holder.binding.recyclerViewModules.scheduleLayoutAnimation();
-                } else {
-                    holder.binding.layoutCollapsed.setVisibility(View.GONE);
-                }
-
+        holder.binding.getRoot().setOnClickListener(v -> {
+            int visibility = holder.binding.layoutCollapsed.getVisibility();
+            if (visibility == View.GONE) {
+                holder.binding.layoutCollapsed.setVisibility(View.VISIBLE);
+                holder.binding.recyclerViewModules.scheduleLayoutAnimation();
+            } else {
+                holder.binding.layoutCollapsed.setVisibility(View.GONE);
             }
+
         });
 
 

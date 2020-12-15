@@ -24,7 +24,6 @@
 
     <string name="title_activity_main">MainActivity</string>
     <string name="nom_du_cursus">Nom du cursus</string>
-    <string name="add_a_student">Add a student</string>
     <string name="nouveau_nom">Nouveau nom</string>
     <string name="aucun_cursus">Aucun cursus</string>
     <string name="aucun_etudiant">Aucun étudiant</string>
@@ -42,4 +41,7 @@
     <string name="cr_dits">Crédits</string>
     <string name="message">Message</string>
     <string name="duplication_d_un_cursus">Duplication d\'un cursus</string>
+    <string name="historique_des_semestres">Historique des semestres</string>
+    <string name="ajouter_un_nouveau_semestre">Ajouter un nouveau semestre</string>
+    <string name="add_a_student">Add a student</string>
 </resources>

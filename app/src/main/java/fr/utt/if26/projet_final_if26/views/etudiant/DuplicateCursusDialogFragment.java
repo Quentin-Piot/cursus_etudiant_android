@@ -4,11 +4,13 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 
 import java.util.List;
+import java.util.Objects;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.DialogDuplicateCursusBinding;
@@ -19,7 +21,7 @@ import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
 public class DuplicateCursusDialogFragment extends DialogFragment {
 
     private EtudiantViewModel viewModel;
-    private Cursus selectedCursus;
+    private final Cursus selectedCursus;
 
     private List<Semestre> semestreList;
 
@@ -29,6 +31,7 @@ public class DuplicateCursusDialogFragment extends DialogFragment {
         this.selectedCursus = cursus;
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -46,7 +49,7 @@ public class DuplicateCursusDialogFragment extends DialogFragment {
         viewModel.cursusLabel.setValue("");
         builder.setView(binding.getRoot())
                 .setPositiveButton(R.string.modifier, (dialog, id) -> {
-                    viewModel.onClickDuplicateCursus(viewModel.cursusLabel.getValue(), semestreList);
+                    viewModel.onClickDuplicateCursus(Objects.requireNonNull(viewModel.cursusLabel.getValue()), semestreList);
                 })
                 .setNegativeButton(R.string.annuler, (dialog, id) -> {
                 });

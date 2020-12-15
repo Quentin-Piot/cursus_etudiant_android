@@ -24,7 +24,6 @@ public class AddEtudiantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Ajout d'un étudiant");
         initBinding();
-
         viewModel.getVmEvent().observe(this, this::onRecieveVMEvent);
 
     }
@@ -46,7 +45,7 @@ public class AddEtudiantActivity extends AppCompatActivity {
 
     public void onRecieveVMEvent(VMEventsEnum event) {
         switch (event) {
-            case close_add_etudiant:
+            case success_add:
                 Toast.makeText(getApplicationContext(), "Le cursus a été bien ajouté", Toast.LENGTH_SHORT).show();
                 finish();
                 overridePendingTransition(R.transition.slide_up_in, R.transition.slide_up_out);

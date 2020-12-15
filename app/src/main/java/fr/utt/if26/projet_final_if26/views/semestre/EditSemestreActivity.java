@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,10 +15,8 @@ import java.util.stream.Collectors;
 
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ActivityEditSemestreBinding;
-import fr.utt.if26.projet_final_if26.models.entities.Cursus;
 import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.viewmodels.SemestreViewModel;
-import fr.utt.if26.projet_final_if26.viewmodels.VMEventsEnum;
 import fr.utt.if26.projet_final_if26.viewmodels.factories.SemestreViewModelFactory;
 
 public class EditSemestreActivity extends AppCompatActivity {
@@ -51,16 +48,11 @@ public class EditSemestreActivity extends AppCompatActivity {
         modulesRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         historiqueModulesRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        viewModel.getmModules().observe(this, this::onChanged);
+        viewModel.getmModules().observe(this, this::onListUpdate);
         viewModel.getNpml().observe(this, result -> binding.switchNpml.setChecked(result));
         viewModel.getSe().observe(this, result -> binding.switchSe.setChecked(result));
 
         viewModel.getDistinctModules(mSemestreId).observe(this, this::onHistoriqueChanged);
-
-
-        MediatorLiveData liveDataMerger = new MediatorLiveData<>();
-        liveDataMerger.addSource(viewModel.getmModules(), value -> liveDataMerger.setValue(value));
-        liveDataMerger.addSource(viewModel.getDistinctModules(mSemestreId), value -> liveDataMerger.setValue(value));
 
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("Page du cursus");
@@ -83,11 +75,6 @@ public class EditSemestreActivity extends AppCompatActivity {
         modulesRecyclerView.setAdapter(adapterModules);
     }
 
-
-    public void onEditCursus(Cursus cursus) {
-
-    }
-
     public void onClickAddCursus() {
 
         AddModuleDialogFragment addModuleDialogFragment = new AddModuleDialogFragment(viewModel);
@@ -95,18 +82,7 @@ public class EditSemestreActivity extends AppCompatActivity {
 
     }
 
-    public void onSelectCursus(int etudiantId) {
-
-    }
-
-    public void onRecieveVMEvent(VMEventsEnum event) {
-    }
-
-    public void onSemesterClick() {
-
-    }
-
-    private void onChanged(List<Module> modules) {
+    private void onListUpdate(List<Module> modules) {
 
         if (modules.size() > 0)
             binding.cursusModulesNumberTv.setText(Integer.toString(modules.size()));

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import fr.utt.if26.projet_final_if26.R;
-import fr.utt.if26.projet_final_if26.databinding.ItemHistoriqueModuleBinding;
+import fr.utt.if26.projet_final_if26.databinding.ItemModuleHistoriqueBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.viewmodels.SemestreViewModel;
 
@@ -28,7 +28,7 @@ public class AdapterRecyclerListeHistoriqueModules extends RecyclerView.Adapter<
     @NonNull
     @Override
     public ModuleHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemHistoriqueModuleBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_historique_module, parent, false);
+        ItemModuleHistoriqueBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_module_historique, parent, false);
         return new ModuleHolder(binding);
     }
 
@@ -57,9 +57,9 @@ public class AdapterRecyclerListeHistoriqueModules extends RecyclerView.Adapter<
 
     static class ModuleHolder extends RecyclerView.ViewHolder {
 
-        private final ItemHistoriqueModuleBinding binding;
+        private final ItemModuleHistoriqueBinding binding;
 
-        public ModuleHolder(ItemHistoriqueModuleBinding binding) {
+        public ModuleHolder(ItemModuleHistoriqueBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 

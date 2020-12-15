@@ -42,14 +42,10 @@ public class CursusEtudiantRepository {
         });
     }
 
-    public void deleteEtudiantById(int id) {
+    public void deleteEtudiant(Etudiant etudiant) {
         CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
-            mEtudiantDao.deleteEtudiantById(id);
+            mEtudiantDao.deleteEtudiant(etudiant);
         });
-    }
-
-    public LiveData<List<Cursus>> getAllCursus() {
-        return mCursusDao.getAllCursus();
     }
 
     public void insertCursus(Cursus cursus) {
@@ -58,9 +54,9 @@ public class CursusEtudiantRepository {
         });
     }
 
-    public void deleteCursusByLabel(String label) {
+    public void deleteCursus(Cursus cursus) {
         CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
-            mCursusDao.deleteCursusByLabel(label);
+            mCursusDao.deleteCursus(cursus);
         });
     }
 
@@ -165,6 +161,10 @@ public class CursusEtudiantRepository {
 
     public LiveData<List<Module>> getDistinctModules(int semestreId) {
         return mModuleDao.getDistinctModules(semestreId);
+    }
+
+    public LiveData<List<Semestre>> getDistinctSemestres() {
+        return mSemestreDao.getDistinctSemestres();
     }
 
 
