@@ -95,6 +95,7 @@ public class CursusActivity extends AppCompatActivity {
     }
 
     private void updateProgressCredits(NombreCreditsCategorie mcc) {
+
         binding.arcProgressCs.setMax(mcc.getMaxProgress().get(0));
 
         binding.arcProgressCs.setProgress(mcc.getCs());
@@ -160,6 +161,8 @@ public class CursusActivity extends AppCompatActivity {
             adapter.setListeSemestres(listeSemestres);
             adapter.notifyDataSetChanged();
             viewModel.onUpdateModulesCredits(listeSemestres);
+        } else {
+            viewModel.onUpdateModulesCredits(new ArrayList<>());
         }
 
     }

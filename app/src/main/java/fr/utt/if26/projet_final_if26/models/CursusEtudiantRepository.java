@@ -70,18 +70,6 @@ public class CursusEtudiantRepository {
         });
     }
 
-    public void insertSemestre(Semestre semestre) {
-        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
-            mSemestreDao.insert(semestre);
-        });
-    }
-
-    public void deleteSemestre(Semestre semestre) {
-        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
-            mSemestreDao.deleteSemestre(semestre);
-        });
-    }
-
     public void duplicateCursus(Cursus cursus, List<Semestre> semestres) {
         CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
 
@@ -101,6 +89,19 @@ public class CursusEtudiantRepository {
         });
 
     }
+
+    public void insertSemestre(Semestre semestre) {
+        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
+            mSemestreDao.insert(semestre);
+        });
+    }
+
+    public void deleteSemestre(Semestre semestre) {
+        CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
+            mSemestreDao.deleteSemestre(semestre);
+        });
+    }
+
 
     public void updateNpmlFieldItem(boolean checked, int id) {
         CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
@@ -133,6 +134,10 @@ public class CursusEtudiantRepository {
         });
     }
 
+    public LiveData<List<Semestre>> getDistinctSemestres() {
+        return mSemestreDao.getDistinctSemestres();
+    }
+
     public void insertModule(Module module) {
         CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
             mModuleDao.insert(module);
@@ -161,10 +166,6 @@ public class CursusEtudiantRepository {
 
     public LiveData<List<Module>> getDistinctModules(int semestreId) {
         return mModuleDao.getDistinctModules(semestreId);
-    }
-
-    public LiveData<List<Semestre>> getDistinctSemestres() {
-        return mSemestreDao.getDistinctSemestres();
     }
 
 
