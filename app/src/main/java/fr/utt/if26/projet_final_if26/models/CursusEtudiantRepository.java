@@ -89,18 +89,19 @@ public class CursusEtudiantRepository {
     public void duplicateCursus(Cursus cursus, List<Semestre> semestres) {
         CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
 
-           long result = mCursusDao.insert(cursus);
-           if(result > -1 ) {
-               semestres.forEach(semestre -> {
-                   Semestre newSemestre = new Semestre(semestre.getLabel(), cursus.getLabel());
-                   long id = mSemestreDao.insert(newSemestre);
-                   semestre.getListeModules().forEach(module -> {
-                       module.setSemestreId((int) id);
-                       mModuleDao.insert(module);
-                   });
+            long result = mCursusDao.insert(cursus);
+            if (result > -1) {
+                semestres.forEach(semestre -> {
+                    Semestre newSemestre = new Semestre(semestre.getLabel(), cursus.getLabel());
+                    long id = mSemestreDao.insert(newSemestre);
+                    semestre.getListeModules().forEach(module -> {
+                        module.setSemestreId((int) id);
+                        mModuleDao.insert(module);
+                    });
 
-               });
-           };
+                });
+            }
+            ;
         });
 
     }

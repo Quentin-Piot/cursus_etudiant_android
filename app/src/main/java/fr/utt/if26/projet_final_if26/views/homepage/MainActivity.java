@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private AccueilViewModel viewModel;
     private ActivityMainBinding binding;
     private RecyclerView recyclerView;
+    private AdapterRecyclerListeEtudiants adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        viewModel.getmEtudiants().observe(this, etudiants -> initAdapter(recyclerView, etudiants, viewModel));
+        viewModel.getmEtudiants().observe(this, this::onListUpdate);
         viewModel.getSelectedEtudiant().observe(this, this::onSelectEtudiant);
 
         viewModel.getVmEvent().observe(this, this::onRecieveVMEvent);
@@ -53,17 +55,19 @@ public class MainActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(AccueilViewModel.class);
         binding.setViewModel(viewModel);
         recyclerView = binding.etudiantRecyclerView;
+        adapter = new AdapterRecyclerListeEtudiants(new ArrayList<>(), viewModel);
+        recyclerView.setAdapter(adapter);
     }
 
-    public void initAdapter(RecyclerView recyclerView, List<Etudiant> etudiants, AccueilViewModel viewModel) {
+    public void onListUpdate(List<Etudiant> etudiants) {
         if (etudiants.size() == 0) {
             binding.etudiantMessageTv.setText(R.string.aucun_etudiant);
         } else {
             binding.etudiantMessageTv.setText("");
 
         }
-        AdapterRecyclerListeEtudiants adapter = new AdapterRecyclerListeEtudiants(etudiants, viewModel);
-        recyclerView.setAdapter(adapter);
+        adapter.setEtudiantList(etudiants);
+        adapter.notifyDataSetChanged();
 
     }
 

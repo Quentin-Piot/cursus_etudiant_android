@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,6 +34,8 @@ public class EtudiantActivity extends AppCompatActivity {
 
     private int studentId;
 
+    private AdapterRecyclerListeCursus adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +55,7 @@ public class EtudiantActivity extends AppCompatActivity {
 
         viewModel.getVmEvent().observe(this, this::onRecieveVMEvent);
         viewModel.getSelectedCursus().observe(this, this::onSelectCursus);
-        viewModel.getmCursus().observe(this, cursus -> {
-            initAdapter(recyclerView, cursus, viewModel);
-            if (cursus != null)
-                binding.studentCursusNumberTv.setText(Integer.toString(cursus.size()));
-        });
+        viewModel.getmCursus().observe(this, this::onListUpdate);
     }
 
     private void initBinding() {
@@ -72,18 +71,19 @@ public class EtudiantActivity extends AppCompatActivity {
         binding.studentFirstnameTv.setText(studentFirstName);
         binding.studentProgrammeTv.setText(studentProgramme);
 
+        adapter = new AdapterRecyclerListeCursus(new ArrayList<>(), viewModel, this);
+        recyclerView.setAdapter(adapter);
     }
 
-    public void initAdapter(RecyclerView recyclerView, List<Cursus> cursus, EtudiantViewModel viewModel) {
+    public void onListUpdate(List<Cursus> cursus) {
         if (cursus.size() == 0) {
             binding.messageTvCursus.setText(R.string.aucun_cursus);
         } else {
             binding.messageTvCursus.setText("");
 
         }
-
-        AdapterRecyclerListeCursus adapter = new AdapterRecyclerListeCursus(cursus, viewModel, this);
-        recyclerView.setAdapter(adapter);
+        adapter.setCursusList(cursus);
+        adapter.notifyDataSetChanged();
     }
 
     public void onClickAddCursus() {

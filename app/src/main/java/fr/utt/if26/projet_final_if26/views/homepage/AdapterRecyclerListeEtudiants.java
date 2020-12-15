@@ -17,7 +17,7 @@ import fr.utt.if26.projet_final_if26.viewmodels.AccueilViewModel;
 
 public class AdapterRecyclerListeEtudiants extends RecyclerView.Adapter<AdapterRecyclerListeEtudiants.EtudiantHolder> {
 
-    private final List<Etudiant> etudiantList;
+    private List<Etudiant> etudiantList;
     private final AccueilViewModel viewModel;
 
     public AdapterRecyclerListeEtudiants(List<Etudiant> etudiantList, AccueilViewModel viewModel) {
@@ -38,6 +38,14 @@ public class AdapterRecyclerListeEtudiants extends RecyclerView.Adapter<AdapterR
         holder.binding.setViewModel(viewModel);
         holder.binding.executePendingBindings();
 
+    }
+
+    public List<Etudiant> getEtudiantList() {
+        return etudiantList;
+    }
+
+    public void setEtudiantList(List<Etudiant> etudiantList) {
+        this.etudiantList = etudiantList;
     }
 
     @Override

@@ -17,7 +17,7 @@ import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
 
 public class AdapterRecyclerListeCursus extends RecyclerView.Adapter<AdapterRecyclerListeCursus.CursusHolder> {
 
-    private final List<Cursus> cursusList;
+    private List<Cursus> cursusList;
     private final EtudiantViewModel viewModel;
     private final EtudiantActivity etudiantActivity;
 
@@ -41,6 +41,14 @@ public class AdapterRecyclerListeCursus extends RecyclerView.Adapter<AdapterRecy
         holder.binding.setActivity(etudiantActivity);
         holder.binding.executePendingBindings();
 
+    }
+
+    public List<Cursus> getCursusList() {
+        return cursusList;
+    }
+
+    public void setCursusList(List<Cursus> cursusList) {
+        this.cursusList = cursusList;
     }
 
     @Override
