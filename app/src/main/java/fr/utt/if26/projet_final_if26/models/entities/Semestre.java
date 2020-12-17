@@ -32,9 +32,12 @@ public class Semestre {
     @Ignore
     private List<Module> listeModules = new ArrayList<>();
 
-    public Semestre(@NonNull String label, @NonNull String cursusLabel) {
+
+    public Semestre(@NonNull String label, @NonNull String cursusLabel, boolean semestreEtranger, boolean npml) {
         this.label = label;
         this.cursusLabel = cursusLabel;
+        this.semestreEtranger = semestreEtranger;
+        this.npml = npml;
     }
 
     public int getId() {

@@ -14,7 +14,7 @@ public class NombreCreditsCategorie {
     private int ct = 0;
     private int hp = 0;
 
-    private List<Integer> maxProgress = Arrays.asList(66, 48, 66, 20, 8, 8, 300);
+    private List<Integer> maxProgress = Arrays.asList(24, 24, 60, 12, 4, 4, 180);
     private int total;
 
     public NombreCreditsCategorie(int cs, int tm, int st, int ec, int me, int ht, int ct, int hp) {

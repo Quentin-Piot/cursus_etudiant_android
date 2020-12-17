@@ -16,22 +16,15 @@ import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
 public interface EtudiantDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Etudiant etudiant);
+    long insert(Etudiant etudiant);
 
     @Delete
     void deleteEtudiant(Etudiant... etudiants);
 
-    @Update
-    void updateEtudiant(Etudiant... etudiants);
-
     @Query("select * from etudiant_table")
     LiveData<List<Etudiant>> getAllEtudiants();
 
-    @Query("select * from etudiant_table where id = :id")
-    LiveData<Etudiant> getEtudiantById(int id);
-
-    @Query("DELETE FROM etudiant_table WHERE id = :id")
-    void deleteEtudiantById(int id);
-
+    @Query("DELETE FROM etudiant_table")
+    void deleteAllEtudiants();
 
 }

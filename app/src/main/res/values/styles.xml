@@ -13,4 +13,11 @@
     <style name="Projet.Spinner" parent="@style/Widget.AppCompat.Spinner.Underlined">
 
     </style>
+
+    <style name="AppTheme.ButtonClassic" parent="@style/Widget.AppCompat.Button" >
+        <item name="android:background">@color/dark_bg</item>
+        <item name="android:textColor">@color/text_color</item>
+
+    </style>
+
 </resources>

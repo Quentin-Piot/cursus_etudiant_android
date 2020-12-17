@@ -2,6 +2,7 @@ package fr.utt.if26.projet_final_if26.views.homepage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -63,8 +64,11 @@ public class MainActivity extends AppCompatActivity {
     public void onListUpdate(List<Etudiant> etudiants) {
         if (etudiants.size() == 0) {
             binding.etudiantMessageTv.setText(R.string.aucun_etudiant);
+            binding.roomInitBt.setVisibility(View.VISIBLE);
+
         } else {
             binding.etudiantMessageTv.setText("");
+            binding.roomInitBt.setVisibility(View.INVISIBLE);
 
         }
         adapter.setEtudiantList(etudiants);

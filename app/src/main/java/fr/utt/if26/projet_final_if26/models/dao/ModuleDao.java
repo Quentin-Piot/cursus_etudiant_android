@@ -24,9 +24,6 @@ public interface ModuleDao {
     @Update
     void updateModule(Module... modules);
 
-    @Query("select * from module_table")
-    LiveData<List<Module>> getAllModules();
-
     @Query("select * from module_table where semestre_id = :semesterId")
     LiveData<List<Module>> getModulesBySemesterId(int semesterId);
 

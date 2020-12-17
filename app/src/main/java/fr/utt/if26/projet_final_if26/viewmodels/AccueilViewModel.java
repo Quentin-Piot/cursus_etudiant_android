@@ -53,6 +53,13 @@ public class AccueilViewModel extends AndroidViewModel {
         }
     }
 
+    public void onClickPopulateBaseRoom() {
+
+        mRepository.populateDatabaseRoom();
+
+    }
+
+
     public void onSelectItem(AdapterView<?> parent, View view, int pos, long id) {
         programme.setValue(parent.getSelectedItem().toString());
         ((TextView) parent.getChildAt(0)).setTextSize(16);

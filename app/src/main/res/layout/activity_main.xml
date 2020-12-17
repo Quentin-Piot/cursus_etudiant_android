@@ -68,5 +68,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <Button
+            android:id="@+id/room_init_bt"
+            style="@style/AppTheme.ButtonClassic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="Room Init"
+            android:onClick="@{() -> viewModel.onClickPopulateBaseRoom()}"
+            app:layout_constraintBottom_toBottomOf="@+id/fab"
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -24,14 +24,8 @@ public interface SemestreDao {
     @Update
     void updateSemestre(Semestre... semestres);
 
-    @Query("select * from semestre_table")
-    LiveData<List<Semestre>> getAllSemestres();
-
     @Query("select * from semestre_table where cursus_label = :mCursusLabel")
     LiveData<List<Semestre>> getSemestreByCursusLabel(String mCursusLabel);
-
-    @Query("DELETE FROM semestre_table WHERE id = :id")
-    void deleteSemestreById(int id);
 
     @Query("UPDATE semestre_table SET npml = :checked WHERE id = :id")
     void updateNpmlField(boolean checked, int id);

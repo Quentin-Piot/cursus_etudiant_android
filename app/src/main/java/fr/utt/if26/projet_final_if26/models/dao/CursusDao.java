@@ -19,22 +19,13 @@ public interface CursusDao {
     long insert(Cursus cursus);
 
     @Delete
-    public void deleteCursus(Cursus... cursus);
+    void deleteCursus(Cursus... cursus);
 
     @Update
-    public int updateCursus(Cursus... cursus);
-
-    @Query("select * from cursus_table")
-    LiveData<List<Cursus>> getAllCursus();
+    int updateCursus(Cursus... cursus);
 
     @Query("select * from cursus_table where etudiant_id = :id")
     LiveData<List<Cursus>> getCursusById(int id);
-
-    @Query("DELETE FROM cursus_table WHERE label = :label")
-    void deleteCursusByLabel(String label);
-
-    @Query("DELETE FROM cursus_table WHERE etudiant_id = :etudiantId")
-    void deleteCursusOfEtudiant(int etudiantId);
 
 
 }

@@ -43,7 +43,7 @@ public class CursusViewModel extends AndroidViewModel {
     public void onClickAddSemestre() {
 
         if (semestreLabel.getValue() != null && !semestreLabel.getValue().isEmpty()) {
-            mRepository.insertSemestre(new Semestre(semestreLabel.getValue(), mCursusLabel));
+            mRepository.insertSemestre(new Semestre(semestreLabel.getValue(), mCursusLabel, false, false));
             _vmEvent.setValue(VMEventsEnum.success_add);
 
         } else {
