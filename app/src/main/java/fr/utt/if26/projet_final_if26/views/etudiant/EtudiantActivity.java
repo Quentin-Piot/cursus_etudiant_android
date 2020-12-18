@@ -104,6 +104,7 @@ public class EtudiantActivity extends AppCompatActivity {
         if (!cursus.getLabel().isEmpty()) {
             Intent intent = new Intent(getApplicationContext(), CursusActivity.class);
             intent.putExtra("cursus_label", cursus.getLabel());
+            intent.putExtra("etudiant_programme", studentProgramme);
             startActivity(intent);
         }
     }

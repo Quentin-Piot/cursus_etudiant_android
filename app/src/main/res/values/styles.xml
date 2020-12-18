@@ -14,7 +14,7 @@
 
     </style>
 
-    <style name="AppTheme.ButtonClassic" parent="@style/Widget.AppCompat.Button" >
+    <style name="AppTheme.ButtonClassic" parent="@style/Widget.AppCompat.Button">
         <item name="android:background">@color/dark_bg</item>
         <item name="android:textColor">@color/text_color</item>
 

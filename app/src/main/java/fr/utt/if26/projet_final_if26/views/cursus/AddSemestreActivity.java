@@ -23,6 +23,7 @@ public class AddSemestreActivity extends AppCompatActivity {
 
     private CursusViewModel viewModel;
     private String mCursusLabel;
+    private String mEtudiantProgramme;
 
     private AdapterRecyclerHistoriqueSemestres adapter;
     private ActivityAddSemestreBinding binding;
@@ -33,6 +34,7 @@ public class AddSemestreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Ajout d'un semestre");
         mCursusLabel = getIntent().getStringExtra("cursus_label");
+        mEtudiantProgramme = getIntent().getStringExtra(" etudiant_programme");
         initBinding();
         viewModel.getDistinctSemestres().observe(this, this::onListUpdate);
         viewModel.getVmEvent().observe(this, this::onRecieveVMEvent);
@@ -40,7 +42,7 @@ public class AddSemestreActivity extends AppCompatActivity {
 
     private void initBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_semestre);
-        CursusViewModelFactory factory = new CursusViewModelFactory(getApplication(), mCursusLabel);
+        CursusViewModelFactory factory = new CursusViewModelFactory(getApplication(), mCursusLabel, mEtudiantProgramme);
         viewModel = new ViewModelProvider(this, factory).get(CursusViewModel.class);
         binding.setViewModel(viewModel);
         binding.historiqueSemestresRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

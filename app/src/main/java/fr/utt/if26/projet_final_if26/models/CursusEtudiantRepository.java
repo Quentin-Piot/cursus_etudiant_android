@@ -169,7 +169,6 @@ public class CursusEtudiantRepository {
     }
 
 
-
     public void populateDatabaseRoom() {
         CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
 
@@ -185,27 +184,27 @@ public class CursusEtudiantRepository {
             int cursus1 = (int) mCursusDao.insert(new Cursus("fake cursus 1", etudiantId));
             int cursus2 = (int) mCursusDao.insert(new Cursus("fake cursus 2", etudiantId));
 
-            int cursus1Semestre1 = (int) mSemestreDao.insert(new Semestre("A16", "fake cursus 1", false , true));
-            int cursus1Semestre2 = (int) mSemestreDao.insert(new Semestre("P17", "fake cursus 1", false , false));
-            int cursus1Semestre3 = (int) mSemestreDao.insert(new Semestre("A17", "fake cursus 1", true , false));
-            int cursus1Semestre4 = (int) mSemestreDao.insert(new Semestre("P18", "fake cursus 1", false , false));
-            int cursus1Semestre5 = (int) mSemestreDao.insert(new Semestre("A18", "fake cursus 1", false , false));
-            int cursus1Semestre6 = (int) mSemestreDao.insert(new Semestre("P19", "fake cursus 1", false , false));
+            int cursus1Semestre1 = (int) mSemestreDao.insert(new Semestre("A16", "fake cursus 1", false, true));
+            int cursus1Semestre2 = (int) mSemestreDao.insert(new Semestre("P17", "fake cursus 1", false, false));
+            int cursus1Semestre3 = (int) mSemestreDao.insert(new Semestre("A17", "fake cursus 1", true, false));
+            int cursus1Semestre4 = (int) mSemestreDao.insert(new Semestre("P18", "fake cursus 1", false, false));
+            int cursus1Semestre5 = (int) mSemestreDao.insert(new Semestre("A18", "fake cursus 1", false, false));
+            int cursus1Semestre6 = (int) mSemestreDao.insert(new Semestre("P19", "fake cursus 1", false, false));
 
-             mModuleDao.insert(new Module("GL02", "ISI", "CS", 6, cursus1Semestre1));
-             mModuleDao.insert(new Module("NF16", "ISI", "CS", 6, cursus1Semestre1));
-             mModuleDao.insert(new Module("NF20", "ISI", "CS", 6, cursus1Semestre2));
-             mModuleDao.insert(new Module("IF09", "ISI", "TM", 6, cursus1Semestre1));
-             mModuleDao.insert(new Module("IF14", "ISI", "TM", 6, cursus1Semestre1));
-             mModuleDao.insert(new Module("LO02", "ISI", "TM", 6, cursus1Semestre2));
-             mModuleDao.insert(new Module("NF21", "ISI", "TM", 6, cursus1Semestre2));
+            mModuleDao.insert(new Module("GL02", "ISI", "CS", 6, cursus1Semestre1));
+            mModuleDao.insert(new Module("NF16", "ISI", "CS", 6, cursus1Semestre1));
+            mModuleDao.insert(new Module("NF20", "ISI", "CS", 6, cursus1Semestre2));
+            mModuleDao.insert(new Module("IF09", "ISI", "TM", 6, cursus1Semestre1));
+            mModuleDao.insert(new Module("IF14", "ISI", "TM", 6, cursus1Semestre1));
+            mModuleDao.insert(new Module("LO02", "ISI", "TM", 6, cursus1Semestre2));
+            mModuleDao.insert(new Module("NF21", "ISI", "TM", 6, cursus1Semestre2));
             mModuleDao.insert(new Module("HT01", "ISI", "HT", 4, cursus1Semestre1));
             mModuleDao.insert(new Module("EC01", "ISI", "EC", 4, cursus1Semestre1));
             mModuleDao.insert(new Module("HT02", "ISI", "HT", 4, cursus1Semestre2));
             mModuleDao.insert(new Module("EC02", "ISI", "EC", 4, cursus1Semestre2));
 
 
-            mModuleDao.insert(new Module("GL03", "ISI", "CS", 6, cursus1Semestre3 ));
+            mModuleDao.insert(new Module("GL03", "ISI", "CS", 6, cursus1Semestre3));
             mModuleDao.insert(new Module("NF17", "ISI", "CS", 6, cursus1Semestre3));
             mModuleDao.insert(new Module("NF21", "ISI", "CS", 6, cursus1Semestre5));
             mModuleDao.insert(new Module("IF10", "ISI", "TM", 6, cursus1Semestre3));
@@ -220,8 +219,6 @@ public class CursusEtudiantRepository {
 
             mModuleDao.insert(new Module("ST09", "ISI", "ST", 30, cursus1Semestre4));
             mModuleDao.insert(new Module("ST10", "ISI", "ST", 30, cursus1Semestre6));
-
-
 
 
         });

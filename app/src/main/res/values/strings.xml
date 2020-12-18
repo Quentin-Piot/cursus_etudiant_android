@@ -44,4 +44,5 @@
     <string name="historique_des_semestres">Historique des semestres</string>
     <string name="ajouter_un_nouveau_semestre">Ajouter un nouveau semestre</string>
     <string name="add_a_student">Add a student</string>
+    <string name="fermer">Fermer</string>
 </resources>

@@ -21,6 +21,7 @@ public class CursusViewModel extends AndroidViewModel {
 
     private final CursusEtudiantRepository mRepository;
     private final String mCursusLabel;
+    private final String etudiant_programme;
 
     private final MutableLiveData<Semestre> _selectedSemestre = new MutableLiveData<>();
     private final LiveData<Semestre> selectedSemestre = _selectedSemestre;
@@ -34,10 +35,11 @@ public class CursusViewModel extends AndroidViewModel {
     public MutableLiveData<NombreCreditsCategorie> _moduleCatCredit = new MutableLiveData<>();
     private final LiveData<NombreCreditsCategorie> moduleCatCredit = _moduleCatCredit;
 
-    public CursusViewModel(@NonNull Application application, String mCursusLabel) {
+    public CursusViewModel(@NonNull Application application, String mCursusLabel, String etudiant_programme) {
         super(application);
         mRepository = new CursusEtudiantRepository(application);
         this.mCursusLabel = mCursusLabel;
+        this.etudiant_programme = etudiant_programme;
     }
 
     public void onClickAddSemestre() {
@@ -57,14 +59,19 @@ public class CursusViewModel extends AndroidViewModel {
     }
 
     public void onUpdateModulesCredits(List<Semestre> semestres) {
+        System.out.println(semestres.size());
 
         List<Module> allModules = new ArrayList<>();
-        semestres.stream().map(Semestre::getListeModules).collect(Collectors.toList()).forEach(allModules::addAll);
 
-        Map<String, Integer> mapArray = allModules.stream()
+        semestres.stream().map(Semestre::getListeModules).collect(Collectors.toList()).forEach(allModules::addAll);
+        List<Module> modules_programme = allModules.stream().filter(module -> module.getProgramme().equals(etudiant_programme)).collect(Collectors.toList());
+        List<Module> modules_hp = allModules.stream().filter(module -> !module.getProgramme().equals(etudiant_programme)).collect(Collectors.toList());
+
+        int nbCreditsHp = modules_hp.stream().mapToInt(Module::getCredits).sum();
+        Map<String, Integer> mapArray = modules_programme.stream()
                 .collect(Collectors.groupingBy(Module::getCategorie, Collectors.summingInt(Module::getCredits)));
 
-        NombreCreditsCategorie mcc = new NombreCreditsCategorie(mapArray.getOrDefault("CS", 0), mapArray.getOrDefault("TM", 0), mapArray.getOrDefault("ST", 0), mapArray.getOrDefault("EC", 0), mapArray.getOrDefault("ME", 0), mapArray.getOrDefault("HT", 0), 0, 0);
+        NombreCreditsCategorie mcc = new NombreCreditsCategorie(mapArray.getOrDefault("CS", 0), mapArray.getOrDefault("TM", 0), mapArray.getOrDefault("ST", 0), mapArray.getOrDefault("EC", 0), mapArray.getOrDefault("ME", 0), mapArray.getOrDefault("HT", 0), nbCreditsHp);
         this._moduleCatCredit.setValue(mcc);
     }
 

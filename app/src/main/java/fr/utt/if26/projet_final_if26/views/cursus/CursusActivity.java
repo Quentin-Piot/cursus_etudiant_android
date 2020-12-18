@@ -1,6 +1,9 @@
 package fr.utt.if26.projet_final_if26.views.cursus;
 
 import android.content.Intent;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
 import android.view.View;
 
@@ -32,6 +35,7 @@ public class CursusActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
     private String mCursusLabel;
+    private String mEtudiantProgramme;
 
     private List<Semestre> listeSemestres = new ArrayList<>();
 
@@ -40,13 +44,19 @@ public class CursusActivity extends AppCompatActivity {
     private boolean npmlDone;
     private boolean seDone;
 
+    private ColorFilter doneFilter;
+    private ColorFilter undoneFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mCursusLabel = getIntent().getStringExtra("cursus_label");
+        mEtudiantProgramme = getIntent().getStringExtra("etudiant_programme");
+
         initBinding();
+        doneFilter = new PorterDuffColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.done), PorterDuff.Mode.MULTIPLY);
+        undoneFilter = new PorterDuffColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.undone), PorterDuff.Mode.MULTIPLY);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         viewModel.getmSemestres().observe(this, this::onListUpdate);
         viewModel.getNombreCreditsCategorie().observe(this, this::updateProgressCredits);
@@ -57,7 +67,7 @@ public class CursusActivity extends AppCompatActivity {
 
     private void initBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_cursus);
-        CursusViewModelFactory factory = new CursusViewModelFactory(getApplication(), mCursusLabel);
+        CursusViewModelFactory factory = new CursusViewModelFactory(getApplication(), mCursusLabel, mEtudiantProgramme);
         viewModel = new ViewModelProvider(this, factory).get(CursusViewModel.class);
         binding.setViewModel(viewModel);
         binding.setCursusActivity(this);
@@ -90,33 +100,76 @@ public class CursusActivity extends AppCompatActivity {
     public void onClickAddSemestre() {
         Intent intent = new Intent(getApplicationContext(), AddSemestreActivity.class);
         intent.putExtra("cursus_label", mCursusLabel);
+        intent.putExtra("etudiant_programme", mEtudiantProgramme);
+
         startActivity(intent);
         overridePendingTransition(R.transition.slide_down_in, R.transition.slide_down_out);
+    }
+
+    public void onClickInfosCursus() {
+        InfosCursusDialogFragment infosCursusDialogFragment = new InfosCursusDialogFragment(viewModel);
+        infosCursusDialogFragment.show(getSupportFragmentManager(), "infos_cursus");
     }
 
     private void updateProgressCredits(NombreCreditsCategorie mcc) {
 
         binding.arcProgressCs.setMax(mcc.getMaxProgress().get(0));
-
         binding.arcProgressCs.setProgress(mcc.getCs());
+
+        if (mcc.getCs() >= 24)
+            binding.arcProgressCs.setFinishedStrokeColor(ContextCompat.getColor(getApplicationContext(), R.color.done));
+        else
+            binding.arcProgressCs.setFinishedStrokeColor(ContextCompat.getColor(getApplicationContext(), R.color.undone));
+
         binding.arcProgressTm.setMax(mcc.getMaxProgress().get(1));
-
         binding.arcProgressTm.setProgress(mcc.getTm());
+
+        if (mcc.getTm() >= 24)
+            binding.arcProgressTm.setFinishedStrokeColor(ContextCompat.getColor(getApplicationContext(), R.color.done));
+        else
+            binding.arcProgressTm.setFinishedStrokeColor(ContextCompat.getColor(getApplicationContext(), R.color.undone));
+
         binding.arcProgressSt.setMax(mcc.getMaxProgress().get(2));
-
         binding.arcProgressSt.setProgress(mcc.getSt());
+
+        if (mcc.getSt() >= 60)
+            binding.arcProgressSt.setFinishedStrokeColor(ContextCompat.getColor(getApplicationContext(), R.color.done));
+        else
+            binding.arcProgressSt.setFinishedStrokeColor(ContextCompat.getColor(getApplicationContext(), R.color.undone));
+
         binding.arcProgressEc.setMax(mcc.getMaxProgress().get(3));
-
         binding.arcProgressEc.setProgress(mcc.getEc());
+
+        if (mcc.getEc() >= 12)
+            binding.arcProgressEc.setFinishedStrokeColor(ContextCompat.getColor(getApplicationContext(), R.color.done));
+        else
+            binding.arcProgressEc.setFinishedStrokeColor(ContextCompat.getColor(getApplicationContext(), R.color.undone));
+
         binding.arcProgressMe.setMax(mcc.getMaxProgress().get(4));
-
         binding.arcProgressMe.setProgress(mcc.getMe());
-        binding.arcProgressHt.setMax(mcc.getMaxProgress().get(5));
 
+        if (mcc.getMe() >= 4)
+            binding.arcProgressMe.setFinishedStrokeColor(ContextCompat.getColor(getApplicationContext(), R.color.done));
+        else
+            binding.arcProgressMe.setFinishedStrokeColor(ContextCompat.getColor(getApplicationContext(), R.color.undone));
+
+        binding.arcProgressHt.setMax(mcc.getMaxProgress().get(5));
         binding.arcProgressHt.setProgress(mcc.getHt());
+
+        if (mcc.getHt() >= 4)
+            binding.arcProgressHt.setFinishedStrokeColor(ContextCompat.getColor(getApplicationContext(), R.color.done));
+        else
+            binding.arcProgressHt.setFinishedStrokeColor(ContextCompat.getColor(getApplicationContext(), R.color.undone));
+
+
         binding.determinateBar.setMax(mcc.getMaxProgress().get(6));
         binding.determinateBar.setProgress(mcc.getTotal());
         binding.totalCreditsTv.setText(Integer.toString(mcc.getTotal()));
+
+        if (mcc.getTotal() >= 180)
+            binding.determinateBar.getProgressDrawable().setColorFilter(doneFilter);
+        else binding.determinateBar.getProgressDrawable().setColorFilter(undoneFilter);
+
 
     }
 

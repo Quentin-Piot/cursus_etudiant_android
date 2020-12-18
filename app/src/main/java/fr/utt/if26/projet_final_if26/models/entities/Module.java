@@ -17,16 +17,16 @@ public class Module {
 
     @NonNull
     private final String sigle;
-    private String parcours;
+    private String programme;
     private String categorie;
     private int credits;
     @ColumnInfo(name = "semestre_id")
     private int semestreId;
 
 
-    public Module(@NonNull String sigle, @NonNull String parcours, @NonNull String categorie, int credits, int semestreId) {
+    public Module(@NonNull String sigle, @NonNull String programme, @NonNull String categorie, int credits, int semestreId) {
         this.sigle = sigle;
-        this.parcours = parcours;
+        this.programme = programme;
         this.categorie = categorie;
         this.credits = credits;
         this.semestreId = semestreId;
@@ -38,8 +38,8 @@ public class Module {
         return sigle;
     }
 
-    public String getParcours() {
-        return parcours;
+    public String getProgramme() {
+        return programme;
     }
 
     public String getCategorie() {
@@ -55,8 +55,8 @@ public class Module {
         return semestreId;
     }
 
-    public void setParcours(String parcours) {
-        this.parcours = parcours;
+    public void setProgramme(String programme) {
+        this.programme = programme;
     }
 
     public void setCategorie(String categorie) {
