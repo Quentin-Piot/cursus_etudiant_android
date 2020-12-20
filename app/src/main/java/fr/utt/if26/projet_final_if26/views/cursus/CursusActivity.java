@@ -209,7 +209,7 @@ public class CursusActivity extends AppCompatActivity {
     }
 
     private void updateModules(List<Module> modules, int pos) {
-        if (modules.size() > 0 && pos < listeSemestres.size()) {
+        if (modules.size() > 0) {
             listeSemestres.get(pos).setListeModules(modules);
             adapter.setListeSemestres(listeSemestres);
             adapter.notifyDataSetChanged();

@@ -59,8 +59,6 @@ public class CursusViewModel extends AndroidViewModel {
     }
 
     public void onUpdateModulesCredits(List<Semestre> semestres) {
-        System.out.println(semestres.size());
-
         List<Module> allModules = new ArrayList<>();
 
         semestres.stream().map(Semestre::getListeModules).collect(Collectors.toList()).forEach(allModules::addAll);
