@@ -2,6 +2,7 @@ package fr.utt.if26.projet_final_if26.views.semestre;
 
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ public class AdapterRecyclerListeHistoriqueModules extends RecyclerView.Adapter<
 
     private List<Module> modules;
     private final SemestreViewModel viewModel;
+    private int numberAddedModules = 0;
 
     public AdapterRecyclerListeHistoriqueModules(List<Module> modules, SemestreViewModel viewModel) {
         this.modules = modules;
@@ -37,14 +39,20 @@ public class AdapterRecyclerListeHistoriqueModules extends RecyclerView.Adapter<
 
         holder.binding.setViewModel(viewModel);
         holder.binding.setModule(modules.get(position));
-
-        holder.binding.executePendingBindings();
+        if(numberAddedModules >= 8) holder.binding.button2.setVisibility(View.INVISIBLE);
+        else if(holder.binding.button2.getVisibility() == View.INVISIBLE) holder.binding.button2.setVisibility(View.VISIBLE);
+            holder.binding.executePendingBindings();
 
     }
+
 
     @Override
     public int getItemCount() {
         return this.modules.size();
+    }
+
+    public void setNumberAddedModules(int numberAddedModules) {
+        this.numberAddedModules = numberAddedModules;
     }
 
     public List<Module> getModules() {

@@ -37,7 +37,6 @@ public class AdapterRecyclerListeModules extends RecyclerView.Adapter<AdapterRec
 
         holder.binding.setViewModel(viewModel);
         holder.binding.setModule(modules.get(position));
-
         holder.binding.executePendingBindings();
 
     }
