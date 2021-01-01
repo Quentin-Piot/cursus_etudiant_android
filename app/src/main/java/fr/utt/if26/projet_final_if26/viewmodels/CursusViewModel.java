@@ -62,6 +62,8 @@ public class CursusViewModel extends AndroidViewModel {
         List<Module> allModules = new ArrayList<>();
 
         semestres.stream().map(Semestre::getListeModules).collect(Collectors.toList()).forEach(allModules::addAll);
+
+
         List<Module> modules_programme = allModules.stream().filter(module -> module.getProgramme().equals(etudiant_programme)).collect(Collectors.toList());
         List<Module> modules_hp = allModules.stream().filter(module -> !module.getProgramme().equals(etudiant_programme)).collect(Collectors.toList());
 

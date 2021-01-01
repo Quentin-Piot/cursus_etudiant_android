@@ -209,13 +209,13 @@ public class CursusActivity extends AppCompatActivity {
     }
 
     private void updateModules(List<Module> modules, int pos) {
-        if (modules.size() > 0) {
+        if (modules.size() > 0 && pos < listeSemestres.size()) {
             listeSemestres.get(pos).setListeModules(modules);
             adapter.setListeSemestres(listeSemestres);
             adapter.notifyDataSetChanged();
             viewModel.onUpdateModulesCredits(listeSemestres);
         } else {
-            viewModel.onUpdateModulesCredits(new ArrayList<>());
+            viewModel.onUpdateModulesCredits(listeSemestres);
         }
 
     }
