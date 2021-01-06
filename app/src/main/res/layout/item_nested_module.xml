@@ -51,7 +51,7 @@
             android:layout_weight="1"
             android:text="@{module.programme}"
             android:textColor="@color/text_color"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_credits_nested"

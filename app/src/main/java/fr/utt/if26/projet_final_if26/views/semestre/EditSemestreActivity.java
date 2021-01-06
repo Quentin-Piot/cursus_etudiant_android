@@ -85,8 +85,7 @@ public class EditSemestreActivity extends AppCompatActivity {
 
     private void onListUpdate(List<Module> modules) {
 
-        if (modules.size() > 0)
-            binding.cursusModulesNumberTv.setText(Integer.toString(modules.size()));
+        binding.cursusModulesNumberTv.setText(Integer.toString(modules.size()));
         modulesInSemestre = modules;
 
         adapterModules.setModules(modules);

@@ -23,9 +23,14 @@ public class SemestreViewModel extends AndroidViewModel {
     private final LiveData<Module> selectedModule = _selectedModule;
     private final MutableLiveData<VMEventsEnum> _vmEvent = new MutableLiveData<>();
     private final LiveData<VMEventsEnum> vmEvent = _vmEvent;
+
+    private final MutableLiveData<String> _selectCategorie = new MutableLiveData<>();
+    private final LiveData<String> selectCategorie = _selectCategorie;
+
+
     public MutableLiveData<String> moduleSigle = new MutableLiveData<>();
-    public MutableLiveData<String> moduleCategorie = new MutableLiveData<>();
-    public MutableLiveData<String> moduleProgramme = new MutableLiveData<>();
+    public MutableLiveData<String> moduleCategorie = new MutableLiveData<>("CS");
+    public MutableLiveData<String> moduleProgramme = new MutableLiveData<>("ISI");
     public MutableLiveData<String> moduleCredits = new MutableLiveData<>();
 
 
@@ -58,12 +63,20 @@ public class SemestreViewModel extends AndroidViewModel {
 
     public void onSelectProgramme(AdapterView<?> parent, View view, int pos, long id) {
         moduleProgramme.setValue(parent.getSelectedItem().toString());
+
         ((TextView) parent.getChildAt(0)).setTextSize(16);
 
     }
 
     public void onSelectCategorie(AdapterView<?> parent, View view, int pos, long id) {
-        moduleCategorie.setValue(parent.getSelectedItem().toString());
+        String categorie = parent.getSelectedItem().toString();
+        moduleCategorie.setValue(categorie);
+
+        if (!categorie.equals("CS") && !categorie.equals("TM")) {
+            moduleProgramme.setValue("TB");
+        }
+        _selectCategorie.setValue(categorie);
+
         ((TextView) parent.getChildAt(0)).setTextSize(16);
 
     }
@@ -102,5 +115,9 @@ public class SemestreViewModel extends AndroidViewModel {
 
     public LiveData<Boolean> getSe() {
         return mRepository.getSeFieldForSemestreId(mSemestreId);
+    }
+
+    public LiveData<String> getSelectCategorie() {
+        return selectCategorie;
     }
 }

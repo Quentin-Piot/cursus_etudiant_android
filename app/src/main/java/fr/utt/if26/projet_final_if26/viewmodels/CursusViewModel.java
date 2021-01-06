@@ -60,8 +60,8 @@ public class CursusViewModel extends AndroidViewModel {
         semestres.stream().map(Semestre::getListeModules).collect(Collectors.toList()).forEach(allModules::addAll);
 
 
-        List<Module> modules_programme = allModules.stream().filter(module -> module.getProgramme().equals(etudiant_programme)).collect(Collectors.toList());
-        List<Module> modules_hp = allModules.stream().filter(module -> !module.getProgramme().equals(etudiant_programme)).collect(Collectors.toList());
+        List<Module> modules_programme = allModules.stream().filter(module -> module.getProgramme().equals(etudiant_programme) || module.getProgramme().equals("TB")).collect(Collectors.toList());
+        List<Module> modules_hp = allModules.stream().filter(module -> !module.getProgramme().equals(etudiant_programme) && (module.getCategorie().equals("CS") || module.getCategorie().equals("TM"))).collect(Collectors.toList());
 
         int nbCreditsHp = modules_hp.stream().mapToInt(Module::getCredits).sum();
         Map<String, Integer> mapArray = modules_programme.stream()
