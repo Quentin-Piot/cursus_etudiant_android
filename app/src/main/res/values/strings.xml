@@ -28,7 +28,7 @@
     <string name="aucun_cursus">Aucun cursus</string>
     <string name="aucun_etudiant">Aucun étudiant</string>
     <string name="cursus_tv">Cursus :</string>
-    <string name="modules_tv">Modules :</string>
+    <string name="modules_tv">Modules : </string>
     <string name="semestres_tv">Semestres :</string>
     <string name="ajout_semestre">Ajout d\'un semestre</string>
     <string name="nom_du_semestre">Nom du semestre</string>
@@ -37,7 +37,7 @@
     <string name="sigle">Sigle</string>
     <string name="cat_gorie">Catégorie</string>
     <string name="_0">0</string>
-    <string name="liste_des_modules">Liste des modules:</string>
+    <string name="liste_des_modules">Liste des modules</string>
     <string name="cr_dits">Crédits</string>
     <string name="message">Message</string>
     <string name="duplication_d_un_cursus">Duplication d\'un cursus</string>

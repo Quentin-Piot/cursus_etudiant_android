@@ -62,7 +62,7 @@ public class SemestreViewModel extends AndroidViewModel {
     }
 
     public void onSelectProgramme(AdapterView<?> parent, View view, int pos, long id) {
-        moduleProgramme.setValue(parent.getSelectedItem().toString());
+            moduleProgramme.setValue(parent.getSelectedItem().toString());
 
         ((TextView) parent.getChildAt(0)).setTextSize(16);
 

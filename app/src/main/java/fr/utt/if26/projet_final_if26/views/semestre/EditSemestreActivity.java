@@ -56,7 +56,7 @@ public class EditSemestreActivity extends AppCompatActivity {
         viewModel.getDistinctModules(mSemestreId).observe(this, this::onHistoriqueChanged);
 
 
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Page du cursus");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Page du semestre");
 
 
     }
