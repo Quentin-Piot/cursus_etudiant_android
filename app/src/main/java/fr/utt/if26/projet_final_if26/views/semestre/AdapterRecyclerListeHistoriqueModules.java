@@ -18,8 +18,8 @@ import fr.utt.if26.projet_final_if26.viewmodels.SemestreViewModel;
 
 public class AdapterRecyclerListeHistoriqueModules extends RecyclerView.Adapter<AdapterRecyclerListeHistoriqueModules.ModuleHolder> {
 
-    private List<Module> modules;
     private final SemestreViewModel viewModel;
+    private List<Module> modules;
     private int numberAddedModules = 0;
 
     public AdapterRecyclerListeHistoriqueModules(List<Module> modules, SemestreViewModel viewModel) {
@@ -39,9 +39,10 @@ public class AdapterRecyclerListeHistoriqueModules extends RecyclerView.Adapter<
 
         holder.binding.setViewModel(viewModel);
         holder.binding.setModule(modules.get(position));
-        if(numberAddedModules >= 8) holder.binding.button2.setVisibility(View.INVISIBLE);
-        else if(holder.binding.button2.getVisibility() == View.INVISIBLE) holder.binding.button2.setVisibility(View.VISIBLE);
-            holder.binding.executePendingBindings();
+        if (numberAddedModules >= 8) holder.binding.button2.setVisibility(View.INVISIBLE);
+        else if (holder.binding.button2.getVisibility() == View.INVISIBLE)
+            holder.binding.button2.setVisibility(View.VISIBLE);
+        holder.binding.executePendingBindings();
 
     }
 

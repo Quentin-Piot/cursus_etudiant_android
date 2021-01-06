@@ -21,18 +21,10 @@ import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 @Database(entities = {Etudiant.class, Cursus.class, Semestre.class, Module.class}, version = 1, exportSchema = false)
 public abstract class CursusEtudiantDatabase extends RoomDatabase {
 
-    public abstract EtudiantDao etudiantDao();
-
-    public abstract CursusDao cursusDao();
-
-    public abstract SemestreDao semestreDao();
-
-    public abstract ModuleDao moduleDao();
-
-    private static volatile CursusEtudiantDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    private static volatile CursusEtudiantDatabase INSTANCE;
 
     static CursusEtudiantDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
@@ -46,4 +38,12 @@ public abstract class CursusEtudiantDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
+
+    public abstract EtudiantDao etudiantDao();
+
+    public abstract CursusDao cursusDao();
+
+    public abstract SemestreDao semestreDao();
+
+    public abstract ModuleDao moduleDao();
 }

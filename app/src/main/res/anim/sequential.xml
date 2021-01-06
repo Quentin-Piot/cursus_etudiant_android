@@ -36,9 +36,9 @@
         android:interpolator="@android:anim/cycle_interpolator"
         android:pivotX="50%"
         android:pivotY="50%"
-        android:startOffset="3800"
         android:repeatCount="infinite"
         android:repeatMode="restart"
+        android:startOffset="3800"
         android:toDegrees="360" />
 
 </set>

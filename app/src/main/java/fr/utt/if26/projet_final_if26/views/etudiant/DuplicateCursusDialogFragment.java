@@ -20,9 +20,8 @@ import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
 
 public class DuplicateCursusDialogFragment extends DialogFragment {
 
-    private EtudiantViewModel viewModel;
     private final Cursus selectedCursus;
-
+    private EtudiantViewModel viewModel;
     private List<Semestre> semestreList;
 
     public DuplicateCursusDialogFragment(EtudiantViewModel viewModel, Cursus cursus) {

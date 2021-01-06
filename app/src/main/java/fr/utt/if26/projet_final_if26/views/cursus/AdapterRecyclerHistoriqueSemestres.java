@@ -16,11 +16,9 @@ import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 
 public class AdapterRecyclerHistoriqueSemestres extends RecyclerView.Adapter<AdapterRecyclerHistoriqueSemestres.SemestreHistoriqueHolder> {
 
+    private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
     private List<Semestre> listeSemestres;
     private AddSemestreActivity activity;
-
-
-    private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
 
 
     public AdapterRecyclerHistoriqueSemestres(List<Semestre> listeSemestres, AddSemestreActivity activity) {

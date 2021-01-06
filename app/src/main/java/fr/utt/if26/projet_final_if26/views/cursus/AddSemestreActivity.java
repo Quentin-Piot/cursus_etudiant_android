@@ -69,7 +69,6 @@ public class AddSemestreActivity extends AppCompatActivity {
     public void onRecieveVMEvent(VMEventsEnum event) {
         switch (event) {
             case success_add:
-                Toast.makeText(getApplicationContext(), "Le cursus a été bien ajouté", Toast.LENGTH_SHORT).show();
                 finish();
                 overridePendingTransition(R.transition.slide_up_in, R.transition.slide_up_out);
                 break;

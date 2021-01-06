@@ -25,13 +25,9 @@ public class CursusViewModel extends AndroidViewModel {
 
     private final MutableLiveData<Semestre> _selectedSemestre = new MutableLiveData<>();
     private final LiveData<Semestre> selectedSemestre = _selectedSemestre;
-
-
-    public MutableLiveData<String> semestreLabel = new MutableLiveData<>();
-
     private final MutableLiveData<VMEventsEnum> _vmEvent = new MutableLiveData<>();
     private final LiveData<VMEventsEnum> vmEvent = _vmEvent;
-
+    public MutableLiveData<String> semestreLabel = new MutableLiveData<>();
     public MutableLiveData<NombreCreditsCategorie> _moduleCatCredit = new MutableLiveData<>();
     private final LiveData<NombreCreditsCategorie> moduleCatCredit = _moduleCatCredit;
 

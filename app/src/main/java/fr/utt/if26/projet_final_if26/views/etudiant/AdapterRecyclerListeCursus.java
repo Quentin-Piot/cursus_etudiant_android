@@ -17,9 +17,9 @@ import fr.utt.if26.projet_final_if26.viewmodels.EtudiantViewModel;
 
 public class AdapterRecyclerListeCursus extends RecyclerView.Adapter<AdapterRecyclerListeCursus.CursusHolder> {
 
-    private List<Cursus> cursusList;
     private final EtudiantViewModel viewModel;
     private final EtudiantActivity etudiantActivity;
+    private List<Cursus> cursusList;
 
     public AdapterRecyclerListeCursus(List<Cursus> cursusList, EtudiantViewModel viewModel, EtudiantActivity etudiantActivity) {
         this.cursusList = cursusList;

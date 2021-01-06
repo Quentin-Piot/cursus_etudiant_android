@@ -93,10 +93,6 @@ public class CursusActivity extends AppCompatActivity {
 
     }
 
-    public void onClickDeleteSemestre(Semestre semestre) {
-
-    }
-
     public void onClickAddSemestre() {
         Intent intent = new Intent(getApplicationContext(), AddSemestreActivity.class);
         intent.putExtra("cursus_label", mCursusLabel);
@@ -178,8 +174,12 @@ public class CursusActivity extends AppCompatActivity {
         seDone = false;
         npmlDone = false;
         semestres.forEach(semestre -> {
-            if (semestre.isNpml()) npmlDone = true;
-            if (semestre.isSemestreEtranger()) seDone = true;
+            if (semestre.isNpml()) {
+                npmlDone = true;
+            }
+            if (semestre.isSemestreEtranger()) {
+                seDone = true;
+            }
 
             viewModel.getmModulesForSemesterId(semestre.getId()).observe(this, modules -> updateModules(modules, semestres.indexOf(semestre)));
 
@@ -228,6 +228,7 @@ public class CursusActivity extends AppCompatActivity {
             binding.messageTvSemestre.setText("");
 
         }
+
         adapter.setListeSemestres(listeSemestres);
         adapter.notifyDataSetChanged();
         if (listeSemestres.size() >= 7) {

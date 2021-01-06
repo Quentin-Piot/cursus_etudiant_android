@@ -19,14 +19,10 @@ import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
 
 public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterRecyclerListeSemestres.SemestreHolder> {
 
-    private List<Semestre> listeSemestres;
     private final CursusViewModel viewModel;
     private final CursusActivity cursusActivity;
-
-    private int lastPosition = 0;
-
-
     private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
+    private List<Semestre> listeSemestres;
 
 
     public AdapterRecyclerListeSemestres(List<Semestre> listeSemestres, CursusViewModel viewModel, CursusActivity cursusActivity) {
@@ -47,21 +43,39 @@ public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterR
     @Override
     public void onBindViewHolder(@NonNull SemestreHolder holder, int position) {
 
-        holder.binding.setSemestre(listeSemestres.get(position));
+        Semestre actualSemestre = listeSemestres.get(position);
+        holder.binding.setSemestre(actualSemestre);
         holder.binding.setViewModel(viewModel);
         holder.binding.setCursusActivity(cursusActivity);
         String moduleText = " module";
-        if (listeSemestres.get(position).getListeModules().size() > 1) moduleText += "s";
-        holder.binding.semestreModulesNumberTv.setText(listeSemestres.get(position).getListeModules().size() + moduleText);
+        if (actualSemestre.getListeModules().size() > 1) moduleText += "s";
+        holder.binding.semestreModulesNumberTv.setText(actualSemestre.getListeModules().size() + moduleText);
         if (position > 0) {
             holder.binding.layoutCollapsed.setVisibility(View.GONE);
+        } else {
+            holder.binding.layoutCollapsed.setVisibility(View.VISIBLE);
+
+        }
+
+        if (actualSemestre.isNpml()) {
+            holder.binding.badgeNpmlSemestre.setVisibility(View.VISIBLE);
+        } else {
+            holder.binding.badgeNpmlSemestre.setVisibility(View.GONE);
+
+        }
+
+        if (actualSemestre.isSemestreEtranger()) {
+            holder.binding.badgeEtrangerSemestre.setVisibility(View.VISIBLE);
+        } else {
+            holder.binding.badgeEtrangerSemestre.setVisibility(View.GONE);
+
         }
         holder.binding.executePendingBindings();
 
 
         holder.moduleRecyclerView.setLayoutManager(new LinearLayoutManager(holder.moduleRecyclerView.getContext()));
 
-        AdapterRecyclerNestedModules adapterRecyclerListeModules = new AdapterRecyclerNestedModules(listeSemestres.get(position).getListeModules());
+        AdapterRecyclerNestedModules adapterRecyclerListeModules = new AdapterRecyclerNestedModules(actualSemestre.getListeModules());
         holder.moduleRecyclerView.setAdapter(adapterRecyclerListeModules);
         holder.moduleRecyclerView.setRecycledViewPool(viewPool);
         holder.binding.getRoot().setOnClickListener(v -> {

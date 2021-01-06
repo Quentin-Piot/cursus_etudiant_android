@@ -17,8 +17,8 @@ import fr.utt.if26.projet_final_if26.viewmodels.SemestreViewModel;
 
 public class AdapterRecyclerListeModules extends RecyclerView.Adapter<AdapterRecyclerListeModules.ModuleHolder> {
 
-    private List<Module> modules;
     private final SemestreViewModel viewModel;
+    private List<Module> modules;
 
     public AdapterRecyclerListeModules(List<Module> modules, SemestreViewModel viewModel) {
         this.modules = modules;

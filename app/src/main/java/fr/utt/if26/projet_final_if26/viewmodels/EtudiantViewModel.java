@@ -21,12 +21,9 @@ public class EtudiantViewModel extends AndroidViewModel {
 
     private final MutableLiveData<Cursus> _selectedCursus = new MutableLiveData<>();
     private final LiveData<Cursus> selectedCursus = _selectedCursus;
-
-
-    public MutableLiveData<String> cursusLabel = new MutableLiveData<>();
-
     private final MutableLiveData<VMEventsEnum> _vmEvent = new MutableLiveData<>();
     private final LiveData<VMEventsEnum> vmEvent = _vmEvent;
+    public MutableLiveData<String> cursusLabel = new MutableLiveData<>();
 
 
     public EtudiantViewModel(@NonNull Application application, int mEtudiantId) {

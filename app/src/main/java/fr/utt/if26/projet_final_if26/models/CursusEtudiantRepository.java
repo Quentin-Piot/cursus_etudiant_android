@@ -256,7 +256,6 @@ public class CursusEtudiantRepository {
             mModuleDao.insert(new Module("ME04", "ISI", "ME", 4, cursus1Semestre5));
 
 
-
         });
 
 

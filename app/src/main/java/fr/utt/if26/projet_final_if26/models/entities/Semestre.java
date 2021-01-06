@@ -47,20 +47,24 @@ public class Semestre {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getLabel() {
         return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public String getCursusLabel() {
         return cursusLabel;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
+    public void setCursusLabel(String cursusLabel) {
+        this.cursusLabel = cursusLabel;
     }
 
     public List<Module> getListeModules() {
@@ -85,9 +89,5 @@ public class Semestre {
 
     public void setNpml(boolean npml) {
         this.npml = npml;
-    }
-
-    public void setCursusLabel(String cursusLabel) {
-        this.cursusLabel = cursusLabel;
     }
 }

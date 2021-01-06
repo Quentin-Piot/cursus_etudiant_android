@@ -42,29 +42,28 @@ public class Module {
         return programme;
     }
 
-    public String getCategorie() {
-        return categorie;
-    }
-
-    public int getCredits() {
-        return credits;
-    }
-
-
-    public int getSemestreId() {
-        return semestreId;
-    }
-
     public void setProgramme(String programme) {
         this.programme = programme;
+    }
+
+    public String getCategorie() {
+        return categorie;
     }
 
     public void setCategorie(String categorie) {
         this.categorie = categorie;
     }
 
+    public int getCredits() {
+        return credits;
+    }
+
     public void setCredits(int credits) {
         this.credits = credits;
+    }
+
+    public int getSemestreId() {
+        return semestreId;
     }
 
     public void setSemestreId(int semestreId) {

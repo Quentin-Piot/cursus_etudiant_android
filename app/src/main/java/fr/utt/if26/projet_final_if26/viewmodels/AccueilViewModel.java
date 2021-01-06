@@ -18,19 +18,14 @@ import fr.utt.if26.projet_final_if26.models.entities.Etudiant;
 public class AccueilViewModel extends AndroidViewModel {
 
     private final LiveData<List<Etudiant>> mEtudiants;
-
+    private final MutableLiveData<Etudiant> _selectedEtudiant = new MutableLiveData<>();
+    private final LiveData<Etudiant> selectedEtudiant = _selectedEtudiant;
+    private final MutableLiveData<VMEventsEnum> _vmEvent = new MutableLiveData<>();
+    private final LiveData<VMEventsEnum> vmEvent = _vmEvent;
+    private final CursusEtudiantRepository mRepository;
     public MutableLiveData<String> name = new MutableLiveData<>();
     public MutableLiveData<String> firstName = new MutableLiveData<>();
     public MutableLiveData<String> programme = new MutableLiveData<>();
-
-    private final MutableLiveData<Etudiant> _selectedEtudiant = new MutableLiveData<>();
-    private final LiveData<Etudiant> selectedEtudiant = _selectedEtudiant;
-
-
-    private final MutableLiveData<VMEventsEnum> _vmEvent = new MutableLiveData<>();
-    private final LiveData<VMEventsEnum> vmEvent = _vmEvent;
-
-    private final CursusEtudiantRepository mRepository;
 
 
     public AccueilViewModel(@NonNull Application application) {

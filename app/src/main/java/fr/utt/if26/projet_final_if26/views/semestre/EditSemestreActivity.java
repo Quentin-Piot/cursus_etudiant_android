@@ -1,6 +1,5 @@
 package fr.utt.if26.projet_final_if26.views.semestre;
 
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.View;
 
@@ -94,9 +93,10 @@ public class EditSemestreActivity extends AppCompatActivity {
         adapterModules.notifyDataSetChanged();
         onHistoriqueChanged(historiqueAdapter.getModules());
 
-        if(modules.size() >= 8) {
+        if (modules.size() >= 8) {
             binding.addModuleBt.setVisibility(View.GONE);
-        } else if(binding.addModuleBt.getVisibility() == View.GONE) binding.addModuleBt.setVisibility(View.VISIBLE);
+        } else if (binding.addModuleBt.getVisibility() == View.GONE)
+            binding.addModuleBt.setVisibility(View.VISIBLE);
     }
 
 

@@ -43,66 +43,60 @@ public class NombreCreditsCategorie {
         return cs;
     }
 
-    public int getTm() {
-        return tm;
-    }
-
-    public int getSt() {
-        return st;
-    }
-
-    public int getEc() {
-        return ec;
-    }
-
-    public int getMe() {
-        return me;
-    }
-
-    public int getHt() {
-        return ht;
-    }
-
-
-    public int getHp() {
-        return hp;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
     public void setCs(int cs) {
         this.cs = cs;
+    }
+
+    public int getTm() {
+        return tm;
     }
 
     public void setTm(int tm) {
         this.tm = tm;
     }
 
+    public int getSt() {
+        return st;
+    }
+
     public void setSt(int st) {
         this.st = st;
+    }
+
+    public int getEc() {
+        return ec;
     }
 
     public void setEc(int ec) {
         this.ec = ec;
     }
 
+    public int getMe() {
+        return me;
+    }
+
     public void setMe(int me) {
         this.me = me;
+    }
+
+    public int getHt() {
+        return ht;
     }
 
     public void setHt(int ht) {
         this.ht = ht;
     }
 
+    public int getHp() {
+        return hp;
+    }
 
     public void setHp(int hp) {
         this.hp = hp;
     }
 
-    public void setMaxProgress(List<Integer> maxProgress) {
-        this.maxProgress = maxProgress;
+    public int getTotal() {
+        return total;
     }
 
     public void setTotal(int total) {
@@ -111,5 +105,9 @@ public class NombreCreditsCategorie {
 
     public List<Integer> getMaxProgress() {
         return maxProgress;
+    }
+
+    public void setMaxProgress(List<Integer> maxProgress) {
+        this.maxProgress = maxProgress;
     }
 }

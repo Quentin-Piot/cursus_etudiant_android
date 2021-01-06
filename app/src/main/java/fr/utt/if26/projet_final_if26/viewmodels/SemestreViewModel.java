@@ -19,19 +19,14 @@ public class SemestreViewModel extends AndroidViewModel {
 
     private final CursusEtudiantRepository mRepository;
     private final int mSemestreId;
-
+    private final MutableLiveData<Module> _selectedModule = new MutableLiveData<>();
+    private final LiveData<Module> selectedModule = _selectedModule;
+    private final MutableLiveData<VMEventsEnum> _vmEvent = new MutableLiveData<>();
+    private final LiveData<VMEventsEnum> vmEvent = _vmEvent;
     public MutableLiveData<String> moduleSigle = new MutableLiveData<>();
     public MutableLiveData<String> moduleCategorie = new MutableLiveData<>();
     public MutableLiveData<String> moduleProgramme = new MutableLiveData<>();
     public MutableLiveData<String> moduleCredits = new MutableLiveData<>();
-
-
-    private final MutableLiveData<Module> _selectedModule = new MutableLiveData<>();
-    private final LiveData<Module> selectedModule = _selectedModule;
-
-
-    private final MutableLiveData<VMEventsEnum> _vmEvent = new MutableLiveData<>();
-    private final LiveData<VMEventsEnum> vmEvent = _vmEvent;
 
 
     public SemestreViewModel(@NonNull Application application, int semestreId, String cursusLabel) {

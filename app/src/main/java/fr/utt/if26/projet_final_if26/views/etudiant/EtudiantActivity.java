@@ -80,9 +80,8 @@ public class EtudiantActivity extends AppCompatActivity {
             binding.messageTvCursus.setText(R.string.aucun_cursus);
         } else {
             binding.messageTvCursus.setText("");
-            binding.studentCursusNumberTv.setText(Integer.toString(cursus.size()));
-
         }
+        binding.studentCursusNumberTv.setText(Integer.toString(cursus.size()));
         adapter.setCursusList(cursus);
         adapter.notifyDataSetChanged();
     }

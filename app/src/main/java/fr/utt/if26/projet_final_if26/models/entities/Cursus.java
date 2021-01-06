@@ -25,22 +25,20 @@ public class Cursus {
         this.etudiantId = etudiantId;
     }
 
-
-    public void setLabel(@NonNull String label) {
-        this.label = label;
-    }
-
-    public void setEtudiantId(int etudiantId) {
-        this.etudiantId = etudiantId;
-    }
-
-
     @NonNull
     public String getLabel() {
         return label;
     }
 
+    public void setLabel(@NonNull String label) {
+        this.label = label;
+    }
+
     public int getEtudiantId() {
         return etudiantId;
+    }
+
+    public void setEtudiantId(int etudiantId) {
+        this.etudiantId = etudiantId;
     }
 }
