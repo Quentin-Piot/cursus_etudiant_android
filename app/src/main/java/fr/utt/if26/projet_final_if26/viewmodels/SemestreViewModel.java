@@ -37,8 +37,13 @@ public class SemestreViewModel extends AndroidViewModel {
     public SemestreViewModel(@NonNull Application application, int semestreId, String cursusLabel) {
         super(application);
         mRepository = new CursusEtudiantRepository(application);
-
         this.mSemestreId = semestreId;
+
+        mRepository.getEventRepository().observeForever(v -> {
+            if(v < 0) {
+                _vmEvent.setValue(VMEventsEnum.element_already_exist);
+            }  });
+
     }
 
     public void onClickAddModule() {
@@ -119,5 +124,9 @@ public class SemestreViewModel extends AndroidViewModel {
 
     public LiveData<String> getSelectCategorie() {
         return selectCategorie;
+    }
+
+    public LiveData<VMEventsEnum> getVmEvent() {
+        return vmEvent;
     }
 }

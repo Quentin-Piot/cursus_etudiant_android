@@ -39,6 +39,8 @@ public class AccueilViewModel extends AndroidViewModel {
         if (name.getValue() != null && firstName.getValue() != null && programme.getValue() != null && !name.getValue().isEmpty() && !firstName.getValue().isEmpty()) {
             _vmEvent.setValue(VMEventsEnum.success_add);
             mRepository.insertEtudiant(new Etudiant(name.getValue(), firstName.getValue(), programme.getValue()));
+        } else {
+            _vmEvent.setValue(VMEventsEnum.empty_fields);
         }
     }
 

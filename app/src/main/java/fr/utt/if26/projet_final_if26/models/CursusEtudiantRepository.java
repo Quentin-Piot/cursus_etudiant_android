@@ -3,6 +3,7 @@ package fr.utt.if26.projet_final_if26.models;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
@@ -21,6 +22,10 @@ public class CursusEtudiantRepository {
     private final CursusDao mCursusDao;
     private final SemestreDao mSemestreDao;
     private final ModuleDao mModuleDao;
+
+    private MutableLiveData<Long> _eventRepository = new MutableLiveData<>();
+    private LiveData<Long> eventRepository = _eventRepository;
+
 
 
     public CursusEtudiantRepository(Application application) {
@@ -50,7 +55,8 @@ public class CursusEtudiantRepository {
 
     public void insertCursus(Cursus cursus) {
         CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
-            mCursusDao.insert(cursus);
+            long state = mCursusDao.insert(cursus);
+            _eventRepository.postValue(state);
         });
     }
 
@@ -86,7 +92,8 @@ public class CursusEtudiantRepository {
 
     public void insertSemestre(Semestre semestre) {
         CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
-            mSemestreDao.insert(semestre);
+            long state = mSemestreDao.insert(semestre);
+            _eventRepository.postValue(state);
         });
     }
 
@@ -134,7 +141,9 @@ public class CursusEtudiantRepository {
 
     public void insertModule(Module module) {
         CursusEtudiantDatabase.databaseWriteExecutor.execute(() -> {
-            mModuleDao.insert(module);
+            long state = mModuleDao.insert(module);
+            _eventRepository.postValue(state);
+
         });
     }
 
@@ -255,6 +264,9 @@ public class CursusEtudiantRepository {
 
     }
 
+    public LiveData<Long> getEventRepository() {
+        return eventRepository;
+    }
 }
 
 

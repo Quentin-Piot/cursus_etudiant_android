@@ -12,7 +12,6 @@
         android:id="@+id/item_semestre_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:background="@color/darker_bg"
         android:orientation="vertical">
 
@@ -20,11 +19,12 @@
             android:id="@+id/semestre_label_tv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/dark_bg"
+            android:background="@drawable/border_bottom"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"
             android:text="@{semestre.label}"
             android:textAlignment="center"
+            android:textColor="@color/darker_bg"
             android:textSize="16sp"
             android:textStyle="bold" />
 

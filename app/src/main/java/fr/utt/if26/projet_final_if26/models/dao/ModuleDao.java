@@ -16,7 +16,7 @@ import fr.utt.if26.projet_final_if26.models.entities.Module;
 public interface ModuleDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Module module);
+    long insert(Module module);
 
     @Delete
     void deleteModule(Module... modules);

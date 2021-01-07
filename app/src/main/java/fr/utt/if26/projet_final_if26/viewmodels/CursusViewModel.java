@@ -36,6 +36,11 @@ public class CursusViewModel extends AndroidViewModel {
         mRepository = new CursusEtudiantRepository(application);
         this.mCursusLabel = mCursusLabel;
         this.etudiant_programme = etudiant_programme;
+        mRepository.getEventRepository().observeForever(v -> {
+            if(v < 0) {
+                System.out.println("te");
+                _vmEvent.setValue(VMEventsEnum.element_already_exist);
+            }  });
     }
 
     public void onClickAddSemestre() {

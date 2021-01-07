@@ -90,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onRecieveVMEvent(VMEventsEnum event) {
         switch (event) {
-            case success_operation:
-                Toast.makeText(getApplicationContext(), "Opération réussie", Toast.LENGTH_SHORT).show();
+            case element_already_exist:
+                Toast.makeText(getApplicationContext(), "L'élement existe déjà", Toast.LENGTH_SHORT).show();
                 break;
             case empty_fields:
                 Toast.makeText(getApplicationContext(), "Veuillez compléter l'ensemble des champs", Toast.LENGTH_SHORT).show();

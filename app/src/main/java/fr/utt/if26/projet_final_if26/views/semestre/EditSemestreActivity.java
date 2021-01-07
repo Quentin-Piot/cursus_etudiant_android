@@ -2,6 +2,7 @@ package fr.utt.if26.projet_final_if26.views.semestre;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -18,6 +19,7 @@ import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ActivityEditSemestreBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.viewmodels.SemestreViewModel;
+import fr.utt.if26.projet_final_if26.viewmodels.VMEventsEnum;
 import fr.utt.if26.projet_final_if26.viewmodels.factories.SemestreViewModelFactory;
 
 public class EditSemestreActivity extends AppCompatActivity {
@@ -46,6 +48,7 @@ public class EditSemestreActivity extends AppCompatActivity {
 
 
         initBinding();
+        viewModel.getVmEvent().observe(this, this::onRecieveVMEvent);
         modulesRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         historiqueModulesRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
@@ -113,5 +116,16 @@ public class EditSemestreActivity extends AppCompatActivity {
         return list1.stream()
                 .filter(s -> list2.stream().noneMatch(f -> f.getSigle().equals(s.getSigle())))
                 .collect(Collectors.toList());
+    }
+
+    public void onRecieveVMEvent(VMEventsEnum event) {
+        switch (event) {
+            case element_already_exist:
+                Toast.makeText(getApplicationContext(), "L'élement existe déjà", Toast.LENGTH_SHORT).show();
+                break;
+            case empty_fields:
+                Toast.makeText(getApplicationContext(), "Veuillez compléter l'ensemble des champs", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 }
