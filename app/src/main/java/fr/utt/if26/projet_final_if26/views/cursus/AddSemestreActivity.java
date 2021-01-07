@@ -76,7 +76,7 @@ public class AddSemestreActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Veuillez compléter l'ensemble des champs", Toast.LENGTH_SHORT).show();
                 break;
             case element_already_exist:
-                Toast.makeText(getApplicationContext(), "L'élement existe déjà", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "L'élément existe déjà", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

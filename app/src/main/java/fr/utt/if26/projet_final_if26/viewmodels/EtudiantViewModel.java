@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import java.util.List;
 
@@ -31,9 +30,10 @@ public class EtudiantViewModel extends AndroidViewModel {
         super(application);
         mRepository = new CursusEtudiantRepository(application);
         mRepository.getEventRepository().observeForever(v -> {
-                if(v < 0) {
-                    _vmEvent.setValue(VMEventsEnum.element_already_exist);
-                }  });
+            if (v < 0) {
+                _vmEvent.setValue(VMEventsEnum.element_already_exist);
+            }
+        });
 
         this.mEtudiantId = mEtudiantId;
     }

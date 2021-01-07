@@ -18,6 +18,7 @@ public class AddModuleDialogFragment extends DialogFragment {
 
     private SemestreViewModel viewModel;
     private DialogAddModuleBinding binding;
+
     public AddModuleDialogFragment(SemestreViewModel viewModel) {
         super();
         this.viewModel = viewModel;
@@ -39,7 +40,7 @@ public class AddModuleDialogFragment extends DialogFragment {
 
         this.viewModel.getSelectCategorie().observe(this,
                 value -> {
-                    if(value.equals("CS") || value.equals("TM")) {
+                    if (value.equals("CS") || value.equals("TM")) {
                         binding.programmeLayout.setVisibility(View.VISIBLE);
                     } else {
                         binding.programmeLayout.setVisibility(View.GONE);

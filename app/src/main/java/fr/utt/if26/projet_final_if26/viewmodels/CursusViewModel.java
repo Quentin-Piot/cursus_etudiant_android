@@ -37,10 +37,10 @@ public class CursusViewModel extends AndroidViewModel {
         this.mCursusLabel = mCursusLabel;
         this.etudiant_programme = etudiant_programme;
         mRepository.getEventRepository().observeForever(v -> {
-            if(v < 0) {
-                System.out.println("te");
+            if (v < 0) {
                 _vmEvent.setValue(VMEventsEnum.element_already_exist);
-            }  });
+            }
+        });
     }
 
     public void onClickAddSemestre() {

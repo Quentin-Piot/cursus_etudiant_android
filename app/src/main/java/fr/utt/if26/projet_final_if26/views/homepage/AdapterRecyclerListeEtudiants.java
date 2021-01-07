@@ -49,7 +49,7 @@ public class AdapterRecyclerListeEtudiants extends RecyclerView.Adapter<AdapterR
         return this.etudiantList.size();
     }
 
-    static class EtudiantHolder extends RecyclerView.ViewHolder {
+    class EtudiantHolder extends RecyclerView.ViewHolder {
 
         private final ItemEtudiantBinding binding;
 

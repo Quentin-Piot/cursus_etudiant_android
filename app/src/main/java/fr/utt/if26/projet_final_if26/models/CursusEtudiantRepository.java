@@ -27,7 +27,6 @@ public class CursusEtudiantRepository {
     private LiveData<Long> eventRepository = _eventRepository;
 
 
-
     public CursusEtudiantRepository(Application application) {
         CursusEtudiantDatabase db = CursusEtudiantDatabase.getDatabase(application);
         mEtudiantDao = db.etudiantDao();

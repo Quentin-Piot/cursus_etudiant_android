@@ -92,9 +92,6 @@ public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterR
 
     }
 
-    public List<Semestre> getSemestreCursus() {
-        return listeSemestres;
-    }
 
     public void setListeSemestres(List<Semestre> listeSemestres) {
         this.listeSemestres = listeSemestres;
@@ -105,10 +102,10 @@ public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterR
         return this.listeSemestres.size();
     }
 
-    class SemestreHolder extends RecyclerView.ViewHolder {
+    static class SemestreHolder extends RecyclerView.ViewHolder {
 
         private final ItemSemestreBinding binding;
-        private RecyclerView moduleRecyclerView;
+        private final RecyclerView moduleRecyclerView;
 
 
         public SemestreHolder(ItemSemestreBinding binding) {
