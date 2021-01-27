@@ -1,4 +1,4 @@
-package fr.utt.if26.projet_final_if26.views.semestre;
+package fr.utt.if26.projet_final_if26.views.semestre.adapters;
 
 
 import android.view.LayoutInflater;

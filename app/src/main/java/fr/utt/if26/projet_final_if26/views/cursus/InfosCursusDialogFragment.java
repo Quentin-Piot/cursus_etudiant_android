@@ -76,13 +76,14 @@ public class InfosCursusDialogFragment extends DialogFragment {
             binding.progressBarInfosCs.getProgressDrawable().setColorFilter(doneFilter);
         } else {
             binding.infosCsNumberTv.setTextColor(undoneColor);
-            binding.infosTmNumberTv.setText(Integer.toString(mcc.getTm()));
             binding.progressBarInfosCs.getProgressDrawable().setColorFilter(undoneFilter);
 
         }
 
+        binding.infosTmNumberTv.setText(Integer.toString(mcc.getTm()));
         binding.progressBarInfosTm.setMax(mcc.getMaxProgress().get(1));
         binding.progressBarInfosTm.setProgress(mcc.getTm());
+
         if (mcc.getTm() >= 24) {
             binding.infosTmNumberTv.setTextColor(doneColor);
             binding.progressBarInfosTm.getProgressDrawable().setColorFilter(doneFilter);
@@ -91,9 +92,12 @@ public class InfosCursusDialogFragment extends DialogFragment {
             binding.progressBarInfosTm.getProgressDrawable().setColorFilter(undoneFilter);
 
         }
+
         binding.infosCstmNumberTv.setText(Integer.toString(mcc.getTm() + mcc.getCs()));
-        binding.progressBarInfosCstm.setMax(mcc.getMaxProgress().get(0) + mcc.getMaxProgress().get(1));
+        binding.progressBarInfosCstm.setMax(84);
         binding.progressBarInfosCstm.setProgress(mcc.getCs() + mcc.getTm());
+
+
         if (mcc.getCs() + mcc.getTm() >= 84) {
             binding.infosCstmNumberTv.setTextColor(doneColor);
             binding.progressBarInfosCstm.getProgressDrawable().setColorFilter(doneFilter);
@@ -152,7 +156,7 @@ public class InfosCursusDialogFragment extends DialogFragment {
 
         }
         binding.infosMehtNumberTv.setText(Integer.toString(mcc.getMe() + mcc.getHt()));
-        binding.progressBarInfosMeht.setMax(mcc.getMaxProgress().get(4) + mcc.getMaxProgress().get(5));
+        binding.progressBarInfosMeht.setMax(16);
         binding.progressBarInfosMeht.setProgress(mcc.getMe() + mcc.getHt());
 
 

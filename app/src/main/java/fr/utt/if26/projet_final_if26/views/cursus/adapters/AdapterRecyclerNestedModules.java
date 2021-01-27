@@ -1,6 +1,7 @@
-package fr.utt.if26.projet_final_if26.views.cursus;
+package fr.utt.if26.projet_final_if26.views.cursus.adapters;
 
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -17,9 +18,11 @@ import fr.utt.if26.projet_final_if26.models.entities.Module;
 public class AdapterRecyclerNestedModules extends RecyclerView.Adapter<AdapterRecyclerNestedModules.ModuleHolder> {
 
     private final List<Module> modules;
+    private final String etudiantProgramme;
 
-    public AdapterRecyclerNestedModules(List<Module> modules) {
+    public AdapterRecyclerNestedModules(List<Module> modules, String etudiantProgramme) {
         this.modules = modules;
+        this.etudiantProgramme = etudiantProgramme;
     }
 
     @NonNull
@@ -32,7 +35,16 @@ public class AdapterRecyclerNestedModules extends RecyclerView.Adapter<AdapterRe
     @Override
     public void onBindViewHolder(@NonNull ModuleHolder holder, int position) {
 
-        holder.binding.setModule(modules.get(position));
+        Module actualModule = modules.get(position);
+        if (!actualModule.getProgramme().equals("TB") && !actualModule.getProgramme().equals(etudiantProgramme)) {
+            actualModule.setProgramme("HP");
+            holder.binding.tvCetegorieNested.setTextColor(Color.GRAY);
+            holder.binding.tvCreditsNested.setTextColor(Color.GRAY);
+            holder.binding.tvParcoursNested.setTextColor(Color.GRAY);
+            holder.binding.tvSigleNested.setTextColor(Color.GRAY);
+
+        }
+        holder.binding.setModule(actualModule);
         holder.binding.executePendingBindings();
 
     }

@@ -21,6 +21,8 @@ import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.viewmodels.SemestreViewModel;
 import fr.utt.if26.projet_final_if26.viewmodels.VMEventsEnum;
 import fr.utt.if26.projet_final_if26.viewmodels.factories.SemestreViewModelFactory;
+import fr.utt.if26.projet_final_if26.views.semestre.adapters.AdapterRecyclerListeHistoriqueModules;
+import fr.utt.if26.projet_final_if26.views.semestre.adapters.AdapterRecyclerListeModules;
 
 public class EditSemestreActivity extends AppCompatActivity {
 

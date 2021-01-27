@@ -25,6 +25,7 @@ import fr.utt.if26.projet_final_if26.models.entities.Module;
 import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
 import fr.utt.if26.projet_final_if26.viewmodels.factories.CursusViewModelFactory;
+import fr.utt.if26.projet_final_if26.views.cursus.adapters.AdapterRecyclerListeSemestres;
 import fr.utt.if26.projet_final_if26.views.semestre.EditSemestreActivity;
 
 public class CursusActivity extends AppCompatActivity {
@@ -218,6 +219,10 @@ public class CursusActivity extends AppCompatActivity {
             viewModel.onUpdateModulesCredits(listeSemestres);
         }
 
+    }
+
+    public String getmEtudiantProgramme() {
+        return mEtudiantProgramme;
     }
 
     private void onChanged() {

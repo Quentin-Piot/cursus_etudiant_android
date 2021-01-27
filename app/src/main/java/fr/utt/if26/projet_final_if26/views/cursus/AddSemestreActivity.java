@@ -18,6 +18,7 @@ import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
 import fr.utt.if26.projet_final_if26.viewmodels.VMEventsEnum;
 import fr.utt.if26.projet_final_if26.viewmodels.factories.CursusViewModelFactory;
+import fr.utt.if26.projet_final_if26.views.cursus.adapters.AdapterRecyclerHistoriqueSemestres;
 
 public class AddSemestreActivity extends AppCompatActivity {
 

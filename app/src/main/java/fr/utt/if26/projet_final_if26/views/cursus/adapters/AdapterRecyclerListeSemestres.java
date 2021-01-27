@@ -1,4 +1,4 @@
-package fr.utt.if26.projet_final_if26.views.cursus;
+package fr.utt.if26.projet_final_if26.views.cursus.adapters;
 
 
 import android.view.LayoutInflater;
@@ -16,6 +16,7 @@ import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ItemSemestreBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Semestre;
 import fr.utt.if26.projet_final_if26.viewmodels.CursusViewModel;
+import fr.utt.if26.projet_final_if26.views.cursus.CursusActivity;
 
 public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterRecyclerListeSemestres.SemestreHolder> {
 
@@ -75,7 +76,7 @@ public class AdapterRecyclerListeSemestres extends RecyclerView.Adapter<AdapterR
 
         holder.moduleRecyclerView.setLayoutManager(new LinearLayoutManager(holder.moduleRecyclerView.getContext()));
 
-        AdapterRecyclerNestedModules adapterRecyclerListeModules = new AdapterRecyclerNestedModules(actualSemestre.getListeModules());
+        AdapterRecyclerNestedModules adapterRecyclerListeModules = new AdapterRecyclerNestedModules(actualSemestre.getListeModules(), cursusActivity.getmEtudiantProgramme());
         holder.moduleRecyclerView.setAdapter(adapterRecyclerListeModules);
         holder.moduleRecyclerView.setRecycledViewPool(viewPool);
         holder.binding.getRoot().setOnClickListener(v -> {

@@ -1,4 +1,4 @@
-package fr.utt.if26.projet_final_if26.views.cursus;
+package fr.utt.if26.projet_final_if26.views.cursus.adapters;
 
 
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import java.util.List;
 import fr.utt.if26.projet_final_if26.R;
 import fr.utt.if26.projet_final_if26.databinding.ItemSemestreHistoriqueBinding;
 import fr.utt.if26.projet_final_if26.models.entities.Semestre;
+import fr.utt.if26.projet_final_if26.views.cursus.AddSemestreActivity;
 
 public class AdapterRecyclerHistoriqueSemestres extends RecyclerView.Adapter<AdapterRecyclerHistoriqueSemestres.SemestreHistoriqueHolder> {
 
